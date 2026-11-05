@@ -1,0 +1,41 @@
+# Guías de Alimentación (prototipo)
+
+Sitio estático con pautas de alimentación con evidencia: una ficha web por dieta (vista paciente y vista profesional, imprimible en A4) y un tríptico PDF para entregar en la consulta.
+
+> **Prototipo en revisión.** El contenido aún no está validado por el equipo clínico.
+
+## Estructura
+
+```
+site/                  ← lo que se publica
+  index.html           ← portal: buscador, filtros y catálogo
+  dietas/<dieta>.html  ← ficha: #paciente y #medico; ?imprimir abre el diálogo de impresión
+  tripticos/<dieta>.pdf
+  assets/              ← ficha.css, portal.css, favicon
+src/tripticos/         ← fuente HTML de cada tríptico (A4 apaisado, doble faz)
+tools/                 ← scripts que generan site/ desde los borradores
+```
+
+## Ver en local
+
+```
+python3 -m http.server 8000 -d site
+```
+
+## Publicar en Vercel
+
+Proyecto estático, sin build: `vercel deploy site --prod` (o directorio de salida `site` en el panel).
+
+## Agregar una dieta
+
+1. Ficha en `site/dietas/<dieta>.html` siguiendo la estructura de `dash.html`.
+2. Tríptico en `src/tripticos/<dieta>.html` → exportar a `site/tripticos/<dieta>.pdf` (Chrome, A4 apaisado, márgenes 0, con fondos).
+3. En `site/index.html`, en la lista `D`, marcar la dieta con `on:1, slug:"<dieta>"`.
+
+## Checklist de revisión por ficha
+
+- [ ] Cifras verificadas contra la fuente primaria (abstract o texto completo)
+- [ ] Guías vigentes a la fecha de revisión
+- [ ] Vista paciente revisada por nutricionista
+- [ ] Vista profesional revisada por especialista del área
+- [ ] Fecha de revisión actualizada

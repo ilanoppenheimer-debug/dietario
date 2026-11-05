@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Tríptico DASH</title>
+<style>
+/* Tríptico A4 apaisado, plegado en rollo. Exterior: solapa 97 | contratapa 100 | portada 100 mm. Interior: 100 | 100 | 97 mm. */
+:root{
+  --bg:#F3F6F1; --surface:#FFFFFF; --ink:#17302A; --muted:#566A63; --line:#CBD6CD;
+  --leaf:#2D7A4E; --leaf-soft:#E2F0E6; --beet:#8C2B47; --beet-soft:#F6E4EA;
+  --go:#2E8A4E; --slow:#B07A0E; --stop:#C3412D;
+  --veg:#3E9A57; --fruit:#D9533B; --grain:#C08A3A; --dairy:#5B8FC9; --prot:#7A5BA8; --nut:#8A6A3B; --fat:#9C952A; --sweet:#C9578C;
+  --f-display:"Bricolage Grotesque", "Segoe UI", sans-serif;
+  --f-body:"Nunito Sans", "Segoe UI", sans-serif;
+  --f-mono:"IBM Plex Mono", monospace;
+}
+@page{size:A4 landscape;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--f-body);color:var(--ink);font-size:9.5pt;line-height:1.45;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet{width:297mm;height:210mm;display:grid;overflow:hidden;break-after:page}
+.sheet:last-child{break-after:auto}
+.out{grid-template-columns:97mm 100mm 100mm}
+.in{grid-template-columns:100mm 100mm 97mm}
+.p{padding:10mm 8mm 8mm;display:flex;flex-direction:column;gap:4mm;position:relative;min-width:0}
+.p + .p{border-left:0.2mm dashed #E1E8E2}
+h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.1}
+h2{font-size:15pt;font-weight:800;letter-spacing:-.01em}
+h3{font-size:9.4pt;font-weight:700}
+p{margin:0}
+.eb{font-size:6.6pt;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--leaf)}
+.muted{color:var(--muted)}
+.box{border:0.3mm solid var(--line);border-radius:3mm;padding:3mm}
+.fill{border-bottom:0.3mm solid var(--ink);display:inline-block;min-width:30mm;height:4.2mm;vertical-align:bottom}
+ul{margin:0;padding-left:4mm}
+li{margin:0.4mm 0}
+
+/* Portada */
+.cover{background:var(--leaf);color:#fff;justify-content:space-between}
+.cover .eb{color:#CFE8D8}
+.cover h1{font-size:32pt;font-weight:800;letter-spacing:-.03em;line-height:.98}
+.cover .sub{font-family:var(--f-display);font-size:13pt;font-weight:600;color:#E6F3EA}
+.cover .plate{width:74mm;align-self:center}
+.cover .who{background:#fff;color:var(--ink);border-radius:3mm;padding:3.5mm;display:flex;flex-direction:column;gap:2.6mm}
+.cover .who .row{display:flex;gap:2mm;align-items:flex-end}
+.cover .who .row span:first-child{font-weight:700;white-space:nowrap}
+.cover .who .fill{flex:1;min-width:0}
+
+/* Solapa */
+.big{font-family:var(--f-display);font-weight:800;font-size:46pt;color:var(--beet);line-height:.9;letter-spacing:-.03em}
+.big small{font-size:12pt;margin-left:1mm}
+.how{display:flex;flex-direction:column;gap:3.6mm}
+.how .r{display:grid;grid-template-columns:9mm 1fr;gap:3mm;align-items:center}
+.how .ic{width:8mm;height:8mm;border-radius:2mm;display:grid;place-items:center}
+.how .ic svg{width:5.5mm;height:5.5mm}
+.note{background:var(--beet-soft);border-radius:3mm;padding:3mm;color:var(--beet);font-weight:700}
+
+/* Registro */
+table{border-collapse:collapse;width:100%;font-size:8pt}
+th{font-size:6.4pt;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:1.2mm 1.5mm;border-bottom:0.4mm solid var(--ink)}
+td{height:9.4mm;border-bottom:0.3mm solid var(--line);padding:0 1.5mm}
+.goal{display:flex;align-items:center;justify-content:space-between;gap:3mm;background:var(--leaf-soft);border-radius:3mm;padding:3mm}
+.goal b{font-family:var(--f-display);font-size:11pt}
+.goal .bp{font-family:var(--f-mono);font-size:12pt;color:var(--leaf);white-space:nowrap}
+.sign{display:flex;flex-direction:column;gap:2.4mm}
+.sign .row{display:flex;gap:2mm;align-items:flex-end}
+.sign .row span:first-child{font-weight:700;white-space:nowrap}
+.sign .fill{flex:1;min-width:0}
+
+/* Porciones */
+.g{display:grid;grid-template-columns:8mm 1fr auto;gap:2mm;align-items:center;padding:2.3mm 0;border-top:0.25mm solid var(--line)}
+.g:first-of-type{border-top:0}
+.g .ic{width:7mm;height:7mm;border-radius:1.8mm;display:grid;place-items:center}
+.g .ic svg{width:4.8mm;height:4.8mm}
+.g h3{font-size:9.2pt}
+.g .eq{font-size:7.6pt;color:var(--muted);line-height:1.3}
+.g .q{font-size:8.2pt;font-weight:800}
+.dots{display:flex;gap:1mm;flex-wrap:wrap;justify-content:flex-end;max-width:21mm}
+.dot{width:3.4mm;height:3.4mm;border-radius:50%;border:0.35mm solid currentColor}
+.wk{font-size:5.8pt;color:var(--muted);width:100%;text-align:right}
+
+/* Sal y semáforo */
+.salt{background:var(--beet-soft);border-radius:3mm;padding:3.2mm;display:grid;grid-template-columns:16mm 1fr;gap:3mm;align-items:center}
+.salt h3{color:var(--beet);font-size:10.5pt}
+.salt svg{width:16mm}
+.chips{display:flex;flex-wrap:wrap;gap:1mm;margin-top:1.4mm}
+.chip{font-size:6.8pt;font-weight:700;background:#fff;border:0.25mm solid var(--line);border-radius:1.5mm;padding:0.3mm 1.6mm}
+.sello{display:inline-grid;place-items:center;width:11mm;height:11mm;background:#111;color:#fff;font-family:var(--f-display);font-weight:800;font-size:4.2pt;line-height:1.05;text-align:center;clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%);flex:none}
+.light{border-left:1.6mm solid var(--c);padding:1.4mm 0 1.4mm 2.6mm}
+.light h3{color:var(--c);font-size:8.8pt;margin-bottom:0.6mm}
+.light p{font-size:8.6pt}
+
+/* Metas */
+.goals{display:flex;flex-direction:column;gap:2.6mm}
+.ck{display:grid;grid-template-columns:4.2mm 1fr;gap:2mm;align-items:start;font-size:9.2pt}
+.ck::before{content:"";width:3.6mm;height:3.6mm;border:0.35mm solid var(--ink);border-radius:0.8mm;margin-top:0.3mm}
+.warn{border:0.45mm solid var(--stop);border-radius:3mm;padding:2.8mm}
+.warn h3{color:var(--stop);margin-bottom:0.8mm}
+.warn li{font-size:8.4pt}
+.foot{font-size:6.3pt;color:var(--muted);margin-top:auto}
+</style></head><body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-veg" viewBox="0 0 32 32"><path d="M16 29c-1-6-1-11 0-16 1 5 1 10 0 16z" fill="currentColor"/><path d="M16 14C10 13 6 8 7 3c5 0 9 4 9 11z" fill="currentColor" opacity=".75"/><path d="M16 14c6-1 10-6 9-11-5 0-9 4-9 11z" fill="currentColor"/></symbol>
+  <symbol id="i-fruit" viewBox="0 0 32 32"><path d="M16 10c-3-3-10-2-10 6 0 6 4 13 8 12 1 0 1-.4 2-.4s1 .4 2 .4c4 1 8-6 8-12 0-8-7-9-10-6z" fill="currentColor"/><path d="M16 10c0-3 1-5 3-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="i-grain" viewBox="0 0 32 32"><path d="M6 15c0-5 4-8 10-8s10 3 10 8c0 2-1 3-2 3v8c0 1-1 2-2 2H10c-1 0-2-1-2-2v-8c-1 0-2-1-2-3z" fill="currentColor"/></symbol>
+  <symbol id="i-dairy" viewBox="0 0 32 32"><path d="M11 4h10v4l3 5v15c0 1-1 1-1 1H9s-1 0-1-1V13l3-5z" fill="currentColor"/><path d="M8 17h16v6H8z" fill="#fff" opacity=".85"/></symbol>
+  <symbol id="i-prot" viewBox="0 0 32 32"><path d="M4 16c4-6 10-8 16-6l7-4-2 10 2 10-7-4c-6 2-12 0-16-6z" fill="currentColor"/><circle cx="10" cy="15" r="1.6" fill="#fff"/></symbol>
+  <symbol id="i-nut" viewBox="0 0 32 32"><ellipse cx="10" cy="18" rx="5" ry="7" transform="rotate(-20 10 18)" fill="currentColor"/><ellipse cx="21" cy="12" rx="5" ry="7" transform="rotate(25 21 12)" fill="currentColor" opacity=".75"/><ellipse cx="21" cy="24" rx="4" ry="5" transform="rotate(70 21 24)" fill="currentColor" opacity=".9"/></symbol>
+  <symbol id="i-fat" viewBox="0 0 32 32"><path d="M16 3c4 7 9 12 9 17a9 9 0 0 1-18 0c0-5 5-10 9-17z" fill="currentColor"/></symbol>
+  <symbol id="i-sweet" viewBox="0 0 32 32"><circle cx="16" cy="16" r="6" fill="currentColor"/><path d="M10 16L4 11v10zM22 16l6-5v10z" fill="currentColor" opacity=".7"/></symbol>
+  <symbol id="i-plate" viewBox="0 0 260 240">
+    <circle cx="112" cy="124" r="104" fill="#fff"/>
+    <circle cx="112" cy="124" r="90" fill="#F3F6F1"/>
+    <path d="M112 124 L112 34 A90 90 0 0 0 112 214 Z" fill="#3E9A57"/>
+    <path d="M112 124 L112 34 A90 90 0 0 1 202 124 Z" fill="#C08A3A"/>
+    <path d="M112 124 L202 124 A90 90 0 0 1 112 214 Z" fill="#7A5BA8"/>
+    <circle cx="78" cy="70" r="9" fill="#D9533B"/><circle cx="92" cy="182" r="7" fill="#D9533B"/><circle cx="48" cy="170" r="5" fill="#D9533B"/>
+    <path d="M112 34v180M112 124h90" stroke="#fff" stroke-width="3"/>
+    <text x="66" y="124" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="800" font-size="13" fill="#fff">Verduras</text>
+    <text x="66" y="139" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="800" font-size="13" fill="#fff">y frutas</text>
+    <text x="152" y="92" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="800" font-size="12" fill="#fff">Integrales</text>
+    <text x="152" y="166" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="800" font-size="12" fill="#fff">Proteína</text>
+    <path d="M222 140h28l-4 70c0 3-2 5-5 5h-10c-3 0-5-2-5-5z" fill="#fff" stroke="#5B8FC9" stroke-width="3"/>
+    <path d="M224 160h24l-3 50c0 2-1 3-3 3h-12c-2 0-3-1-3-3z" fill="#5B8FC9"/>
+  </symbol>
+</defs></svg>
+
+<!-- ============ EXTERIOR ============ -->
+<div class="sheet out">
+  <!-- Solapa interior (se ve al abrir la portada) -->
+  <div class="p">
+    <span class="eb">¿Por qué esta dieta?</span>
+    <h2>Comer así baja la presión</h2>
+    <div class="box" style="display:flex;flex-direction:column;gap:1.5mm">
+      <div class="big">−11<small>mmHg</small></div>
+      <p>En personas con presión alta, la dieta DASH bajó la presión máxima en unos 11 puntos. Es un efecto parecido al de un medicamento, y se nota en 2 a 4 semanas.</p>
+    </div>
+    <h3>¿Cómo funciona?</h3>
+    <div class="how">
+      <div class="r"><span class="ic" style="background:#E3F1E6;color:var(--veg)"><svg><use href="#i-veg"/></svg></span><p>Las verduras, frutas y legumbres traen <b>potasio y fibra</b>, que ayudan a relajar las arterias.</p></div>
+      <div class="r"><span class="ic" style="background:#E6EEF8;color:var(--dairy)"><svg><use href="#i-dairy"/></svg></span><p>Los lácteos descremados aportan <b>calcio</b> sin grasa saturada.</p></div>
+      <div class="r"><span class="ic" style="background:var(--beet-soft);color:var(--beet)"><svg viewBox="0 0 32 32"><path d="M10 12c0-5 3-8 6-8s6 3 6 8v14c0 2-1 3-3 3h-6c-2 0-3-1-3-3z" fill="currentColor"/></svg></span><p>Con <b>menos sal</b>, el cuerpo retiene menos líquido y la presión baja aún más.</p></div>
+    </div>
+    <div class="note">Sigue tomando tus remedios. La dieta los acompaña, no los reemplaza.</div>
+    <p class="foot">Basado en los estudios DASH (1997) y DASH-Sodio (2001) y en la guía europea de hipertensión 2024.</p>
+  </div>
+
+  <!-- Contratapa -->
+  <div class="p">
+    <span class="eb">Mis controles</span>
+    <h2>Registro de mi presión</h2>
+    <div class="goal"><b>Mi meta de presión</b><span class="bp">menos de ____ / ____</span></div>
+    <table>
+      <thead><tr><th style="width:24%">Fecha</th><th style="width:30%">Presión</th><th>¿Cómo me fue con la dieta?</th></tr></thead>
+      <tbody><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></tbody>
+    </table>
+    <div class="box sign">
+      <div class="row"><span>Próximo control:</span><span class="fill"></span></div>
+      <div class="row"><span>Médico/a:</span><span class="fill"></span></div>
+      <div class="row"><span>Centro de salud:</span><span class="fill"></span></div>
+    </div>
+    <p class="foot">Material educativo general. No reemplaza la indicación de tu médico ni la evaluación de un nutricionista. Revisado nov. 2026.</p>
+  </div>
+
+  <!-- Portada -->
+  <div class="p cover">
+    <span class="eb">Guía de alimentación · Presión arterial</span>
+    <div style="display:flex;flex-direction:column;gap:2mm">
+      <h1>Dieta<br>DASH</h1>
+      <p class="sub">Mi plan para bajar la presión</p>
+    </div>
+    <svg class="plate"><use href="#i-plate"/></svg>
+    <div class="who">
+      <div class="row"><span>Nombre:</span><span class="fill"></span></div>
+      <div class="row"><span>Fecha:</span><span class="fill"></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ INTERIOR ============ -->
+<div class="sheet in">
+  <!-- Panel 1: porciones -->
+  <div class="p">
+    <span class="eb">Mi día en porciones</span>
+    <h2>¿Cuánto comer?</h2>
+    <p class="muted" style="font-size:7.4pt">Para un adulto de unas 2.000 calorías. Marca un círculo por cada porción.</p>
+    <div id="groups"></div>
+  </div>
+
+  <!-- Panel 2: sal y semáforo -->
+  <div class="p">
+    <span class="eb">Lo más importante</span>
+    <div class="salt">
+      <svg viewBox="0 0 100 120"><path d="M30 40c0-14 8-26 20-26s20 12 20 26v62c0 6-4 10-10 10H40c-6 0-10-4-10-10z" fill="#fff" stroke="#8C2B47" stroke-width="4"/><path d="M30 40h40" stroke="#8C2B47" stroke-width="4"/><circle cx="42" cy="26" r="2.5" fill="#8C2B47"/><circle cx="50" cy="22" r="2.5" fill="#8C2B47"/><circle cx="58" cy="26" r="2.5" fill="#8C2B47"/><text x="50" y="88" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="800" font-size="20" fill="#8C2B47">5 g</text></svg>
+      <div>
+        <h3>Sal: menos de 1 cucharadita al día</h3>
+        <p style="font-size:7.8pt">En total, sumando la que ya viene en los alimentos. La mayor parte no sale del salero.</p>
+        <div class="chips"><span class="chip">Pan y marraqueta</span><span class="chip">Embutidos</span><span class="chip">Quesos maduros</span><span class="chip">Caldos en cubo</span><span class="chip">Snacks</span><span class="chip">Salsa de soya</span></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:2.5mm;align-items:center"><span class="sello">ALTO EN<br>SODIO</span><p style="font-size:7.8pt">Si ves este sello, busca otra opción o cómelo solo de vez en cuando.</p></div>
+    <h2 style="font-size:12pt;margin-top:1mm">El semáforo</h2>
+    <div class="light" style="--c:var(--go)"><h3>Todos los días</h3><p>Verduras, frutas enteras, porotos, lentejas, garbanzos, avena, arroz y pan integral, leche y yogurt descremados, pescado, pollo sin piel, huevo, nueces sin sal, aceite de oliva, palta, hierbas y limón.</p></div>
+    <div class="light" style="--c:var(--slow)"><h3>Con moderación</h3><p>Pan blanco y marraqueta, quesos (mejor quesillo o fresco), carne roja magra 1 a 2 veces por semana, jugos de fruta, mantequilla, legumbres en lata enjuagadas.</p></div>
+    <div class="light" style="--c:var(--stop)"><h3>Evitar</h3><p>Jamón, salame, longaniza y vienesas, cubos de caldo y sopas en sobre, snacks salados, comida rápida, bebidas azucaradas, pasteles y galletas.</p></div>
+  </div>
+
+  <!-- Panel 3: metas con el médico -->
+  <div class="p">
+    <span class="eb">Acordado en la consulta</span>
+    <h2>Mis metas</h2>
+    <p class="muted" style="font-size:7.4pt">Tu médico marca 2 o 3 para empezar. Cuando ya sean costumbre, suma otra.</p>
+    <div class="box goals">
+      <div class="ck">Sacar el salero de la mesa</div>
+      <div class="ck">Una verdura en el almuerzo y otra en la cena</div>
+      <div class="ck">Fruta de postre en vez de dulce</div>
+      <div class="ck">Cambiar a leche y yogurt descremados</div>
+      <div class="ck">Legumbres 2 veces por semana</div>
+      <div class="ck">Cambiar embutidos por huevo, pollo o quesillo</div>
+      <div class="ck">Bajar el pan a ____ al día</div>
+      <div class="ck">Cocinar sin cubos de caldo ni sopas en sobre</div>
+      <div class="ck">Otra: ____________________</div>
+    </div>
+    <div class="warn">
+      <h3>Avisa a tu médico si…</h3>
+      <ul>
+        <li>Tienes enfermedad renal o te dijeron que tu potasio está alto.</li>
+        <li>Te sientes mareado o débil al levantarte.</li>
+        <li>Tienes diabetes con insulina, celiaquía o intolerancia a la lactosa: la dieta se adapta.</li>
+      </ul>
+    </div>
+    <p class="foot">Trucos: da sabor con ajo, cebolla, limón, orégano, comino o merkén sin sal. El gusto se acostumbra a menos sal en 2 a 3 semanas.</p>
+  </div>
+</div>
+
+<script>
+var G=[
+ ["i-veg","--veg","#E3F1E6","Verduras","4–5 al día","1 taza cruda o ½ taza cocida",5],
+ ["i-fruit","--fruit","#FBE6E1","Frutas","4–5 al día","1 fruta mediana o ½ taza picada",5],
+ ["i-grain","--grain","#F6EBDB","Cereales integrales","6–8 al día","1 rebanada de pan, ½ taza de arroz, fideos o avena",7],
+ ["i-dairy","--dairy","#E6EEF8","Lácteos descremados","2–3 al día","1 taza de leche, 1 yogurt, 1 lámina de quesillo",3],
+ ["i-prot","--prot","#EEE8F6","Pescado, pollo, huevo","Hasta 2 al día","Media palma (75 g) o 1 huevo",2],
+ ["i-fat","--fat","#F2F1DC","Aceites y palta","2–3 al día","1 cdta de aceite o 2 cdas de palta",3],
+ ["i-nut","--nut","#F0E9DE","Legumbres y frutos secos","4–5 a la semana","½ taza cocida o 1 puñado sin sal",5,1],
+ ["i-sweet","--sweet","#F8E3ED","Dulces","Máx. 5 a la semana","1 cda de azúcar, mermelada o miel",5,1]
+];
+document.getElementById("groups").innerHTML=G.map(function(g){
+  var d="";for(var i=0;i<g[6];i++)d+='<span class="dot"></span>';
+  return '<div class="g"><span class="ic" style="background:'+g[2]+';color:var('+g[1]+')"><svg><use href="#'+g[0]+'"/></svg></span>'+
+  '<div><h3>'+g[3]+'</h3><div class="q" style="color:var('+g[1]+')">'+g[4]+'</div><div class="eq">'+g[5]+'</div></div>'+
+  '<div class="dots" style="color:var('+g[1]+')">'+d+(g[7]?'<span class="wk">por semana</span>':'')+'</div></div>';
+}).join("");
+</script>
+</body></html>
