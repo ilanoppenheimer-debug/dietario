@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Calculadora nutricional · Guías de Alimentación</title>
-<meta name="description" content="Requerimientos de energía y proteína, riesgo de realimentación, balance nitrogenado y velocidad de nutrición enteral en adultos hospitalizados.">
+<meta name="description" content="Requerimientos de energía y proteína, síndrome de realimentación, balance nitrogenado y velocidad de nutrición enteral en adultos hospitalizados.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-leaf" viewBox="0 0 32 32"><path d="M5 27C5 13 13 5 27 5c0 14-8 22-22 22z" fill="currentColor"/><path d="M5 27L20 12" stroke="var(--leaf)" stroke-width="2" stroke-linecap="round"/></symbol></defs></svg>
-<div class="proto"><b>Prototipo en revisión.</b> Herramienta de apoyo para profesionales; no reemplaza el juicio clínico ni la evaluación por nutricionista. Verifica cada resultado.</div>
+<div class="proto"><b>Prototipo en revisión.</b> Apoyo para profesionales; no reemplaza el juicio clínico ni la evaluación por nutricionista.</div>
 <header class="sitebar">
   <div class="in" style="max-width:1100px">
     <a class="home" href="../index.html"><span class="mark"><svg><use href="#i-leaf"/></svg></span>Guías de Alimentación</a>
@@ -29,32 +29,39 @@
   <div class="tool-head">
     <span class="eyebrow">Herramienta profesional · Adultos hospitalizados</span>
     <h1>Calculadora nutricional</h1>
-    <p>Calcula energía y proteína según la situación clínica, con el peso de referencia que indica cada guía. Cada resultado muestra la fórmula y su fuente para que lo puedas verificar.</p>
   </div>
 
-  <div class="calc">
-    <form id="f" autocomplete="off" novalidate style="display:flex;flex-direction:column;gap:16px">
-      <span class="example" id="exnote">Datos de ejemplo: caso 1 del manual (politrauma en UCI). Reemplázalos por los de tu paciente.</span>
-      <fieldset class="fset">
-        <legend>Paciente</legend>
-        <div class="fld"><span class="lbl">Sexo</span>
-          <div class="seg2" role="radiogroup" aria-label="Sexo">
-            <label><input type="radio" name="sexo" id="sexo-m" value="M" checked>Hombre</label>
-            <label><input type="radio" name="sexo" id="sexo-f" value="F">Mujer</label>
-          </div>
+  <!-- Datos del paciente: compartidos por todas las pestañas -->
+  <form id="f" class="pt" autocomplete="off" novalidate>
+    <div class="pt-head"><b>Paciente</b><span class="example" id="exnote">Ejemplo: caso 1 del manual</span></div>
+    <div class="pt-grid">
+      <div class="fld"><span class="lbl">Sexo</span>
+        <div class="seg2" role="radiogroup" aria-label="Sexo">
+          <label><input type="radio" name="sexo" id="sexo-m" value="M" checked>H</label>
+          <label><input type="radio" name="sexo" id="sexo-f" value="F">M</label>
         </div>
-        <div class="frow">
-          <div class="fld"><label for="edad">Edad</label><div class="unit"><input id="edad" type="number" inputmode="numeric" min="18" max="110" value="25"><span>años</span></div></div>
-          <div class="fld"><label for="talla">Talla</label><div class="unit"><input id="talla" type="number" inputmode="decimal" min="120" max="230" step="0.5" value="175"><span>cm</span></div></div>
-          <div class="fld"><label for="peso">Peso actual</label><div class="unit"><input id="peso" type="number" inputmode="decimal" min="25" max="350" step="0.1" value="76"><span>kg</span></div></div>
-          <div class="fld"><label for="habitual">Peso habitual</label><div class="unit"><input id="habitual" type="number" inputmode="decimal" min="25" max="350" step="0.1" placeholder="opcional"><span>kg</span></div></div>
-        </div>
-      </fieldset>
+      </div>
+      <div class="fld"><label for="edad">Edad</label><div class="unit"><input id="edad" type="number" inputmode="numeric" min="18" max="110" value="25"><span>años</span></div></div>
+      <div class="fld"><label for="talla">Talla</label><div class="unit"><input id="talla" type="number" inputmode="decimal" min="120" max="230" step="0.5" value="175"><span>cm</span></div></div>
+      <div class="fld"><label for="peso">Peso actual</label><div class="unit"><input id="peso" type="number" inputmode="decimal" min="25" max="350" step="0.1" value="76"><span>kg</span></div></div>
+      <div class="fld"><label for="habitual">Peso habitual</label><div class="unit"><input id="habitual" type="number" inputmode="decimal" min="25" max="350" step="0.1" placeholder="opc."><span>kg</span></div></div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+  </form>
 
-      <fieldset class="fset">
-        <legend>Situación clínica</legend>
-        <div class="fld"><label for="situacion">Situación</label>
-          <select id="situacion">
+  <div class="ctabs" role="tablist" aria-label="Cálculos">
+    <button role="tab" id="t-requerimientos" aria-controls="p-requerimientos" data-tab="requerimientos">Requerimientos</button>
+    <button role="tab" id="t-realimentacion" aria-controls="p-realimentacion" data-tab="realimentacion">Realimentación</button>
+    <button role="tab" id="t-balance" aria-controls="p-balance" data-tab="balance">Balance N</button>
+    <button role="tab" id="t-enteral" aria-controls="p-enteral" data-tab="enteral">Nutrición enteral</button>
+  </div>
+
+  <!-- 1. Requerimientos -->
+  <section class="panel-t" role="tabpanel" id="p-requerimientos" aria-labelledby="t-requerimientos">
+    <div class="calc">
+      <div class="fset">
+        <div class="fld"><label for="situacion">Situación clínica</label>
+          <select id="situacion" form="f">
             <option value="sala_riesgo">Sala, con riesgo nutricional</option>
             <option value="sala_sin_riesgo">Sala, sin riesgo nutricional</option>
             <option value="polimorbido">Paciente médico polimórbido ≥65 años</option>
@@ -65,70 +72,111 @@
           </select>
         </div>
         <div class="fld" id="box-renal" hidden><label for="renal">Escenario renal</label>
-          <select id="renal">
+          <select id="renal" form="f">
             <option value="erc_estable">ERC sin enfermedad aguda</option>
-            <option value="erc_hd">ERC en hemodiálisis crónica, sin enfermedad aguda</option>
-            <option value="ira_no_critico">IRA o IRA sobre ERC, sin enfermedad crítica</option>
-            <option value="agudo_sin_trr" selected>Enfermedad aguda o crítica, sin terapia de reemplazo</option>
+            <option value="erc_hd">ERC en hemodiálisis crónica</option>
+            <option value="ira_no_critico">IRA o IRA sobre ERC, no crítico</option>
+            <option value="agudo_sin_trr" selected>Agudo o crítico, sin terapia de reemplazo</option>
             <option value="critico_hdi">Crítico con diálisis intermitente</option>
-            <option value="critico_trrc">Crítico con terapia continua o prolongada</option>
+            <option value="critico_trrc">Crítico con terapia continua</option>
           </select>
-          <small>Usa el peso habitual o previo al ingreso si lo tienes; si no, se usa el peso ideal.</small>
         </div>
-        <div id="box-cirrosis" hidden style="display:flex;flex-direction:column;gap:8px">
-          <label class="chk"><input type="checkbox" id="ascitis">Tiene ascitis (se calcula con peso ideal según talla)</label>
-          <label class="chk"><input type="checkbox" id="desnutrido">Desnutrido o con pérdida muscular</label>
+        <div id="box-cirrosis" hidden class="stack">
+          <label class="chk"><input type="checkbox" id="ascitis" form="f">Ascitis</label>
+          <label class="chk"><input type="checkbox" id="desnutrido" form="f">Desnutrido o con pérdida muscular</label>
         </div>
-        <label class="chk" id="box-tfg" hidden><input type="checkbox" id="tfg">TFGe &lt;30 mL/min/1,73 m² sin terapia de reemplazo</label>
+        <label class="chk" id="box-tfg" hidden><input type="checkbox" id="tfg" form="f">TFGe &lt;30 sin terapia de reemplazo</label>
         <div class="fld" id="box-geria" hidden><label for="enfermedad">Enfermedad</label>
-          <select id="enfermedad">
-            <option value="ninguna">Sin enfermedad aguda ni crónica relevante</option>
-            <option value="aguda" selected>Enfermedad aguda o crónica</option>
-            <option value="severa">Enfermedad severa, lesión o desnutrición</option>
+          <select id="enfermedad" form="f">
+            <option value="ninguna">Sin enfermedad relevante</option>
+            <option value="aguda" selected>Aguda o crónica</option>
+            <option value="severa">Severa, lesión o desnutrición</option>
           </select>
         </div>
-      </fieldset>
-    </form>
+      </div>
+      <div class="results" aria-live="polite" id="results"></div>
+    </div>
+  </section>
 
-    <section class="results" aria-live="polite" id="results"></section>
-  </div>
+  <!-- 2. Realimentación -->
+  <section class="panel-t" role="tabpanel" id="p-realimentacion" aria-labelledby="t-realimentacion" hidden>
+    <div class="rsteps">
+      <div class="blk">
+        <div class="bh"><span class="num">1</span><h2>¿Está en riesgo?</h2>
+          <details class="pop"><summary aria-label="Cómo se clasifica">?</summary><div>Criterios ASPEN 2020. <b>Significativo:</b> 1 criterio de la columna significativa. <b>Moderado:</b> 2 criterios de la columna moderada. El IMC se toma de los datos del paciente.</div></details>
+        </div>
+        <div class="crit" id="crit"></div>
+        <div id="refeed-out"></div>
+      </div>
 
-  <div class="blocks">
-    <section class="blk wide" id="refeed">
-      <div><span class="eyebrow" style="color:var(--tool)">ASPEN 2020</span><h2>Riesgo de realimentación</h2></div>
-      <p class="lead">Riesgo significativo con 1 criterio de la columna significativa; moderado con 2 de la columna moderada. El IMC y la pérdida de peso se completan con los datos de arriba.</p>
-      <div class="crit" id="crit"></div>
-      <div id="refeed-out"></div>
-    </section>
+      <div class="blk">
+        <div class="bh"><span class="num">2</span><h2>Plan de inicio</h2>
+          <details class="pop"><summary aria-label="Regla">?</summary><div>ASPEN 2020: 10–20 kcal/kg o 100–150 g de dextrosa las primeras 24 h, contando sueros y diluciones; subir 33 % de la meta cada 1–2 días. ESPEN hospitalaria 2021 propone 5–15 kcal/kg según el riesgo.</div></details>
+        </div>
+        <div class="frow3">
+          <div class="fld"><label for="rf-ini">Inicio</label>
+            <select id="rf-ini"><option value="10" selected>10 kcal/kg</option><option value="15">15 kcal/kg</option><option value="20">20 kcal/kg</option></select></div>
+          <div class="fld"><label for="rf-meta">Meta</label><div class="unit"><input id="rf-meta" type="number" inputmode="numeric" min="300" step="10"><span>kcal</span></div></div>
+          <div class="fld"><label for="rf-cada">Subir cada</label>
+            <select id="rf-cada"><option value="1">1 día</option><option value="2" selected>2 días</option></select></div>
+        </div>
+        <div id="plan"></div>
+      </div>
 
-    <section class="blk">
-      <div><span class="eyebrow" style="color:var(--tool)">Manual 2014</span><h2>Balance nitrogenado</h2></div>
-      <p class="lead">BN = proteína ÷ 6,25 − (NUU + 4). Proteína para balance neutro = (NUU + 4) × 6,25.</p>
+      <div class="blk">
+        <div class="bh"><span class="num">3</span><h2>Tiamina y electrolitos</h2></div>
+        <ul class="checks">
+          <li><b>Tiamina 100 mg</b> antes de alimentar o de iniciar sueros glucosados.</li>
+          <li><b>Tiamina 100 mg/día por 5–7 días</b> si hay ayuno severo, alcoholismo u otro riesgo alto de déficit.</li>
+          <li><b>Multivitamínico</b> por ≥10 días (en NP, diario mientras dure).</li>
+          <li><b>K, P y Mg</b> antes de iniciar y cada 12 h los primeros 3 días en riesgo alto. Si están muy bajos, corregir antes de partir.</li>
+          <li><b>Si caen o cuesta corregirlos:</b> bajar 50 % las calorías y volver a subir 33 % de la meta cada 1–2 días.</li>
+          <li><b>Signos vitales</b> cada 4 h las primeras 24 h; peso y balance hídrico diarios.</li>
+        </ul>
+        <details class="more"><summary>¿Qué es y cómo se define?</summary>
+          <div>
+            <p>Al reiniciar la alimentación tras un ayuno, la insulina desplaza fósforo, potasio y magnesio hacia la célula y aumenta la demanda de tiamina. Las caídas bruscas pueden causar arritmias, insuficiencia respiratoria o cardíaca y encefalopatía.</p>
+            <p><b>Definición ASPEN 2020:</b> caída de P, K o Mg de 10–20 % (leve), 20–30 % (moderada) o &gt;30 % o falla de órgano (grave), en los 5 días siguientes a reiniciar el aporte calórico.</p>
+            <p><b>ESPEN micronutrientes 2024:</b> tiamina 100–300 mg/día desde el ingreso si hubo hipoingesta o alcohol.</p>
+          </div>
+        </details>
+        <p class="src">ASPEN 2020 (da Silva), tabla 6. Ver también el <a href="nutricion-hospitalaria.html#realim" style="color:var(--tool)">torpedo</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Balance nitrogenado -->
+  <section class="panel-t" role="tabpanel" id="p-balance" aria-labelledby="t-balance" hidden>
+    <div class="blk narrow">
+      <div class="bh"><h2>Balance nitrogenado</h2>
+        <details class="pop"><summary aria-label="Fórmula">?</summary><div>BN = proteína ÷ 6,25 − (NUU + 4). Proteína para balance neutro = (NUU + 4) × 6,25. Meta +2 a +4 g/d; en el crítico, el menos negativo posible. En oligoanuria el NUU no sirve. Fuente: Manual UDD 2014.</div></details>
+      </div>
       <div class="frow">
         <div class="fld"><label for="bn-prot">Proteína aportada</label><div class="unit"><input id="bn-prot" type="number" inputmode="decimal" min="0" step="1" value="90"><span>g/d</span></div></div>
-        <div class="fld"><label for="bn-nuu">Nitrógeno ureico urinario</label><div class="unit"><input id="bn-nuu" type="number" inputmode="decimal" min="0" step="0.1" value="16"><span>g/d</span></div></div>
+        <div class="fld"><label for="bn-nuu">NUU</label><div class="unit"><input id="bn-nuu" type="number" inputmode="decimal" min="0" step="0.1" value="16"><span>g/d</span></div></div>
       </div>
       <div class="mini" id="bn-out"></div>
-      <p class="src">Meta: +2 a +4 g/d; en el crítico, el balance menos negativo posible. En oligoanuria el NUU no sirve.</p>
-    </section>
+    </div>
+  </section>
 
-    <section class="blk">
-      <div><span class="eyebrow" style="color:var(--tool)">Aritmética</span><h2>Velocidad de nutrición enteral</h2></div>
-      <p class="lead">Volumen = meta de kcal ÷ densidad. Toma la densidad y la proteína por litro de la etiqueta del producto que se dispensa.</p>
-      <div class="frow">
-        <div class="fld"><label for="ne-kcal">Meta de energía</label><div class="unit"><input id="ne-kcal" type="number" inputmode="numeric" min="0" step="10" value="1900"><span>kcal</span></div></div>
-        <div class="fld"><label for="ne-dens">Densidad</label><div class="unit"><input id="ne-dens" type="number" inputmode="decimal" min="0.5" max="2.5" step="0.05" value="1.2"><span>kcal/mL</span></div></div>
-        <div class="fld"><label for="ne-h">Horas de infusión</label><div class="unit"><input id="ne-h" type="number" inputmode="numeric" min="1" max="24" value="24"><span>h</span></div></div>
-        <div class="fld"><label for="ne-p">Proteína del producto</label><div class="unit"><input id="ne-p" type="number" inputmode="decimal" min="0" step="1" placeholder="opcional"><span>g/L</span></div></div>
+  <!-- 4. Nutrición enteral -->
+  <section class="panel-t" role="tabpanel" id="p-enteral" aria-labelledby="t-enteral" hidden>
+    <div class="blk narrow">
+      <div class="bh"><h2>Velocidad de nutrición enteral</h2>
+        <details class="pop"><summary aria-label="Cómo se calcula">?</summary><div>Volumen = meta de kcal ÷ densidad; velocidad = volumen ÷ horas. Toma la densidad y la proteína por litro de la etiqueta del producto que se dispensa.</div></details>
       </div>
+      <div class="frow">
+        <div class="fld"><label for="ne-kcal">Meta</label><div class="unit"><input id="ne-kcal" type="number" inputmode="numeric" min="0" step="10" value="1900"><span>kcal</span></div></div>
+        <div class="fld"><label for="ne-dens">Densidad</label><div class="unit"><input id="ne-dens" type="number" inputmode="decimal" min="0.5" max="2.5" step="0.05" value="1.2"><span>kcal/mL</span></div></div>
+        <div class="fld"><label for="ne-h">Horas</label><div class="unit"><input id="ne-h" type="number" inputmode="numeric" min="1" max="24" value="24"><span>h</span></div></div>
+        <div class="fld"><label for="ne-p">Proteína</label><div class="unit"><input id="ne-p" type="number" inputmode="decimal" min="0" step="1" placeholder="opc."><span>g/L</span></div></div>
+      </div>
+      <label class="chk"><input type="checkbox" id="ne-sync" checked>Usar la meta de Requerimientos</label>
       <div class="mini" id="ne-out"></div>
-      <label class="chk"><input type="checkbox" id="ne-sync" checked>Usar el máximo de energía calculado arriba</label>
-    </section>
-  </div>
+    </div>
+  </section>
 
-  <footer style="font-size:.84rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px">
-    Fuentes: ESPEN hospitalaria 2021 (Thibault), ESPEN polimórbido 2024 (Wunderle), ESPEN UCI 2023 (Singer), ESPEN renal 2024 (Sabatino), ESPEN hígado 2020 (Bischoff), ESPEN geriatría 2019 (Volkert), ASPEN realimentación 2020 (da Silva). Fórmulas clásicas: Manual de Terapia Nutricional UDD 2014. Revisión: noviembre 2026.
-  </footer>
+  <details class="more foot"><summary>Fuentes</summary><div>ESPEN hospitalaria 2021 (Thibault), ESPEN polimórbido 2024 (Wunderle), ESPEN UCI 2023 (Singer), ESPEN renal 2024 (Sabatino), ESPEN hígado 2020 (Bischoff), ESPEN geriatría 2019 (Volkert), ASPEN realimentación 2020 (da Silva), ESPEN micronutrientes 2024 (Berger). Fórmulas clásicas: Manual de Terapia Nutricional UDD 2014. Revisión: noviembre 2026.</div></details>
 </main>
 </div>
 
@@ -138,22 +186,47 @@
   var C = window.NutriCalc, $ = function(id){ return document.getElementById(id); };
   var nf = function(x, d){ return x == null ? "" : x.toLocaleString("es-CL", {maximumFractionDigits: d == null ? 0 : d}); };
   var num = function(id){ var v = parseFloat(String($(id).value).replace(",", ".")); return isNaN(v) ? null : v; };
-  var last = null;
+  var last = null, metaTocada = false;
 
+  /* ---------- Pestañas ---------- */
+  var TABS = ["requerimientos","realimentacion","balance","enteral"];
+  function show(t){
+    if (TABS.indexOf(t) < 0) t = "requerimientos";
+    TABS.forEach(function(x){
+      $("p-" + x).hidden = x !== t;
+      var b = $("t-" + x); b.setAttribute("aria-selected", x === t); b.tabIndex = x === t ? 0 : -1;
+    });
+  }
+  document.querySelector(".ctabs").addEventListener("click", function(e){
+    var b = e.target.closest("[data-tab]"); if (!b) return;
+    if (location.hash !== "#" + b.dataset.tab) history.replaceState(null, "", "#" + b.dataset.tab);
+    show(b.dataset.tab);
+  });
+  document.querySelector(".ctabs").addEventListener("keydown", function(e){
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    var i = TABS.indexOf(document.activeElement.dataset.tab); if (i < 0) return;
+    var n = TABS[(i + (e.key === "ArrowRight" ? 1 : TABS.length - 1)) % TABS.length];
+    $("t-" + n).focus(); $("t-" + n).click();
+  });
+  window.addEventListener("hashchange", function(){ show(location.hash.slice(1)); });
+
+  /* ---------- Criterios de realimentación ---------- */
   var CRIT = [
-    {k:"imc", t:"IMC", m:"16–18,5", s:"<16", auto:true},
-    {k:"perdida", t:"Pérdida de peso", m:"5 % en 1 mes", s:"7,5 % en 3 meses o >10 % en 6 meses"},
-    {k:"ingesta", t:"Ingesta", m:"Nula 5–6 días, o <75 % >7 días en enfermedad aguda, o <75 % >1 mes", s:"Nula >7 días, o <50 % >5 días en enfermedad aguda, o <50 % >1 mes"},
-    {k:"electrolitos", t:"K, P o Mg antes de alimentar", m:"Mínimamente bajos, o normales con baja reciente que requirió poca reposición", s:"Moderada o significativamente bajos, o normales con baja reciente que requirió reposición importante"},
-    {k:"grasa", t:"Pérdida de grasa subcutánea", m:"Moderada", s:"Severa"},
-    {k:"musculo", t:"Pérdida de masa muscular", m:"Leve o moderada", s:"Severa"},
-    {k:"comorbilidad", t:"Comorbilidad de alto riesgo", m:"Moderada", s:"Severa", hint:"Alcohol o drogas, cáncer, malabsorción, disfagia, trastorno alimentario, cirugía bariátrica, ayuno prolongado, entre otras"}
+    {k:"imc", t:"IMC", m:"16–18,5", s:"&lt;16", auto:true},
+    {k:"perdida", t:"Pérdida de peso", m:"5 % en 1 mes", s:"7,5 % en 3 meses o &gt;10 % en 6 meses"},
+    {k:"ingesta", t:"Ingesta", m:"Nula 5–6 días; &lt;75 % por &gt;7 días en enfermedad aguda; &lt;75 % por &gt;1 mes", s:"Nula &gt;7 días; &lt;50 % por &gt;5 días en enfermedad aguda; &lt;50 % por &gt;1 mes"},
+    {k:"electrolitos", t:"K, P o Mg antes de alimentar", m:"Mínimamente bajos, o reposición mínima reciente", s:"Moderada o significativamente bajos, o reposición importante reciente"},
+    {k:"grasa", t:"Grasa subcutánea", m:"Pérdida moderada", s:"Pérdida severa"},
+    {k:"musculo", t:"Masa muscular", m:"Pérdida leve o moderada", s:"Pérdida severa"},
+    {k:"comorbilidad", t:"Comorbilidad de riesgo", m:"Moderada", s:"Severa", hint:"Alcohol o drogas, cáncer, malabsorción, disfagia, trastorno alimentario, cirugía bariátrica, ayuno prolongado, entre otras."}
   ];
   $("crit").innerHTML = CRIT.map(function(c){
-    var opts = [["0","No"],["1","Moderado"],["2","Significativo"]].map(function(o){
+    var opts = [["0","No"],["1","Mod."],["2","Signif."]].map(function(o){
       return '<label data-v="'+o[0]+'"><input type="radio" name="c-'+c.k+'" id="c-'+c.k+'-'+o[0]+'" value="'+o[0]+'"'+(o[0]==="0"?" checked":"")+(c.auto?" disabled":"")+'>'+o[1]+'</label>';
     }).join("");
-    return '<div class="row"><div><b>'+c.t+(c.auto?' <span class="auto" style="display:inline">· automático</span>':'')+'</b><span>Moderado: '+c.m+' · Significativo: '+c.s+'</span>'+(c.hint?'<span>'+c.hint+'</span>':'')+'</div><div class="lvl3" role="radiogroup" aria-label="'+c.t+'">'+opts+'</div></div>';
+    return '<div class="row"><div class="ct"><b>'+c.t+'</b>'+(c.auto?'<span class="auto">automático</span>':'')+
+      '<details class="pop"><summary aria-label="Umbrales de '+c.t+'">?</summary><div><b>Moderado:</b> '+c.m+'<br><b>Significativo:</b> '+c.s+(c.hint?'<br>'+c.hint:'')+'</div></details></div>'+
+      '<div class="lvl3" role="radiogroup" aria-label="'+c.t+'">'+opts+'</div></div>';
   }).join("");
 
   function input(){
@@ -163,10 +236,8 @@
   }
   function toggles(){
     var s = $("situacion").value;
-    $("box-renal").hidden = s !== "renal";
-    $("box-cirrosis").hidden = s !== "cirrosis";
-    $("box-tfg").hidden = s !== "polimorbido";
-    $("box-geria").hidden = s !== "geriatria";
+    $("box-renal").hidden = s !== "renal"; $("box-cirrosis").hidden = s !== "cirrosis";
+    $("box-tfg").hidden = s !== "polimorbido"; $("box-geria").hidden = s !== "geriatria";
   }
   function rangoTxt(o, unit){
     if (o.max == null) return "≥ " + nf(o.min) + "<small>" + unit + "</small>";
@@ -179,22 +250,23 @@
   function render(){
     toggles();
     var e = input(), r = C.requerimientos(e), out = $("results");
-    if (!r.ok){ out.innerHTML = '<div class="alerts">' + r.errores.map(function(x){ return '<div class="alert err">' + x + '</div>'; }).join("") + '</div>'; last = null; refeed(); return; }
+    if (!r.ok){ out.innerHTML = '<div class="alerts">' + r.errores.map(function(x){ return '<div class="alert err">' + x + '</div>'; }).join("") + '</div>'; $("kpis").innerHTML = ""; last = null; refeed(); return; }
     last = r;
-    var k = '<div class="kpis"><span class="kpi">IMC<b>' + nf(r.imc, 1) + '</b></span><span class="kpi">Peso ideal (IMC 25)<b>' + nf(r.peso.ideal25, 1) + ' kg</b></span>' +
-      (r.peso.idealUCI ? '<span class="kpi">Peso ideal UCI<b>' + nf(r.peso.idealUCI, 1) + ' kg</b></span>' : '') +
-      (r.perdida != null ? '<span class="kpi">Pérdida de peso<b>' + nf(r.perdida, 1) + ' %</b></span>' : '') + '</div>';
+    $("kpis").innerHTML = '<span class="kpi">IMC<b>' + nf(r.imc, 1) + '</b></span><span class="kpi">Ideal (IMC 25)<b>' + nf(r.peso.ideal25, 1) + ' kg</b></span>' +
+      (r.peso.idealUCI ? '<span class="kpi">Ideal UCI<b>' + nf(r.peso.idealUCI, 1) + ' kg</b></span>' : '') +
+      (r.perdida != null ? '<span class="kpi">Pérdida<b>' + nf(r.perdida, 1) + ' %</b></span>' : '');
     var E = r.energia, P = r.proteina;
-    var en = '<div class="res"><span class="k">Energía</span><div class="v">' + rangoTxt(E, "kcal/día") + '</div>' +
-      '<div class="f">' + porKgTxt(E.porKg) + ' kcal/kg × ' + pesoTxt(E.pesoRef) + ' (' + E.pesoTxt + ')</div>' +
-      (E.semana1 ? '<div class="w1">Primera semana: menos de ' + nf(E.semana1.max) + ' kcal/día (&lt;70 %)</div>' : '') +
-      (E.nota ? '<p class="n">' + E.nota + '</p>' : '') + '</div>';
-    var pr = '<div class="res"><span class="k">Proteína</span><div class="v">' + rangoTxt(P, "g/día") + '</div>' +
-      '<div class="f">' + porKgTxt(P.porKg) + ' g/kg × ' + pesoTxt(P.pesoRef) + ' (' + P.pesoTxt + ')</div>' +
-      (P.nota ? '<p class="n">' + P.nota + '</p>' : '') + '</div>';
-    var al = r.avisos.length ? '<div class="alerts">' + r.avisos.map(function(x){ return '<div class="alert">' + x + '</div>'; }).join("") + '</div>' : '';
-    out.innerHTML = k + en + pr + al + '<p class="src">Fuente: ' + r.fuentes.join("; ") + '. Líquidos, micronutrientes y calorías no nutricionales (propofol 1,1 kcal/mL, dextrosa, citrato) se calculan aparte.</p>';
+    function card(k, o, unit, extra){
+      var det = (o.nota ? '<p>' + o.nota + '</p>' : '') + '<p>Peso: ' + o.pesoTxt + '.</p>';
+      return '<div class="res"><div class="rh"><span class="k">' + k + '</span><details class="pop"><summary aria-label="Notas de ' + k + '">?</summary><div>' + det + '</div></details></div>' +
+        '<div class="v">' + rangoTxt(o, unit) + '</div><div class="f">' + porKgTxt(o.porKg) + (unit === "kcal/día" ? ' kcal/kg' : ' g/kg') + ' × ' + pesoTxt(o.pesoRef) + '</div>' + (extra || '') + '</div>';
+    }
+    out.innerHTML = card("Energía", E, "kcal/día", E.semana1 ? '<div class="w1">1ª semana: &lt;' + nf(E.semana1.max) + ' kcal/día</div>' : '') +
+      card("Proteína", P, "g/día") +
+      (r.avisos.length ? '<div class="alerts">' + r.avisos.map(function(x){ return '<div class="alert">' + x + '</div>'; }).join("") + '</div>' : '') +
+      '<p class="src">' + r.fuentes.join("; ") + '</p>';
     if ($("ne-sync").checked && E.max) { $("ne-kcal").value = E.max; ne(); }
+    if (!metaTocada) $("rf-meta").value = E.max || E.min;
     refeed();
   }
 
@@ -204,18 +276,21 @@
     ["0","1","2"].forEach(function(v){ var x = $("c-imc-" + v); if (x) x.checked = (+v === lvlImc); });
     var c = { imc: I == null ? 0 : I };
     CRIT.forEach(function(k){ if (!k.auto) { var s = document.querySelector('input[name="c-' + k.k + '"]:checked'); c[k.k] = s ? +s.value : 0; } });
-    var w = e.peso || 0, R = C.realimentacion(c, w);
+    var R = C.realimentacion(c, e.peso || 0);
     var col = R.riesgo === "significativo" ? "var(--stop)" : R.riesgo === "moderado" ? "var(--slow)" : "var(--leaf)";
-    var html = '<div class="verdict" style="--c:' + col + '"><b>Riesgo ' + R.riesgo + '</b>';
-    if (R.enRiesgo) {
-      html += '<p><b style="font-size:.95rem;color:var(--ink)">Inicio:</b> 10–20 kcal/kg = ' + nf(R.inicio.kcalMin) + '–' + nf(R.inicio.kcalMax) + ' kcal las primeras 24 h, o 100–150 g de dextrosa (incluye la de sueros y diluciones). Subir 33 % de la meta cada 1–2 días.</p>' +
-        '<p><b style="font-size:.95rem;color:var(--ink)">Tiamina:</b> 100 mg antes de alimentar o de iniciar sueros glucosados; 100 mg/día por 5–7 días si hay ayuno severo, alcoholismo u otro riesgo alto. Multivitamínico por ≥10 días.</p>' +
-        '<p><b style="font-size:.95rem;color:var(--ink)">Electrolitos:</b> K, P y Mg antes de iniciar y cada 12 h los primeros 3 días en riesgo alto. Si caen o cuesta corregirlos, bajar 50 % las calorías y volver a subir 33 % cada 1–2 días. Con valores muy bajos, corregir antes de partir.</p>' +
-        '<p class="src">ESPEN hospitalaria 2021 sugiere partir con 5–15 kcal/kg según el riesgo.</p>';
-    } else {
-      html += '<p>Sin criterios suficientes para riesgo según ASPEN. Igual revisa electrolitos al iniciar si hubo ayuno.</p>';
-    }
-    $("refeed-out").innerHTML = html + '</div>';
+    $("refeed-out").innerHTML = '<div class="verdict" style="--c:' + col + '"><b>Riesgo ' + R.riesgo + '</b><p>' +
+      (R.enRiesgo ? 'Inicia con el plan del paso 2 y sigue el paso 3.' : 'Sin criterios suficientes según ASPEN. Igual revisa electrolitos al iniciar si hubo ayuno.') + '</p></div>';
+    plan(R.enRiesgo);
+  }
+
+  function plan(enRiesgo){
+    var w = num("peso"), meta = num("rf-meta"), ini = +$("rf-ini").value, cada = +$("rf-cada").value;
+    if (!w || !meta) { $("plan").innerHTML = ""; return; }
+    var p = C.planRealimentacion(meta, ini * w, cada);
+    $("plan").innerHTML = (enRiesgo ? '' : '<p class="src">El paciente no cumple criterios de riesgo; el plan se muestra como referencia.</p>') +
+      '<div class="ptable"><div class="pr ph"><span>Día</span><span>kcal/día</span><span>% de la meta</span></div>' +
+      p.map(function(x){ return '<div class="pr"><span>' + x.dia + '</span><span>' + nf(x.kcal) + '</span><span><i style="width:' + x.pct + '%"></i>' + x.pct + ' %</span></div>'; }).join("") +
+      '</div><p class="src">Alternativa: 100–150 g de dextrosa el día 1. Incluye la dextrosa de sueros y diluciones.</p>';
   }
 
   function bn(){
@@ -223,7 +298,7 @@
     if (p == null || n == null) { $("bn-out").innerHTML = ""; return; }
     var b = C.balanceNitrogenado(p, n);
     $("bn-out").innerHTML = '<div class="out"><span class="k">Balance</span><span class="v">' + (b.balance > 0 ? "+" : "") + nf(b.balance, 1) + '<small> g N/d</small></span></div>' +
-      '<div class="out"><span class="k">Proteína para BN neutro</span><span class="v">' + nf(b.proteinaNeutra) + '<small> g/d</small></span></div>';
+      '<div class="out"><span class="k">Para BN neutro</span><span class="v">' + nf(b.proteinaNeutra) + '<small> g prot/d</small></span></div>';
   }
   function ne(){
     var k = num("ne-kcal"), d = num("ne-dens"), h = num("ne-h"), p = num("ne-p");
@@ -231,17 +306,27 @@
     var v = C.velocidadEnteral(k, d, h, p);
     $("ne-out").innerHTML = '<div class="out"><span class="k">Velocidad</span><span class="v">' + nf(v.mlh, 1) + '<small> mL/h</small></span></div>' +
       '<div class="out"><span class="k">Volumen</span><span class="v">' + nf(v.volumen) + '<small> mL/d</small></span></div>' +
-      (v.proteina != null ? '<div class="out"><span class="k">Proteína aportada</span><span class="v">' + nf(v.proteina) + '<small> g/d</small></span></div>' : '');
+      (v.proteina != null ? '<div class="out"><span class="k">Proteína</span><span class="v">' + nf(v.proteina) + '<small> g/d</small></span></div>' : '');
   }
 
-  $("f").addEventListener("input", function(){ $("exnote").hidden = true; render(); });
-  $("f").addEventListener("change", render);
+  document.addEventListener("input", function(e){
+    var t = e.target;
+    if (t.form === $("f") || t.closest("#f")) { $("exnote").hidden = true; render(); }
+  });
+  document.addEventListener("change", function(e){ if (e.target.form === $("f") || e.target.closest("#f")) render(); });
   $("crit").addEventListener("change", refeed);
+  $("rf-meta").addEventListener("input", function(){ metaTocada = true; refeed(); });
+  ["rf-ini","rf-cada"].forEach(function(id){ $(id).addEventListener("change", refeed); });
   ["bn-prot","bn-nuu"].forEach(function(id){ $(id).addEventListener("input", bn); });
   ["ne-dens","ne-h","ne-p"].forEach(function(id){ $(id).addEventListener("input", ne); });
   $("ne-kcal").addEventListener("input", function(){ $("ne-sync").checked = false; ne(); });
   $("ne-sync").addEventListener("change", render);
-  render(); bn(); ne();
+  /* cerrar otros "?" al abrir uno */
+  document.addEventListener("toggle", function(e){
+    if (e.target.classList && e.target.classList.contains("pop") && e.target.open)
+      document.querySelectorAll("details.pop[open]").forEach(function(d){ if (d !== e.target) d.open = false; });
+  }, true);
+  show(location.hash.slice(1)); render(); bn(); ne();
 })();
 </script>
 </body>

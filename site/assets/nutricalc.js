@@ -172,6 +172,18 @@
     return out;
   }
 
+  /* Plan de progresión en realimentación (ASPEN 2020): parte en inicioKcal y sube 33 % de la meta
+     cada "cada" días (1 o 2) hasta llegar a la meta. Devuelve [{dia, kcal, pct}]. */
+  function planRealimentacion(metaKcal, inicioKcal, cada) {
+    var plan = [], k = Math.min(inicioKcal, metaKcal), dia = 1, paso = metaKcal * 0.33;
+    plan.push({ dia: 1, kcal: r0(k), pct: r0(100 * k / metaKcal) });
+    while (k < metaKcal && plan.length < 30) {
+      dia += cada; k = Math.min(metaKcal, k + paso); if (metaKcal - k < 0.05 * metaKcal) k = metaKcal;
+      plan.push({ dia: dia, kcal: r0(k), pct: r0(100 * k / metaKcal) });
+    }
+    return plan;
+  }
+
   function balanceNitrogenado(proteinaG, nuuG) {
     return { balance: r1(proteinaG / 6.25 - (nuuG + 4)), proteinaNeutra: r0((nuuG + 4) * 6.25) };
   }
@@ -185,7 +197,7 @@
 
   var api = { imc: imc, pesoIdealIMC25: pesoIdealIMC25, pesoIdealUCI: pesoIdealUCI, pesoAjustadoHosp: pesoAjustadoHosp,
               pesoAjustadoUCI: pesoAjustadoUCI, perdidaPeso: perdidaPeso, requerimientos: requerimientos,
-              realimentacion: realimentacion, balanceNitrogenado: balanceNitrogenado, velocidadEnteral: velocidadEnteral,
+              realimentacion: realimentacion, planRealimentacion: planRealimentacion, balanceNitrogenado: balanceNitrogenado, velocidadEnteral: velocidadEnteral,
               SITUACIONES: SITUACIONES, RENAL: RENAL };
   if (typeof module !== "undefined" && module.exports) module.exports = api; else root.NutriCalc = api;
 })(this);

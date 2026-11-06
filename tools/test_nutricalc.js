@@ -77,7 +77,11 @@ f = C.realimentacion({ imc: 17.5 }, 50); igual("1 moderado → no en riesgo", f.
 f = C.realimentacion({ imc: 16 }, 50); igual("IMC 16 exacto → moderado (16–18,5)", f.criterios.imc, 1);
 f = C.realimentacion({ imc: 22, electrolitos: 2 }, 70); igual("Electrolitos muy bajos → significativo", f.riesgo, "significativo");
 
-// Balance nitrogenado y enteral
+// Plan de realimentación: meta 1800, inicio 600 (60 kg × 10), cada 1 día
+let pl = C.planRealimentacion(1800, 600, 1);
+igual("Plan días", pl.map(x=>x.dia).join(","), "1,2,3"); igual("Plan kcal", pl.map(x=>x.kcal).join(","), "600,1194,1800");
+pl = C.planRealimentacion(2000, 1000, 2); igual("Plan cada 2 días", pl.map(x=>x.dia+":"+x.kcal).join(","), "1:1000,3:1660,5:2000");
+
 let b = C.balanceNitrogenado(100, 12);
 eq("BN 100 g prot, NUU 12", b.balance, -0.0, 0.05); eq("Proteína neutra NUU 16", C.balanceNitrogenado(0, 16).proteinaNeutra, 125);
 let v = C.velocidadEnteral(1800, 1.2, 24, 56);

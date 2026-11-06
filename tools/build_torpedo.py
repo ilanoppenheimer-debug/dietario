@@ -63,7 +63,7 @@ S.append(("realim", "Síndrome de realimentación", table(
 <li><b>Electrolitos:</b> K, P y Mg antes de iniciar y cada 12 h los primeros 3 días en riesgo alto. Si están muy bajos, corregir antes de partir. Si caen o cuesta corregirlos, bajar 50 % las calorías y volver a subir 33 % cada 1–2 días.</li>
 <li><b>Tiamina:</b> 100 mg antes de alimentar o de iniciar sueros glucosados; 100 mg/día por 5–7 días en ayuno severo, alcoholismo u otro riesgo alto. ESPEN micronutrientes 2024: 100–300 mg/día desde el ingreso si hubo hipoingesta o alcohol. Multivitamínico por ≥10 días.</li>
 <li><b>Definición:</b> caída de P, K o Mg de 10–20 % (leve), 20–30 % (moderada) o &gt;30 % o falla de órgano (grave) en los 5 días siguientes a reiniciar la alimentación.</li>
-</ul><p class="src">''' + T("ASPEN 2020") + " " + T("ESPEN hosp. 2021") + "</p>"))
+</ul><p class="src">''' + T("ASPEN 2020") + " " + T("ESPEN hosp. 2021") + ' Para calcular el riesgo y el plan de inicio de un paciente, usa la <a href="calculadora.html#realimentacion" style="color:var(--tool);font-weight:700">calculadora</a>.</p>'))
 
 S.append(("uci", "UCI: claves", '''<ul class="lst">
 <li>Preferir calorimetría indirecta. Sin ella, 20–25 kcal/kg y menos del 70 % de lo estimado la primera semana.</li>
@@ -115,8 +115,9 @@ S.append(("cambios", "Qué cambió respecto del manual 2014", '''<ul class="lst 
 <li><b>Pancreatitis leve:</b> comer en 24–48 h, sin ayuno de varios días.</li>
 </ul>'''))
 
-toc = "".join(f'<a href="#{i}">{t}</a>' for i, t, _ in S)
-secs = "\n".join(f'<section id="{i}"><h2>{t}</h2>{h}</section>' for i, t, h in S)
+SHORT = {"peso":"Peso","req":"Requerimientos","renal":"Renal","realim":"Realimentación","uci":"UCI","pancreatitis":"Pancreatitis","dm":"Diabetes","formulas":"Fórmulas","cambios":"Cambios 2014"}
+toc = "".join(f'<button role="tab" id="t-{i}" aria-controls="{i}" data-tab="{i}">{SHORT.get(i,t)}</button>' for i, t, _ in S)
+secs = "\n".join(f'<section class="tpanel" role="tabpanel" id="{i}" aria-labelledby="t-{i}"><h2>{t}</h2>{h}</section>' for i, t, h in S)
 
 page = f'''<!doctype html>
 <html lang="es">
@@ -149,15 +150,34 @@ page = f'''<!doctype html>
   <div class="tool-head">
     <span class="eyebrow">Torpedo · Adultos hospitalizados</span>
     <h1>Nutrición en el hospitalizado</h1>
-    <p>Cifras de las guías vigentes, con su fuente al lado. Para calcular un caso, usa la <a href="calculadora.html" style="color:var(--tool);font-weight:700">calculadora</a>.</p>
+    <p>Cifras de las guías vigentes, con su fuente al lado.</p>
   </div>
-  <nav class="toc" aria-label="Contenido">{toc}</nav>
+  <div class="ctabs ttabs" role="tablist" aria-label="Secciones">{toc}</div>
 {secs}
   <footer style="font-size:.84rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px">
     Guías: ESPEN hospitalaria 2021, ESPEN polimórbido 2024, ESPEN UCI 2023, ESPEN renal 2024, ESPEN hígado 2020, ESPEN geriatría 2019, ESPEN micronutrientes 2024, ASPEN realimentación 2020, ACG pancreatitis aguda 2024, ADA Standards of Care 2026. Revisión: noviembre 2026.
   </footer>
 </main>
 </div>
+<script>
+(function(){{
+  var ids = [].map.call(document.querySelectorAll(".tpanel"), function(s){{ return s.id; }});
+  function show(t){{
+    if (ids.indexOf(t) < 0) t = ids[0];
+    ids.forEach(function(x){{ document.getElementById(x).hidden = x !== t; var b = document.getElementById("t-" + x); b.setAttribute("aria-selected", x === t); b.tabIndex = x === t ? 0 : -1; }});
+  }}
+  var bar = document.querySelector(".ttabs");
+  bar.addEventListener("click", function(e){{ var b = e.target.closest("[data-tab]"); if (!b) return; history.replaceState(null, "", "#" + b.dataset.tab); show(b.dataset.tab); b.scrollIntoView({{block:"nearest", inline:"nearest"}}); }});
+  bar.addEventListener("keydown", function(e){{
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    var i = ids.indexOf(document.activeElement.dataset.tab); if (i < 0) return;
+    var n = ids[(i + (e.key === "ArrowRight" ? 1 : ids.length - 1)) % ids.length];
+    document.getElementById("t-" + n).focus(); document.getElementById("t-" + n).click();
+  }});
+  window.addEventListener("hashchange", function(){{ show(location.hash.slice(1)); }});
+  show(location.hash.slice(1)); if (location.hash) setTimeout(function(){{ window.scrollTo(0, 0); }}, 0);
+}})();
+</script>
 </body>
 </html>
 '''
