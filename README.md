@@ -17,6 +17,12 @@ src/tripticos/         ← fuente HTML de cada tríptico (A4 apaisado, doble faz
 tools/                 ← scripts que generan site/ desde los borradores
 ```
 
+## Herramientas profesionales
+
+- `site/herramientas/calculadora.html` usa `site/assets/nutricalc.js` (funciones puras). Antes de publicar un cambio: `node tools/test_nutricalc.js` (todas las pruebas deben pasar).
+- `site/herramientas/nutricion-hospitalaria.html` se genera con `python3 tools/build_torpedo.py`; el contenido se edita en ese script.
+- Regla: solo cifras de guías vigentes, con la guía al lado. Las fórmulas del manual 2014 van marcadas como tales.
+
 ## Ver en local
 
 ```
