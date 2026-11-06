@@ -2,6 +2,26 @@
   "outputDirectory": "site",
   "cleanUrls": false,
   "headers": [
-    { "source": "/(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }] }
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/dash",
+      "destination": "/dietas/dash.html#paciente",
+      "permanent": false
+    },
+    {
+      "source": "/fodmap",
+      "destination": "/dietas/fodmap.html#paciente",
+      "permanent": false
+    }
   ]
 }

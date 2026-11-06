@@ -132,15 +132,17 @@ A4 apaisado, plegado en rollo, doble faz con volteo por el borde corto. **Cada p
 |---|---|---|---|
 | Exterior | Portada (derecha) | Etiqueta · título · subtítulo · ilustración · Nombre / Fecha | Título ≤ 25 car.; subtítulo ≤ 45 car. |
 | Exterior | Solapa (izquierda; se ve al abrir) | El porqué: cifra + 3 ideas con ícono + mensaje clave | 120 palabras |
-| Exterior | Contratapa (centro) | Registro/seguimiento según tipo (sección 3) + próximo control, médico/a, centro o nutricionista | Tabla de 6–8 filas |
+| Exterior | Contratapa (centro) | Ejemplo práctico (día tipo o etapas) + **QR a la ficha** + recuadro "Indicaciones de tu médico" (2 líneas, 1 dato específico, próximo control) | 6 ítems cortos |
 | Interior | Panel 1 | Contenido central parte 1 (p. ej., porciones o reemplazos) | 8 filas cortas |
 | Interior | Panel 2 | Contenido central parte 2 (p. ej., sal + semáforo, o protocolo) | 150 palabras o 1 tabla de 8 filas |
-| Interior | Panel 3 | **Metas o indicaciones marcables por el médico** + "Consulta antes si…" | 8–9 metas × ≤ 50 car.; 3 alertas |
+| Interior | Panel 3 | Contenido central parte 3 (p. ej., semáforo ampliado o protocolo) + "Consulta antes si…" | 150 palabras; 3 alertas |
 
 Reglas del tríptico:
-- Las metas son **acciones concretas y verificables** ("Sacar el salero de la mesa", no "Comer más sano").
-- Incluir siempre 1 meta con blanco para completar ("Bajar el pan a ___ al día") y 1 línea "Otra: ____".
-- Si un examen previo es obligatorio (p. ej., serología celíaca), va como **primera meta**.
+- **Prioridad: informar.** El paciente debe poder entender qué comer y qué evitar sin volver a preguntar. Lo que se completa a mano se limita al recuadro "Indicaciones de tu médico".
+- El "qué comer / qué evitar" va en listas concretas de alimentos chilenos, no en principios generales.
+- El QR lleva a `dietario.vercel.app/<dieta>` (redirección a la vista paciente de la ficha).
+- Si un examen previo es obligatorio (p. ej., serología celíaca), va destacado en la solapa o en el recuadro del médico.
+- Se imprime en color y en blanco y negro: nada puede depender solo del color (usar ✓, !, ✕, ⚠ y palabras).
 - Ninguna cifra que no esté en la vista paciente.
 
 ---

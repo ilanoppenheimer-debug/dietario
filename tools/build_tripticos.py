@@ -26,6 +26,8 @@ async def main(slugs):
                 tmp = os.path.join(SRC, f".tmp-{slug}{suffix}.html")
                 open(tmp, "w").write(html)
                 await pg.goto("file://" + tmp); await pg.wait_for_timeout(600)
+                over = await pg.evaluate("[...document.querySelectorAll('.p')].map((p,i)=>[i,p.scrollHeight-p.clientHeight]).filter(x=>x[1]>1)")
+                if over: print("  ⚠ paneles desbordados (índice, px):", over)
                 raw = tmp.replace(".html", ".pdf")
                 await pg.pdf(path=raw, prefer_css_page_size=True, print_background=True)
                 out = os.path.join(OUT, f"{slug}{suffix}.pdf")

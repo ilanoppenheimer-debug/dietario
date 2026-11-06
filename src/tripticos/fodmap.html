@@ -117,6 +117,41 @@ td{height:9.4mm;border-bottom:0.3mm solid var(--line);padding:0 1.5mm}
 .log td{height:9mm}
 .log td:not(:first-child){border-left:0.25mm solid var(--line);width:13mm}
 .log td:first-child{font-size:8pt}
+
+.qr{display:grid;grid-template-columns:25mm 1fr;gap:3mm;align-items:center;border:0.4mm solid var(--ink);border-radius:3mm;padding:2.6mm}
+.qr svg{width:25mm;height:25mm;display:block}
+.qr b{font-family:var(--f-display);font-size:10pt;display:block;margin-bottom:1mm}
+.qr p{font-size:7.8pt;line-height:1.3}
+.qr .u{font-family:var(--f-mono);font-size:7.6pt;margin-top:1.2mm;display:block;font-weight:500}
+.menu{display:flex;flex-direction:column}
+.menu > div{display:grid;grid-template-columns:18mm 1fr;gap:2mm;font-size:8.2pt;line-height:1.32;padding:1.5mm 0;border-top:0.25mm solid var(--line)}
+.menu > div:first-child{border-top:0}
+.menu b{font-family:var(--f-mono);font-size:6.3pt;letter-spacing:.05em;color:var(--leaf);padding-top:.5mm;font-weight:500}
+.lst{margin:0;padding-left:3.6mm;font-size:8.2pt;line-height:1.33}
+.lst li{margin:0.5mm 0}
+.lst.two{columns:2;column-gap:5mm}
+.lst.two li{break-inside:avoid}
+.light .lst{font-size:8.1pt}
+.light{padding-top:1.6mm;padding-bottom:1.6mm}
+.light h3{font-size:9.6pt}
+.doc{border:0.3mm dashed var(--muted);border-radius:3mm;padding:2.6mm;display:flex;flex-direction:column;gap:2.2mm}
+.doc h3{font-size:8.8pt}
+.doc .row{display:flex;gap:2mm;align-items:flex-end;font-size:8pt}
+.doc .row span:first-child{font-weight:700;white-space:nowrap}
+.doc .fill{flex:1;min-width:0;height:4mm}
+.doc .ln{border-bottom:0.3mm solid var(--ink);height:5.2mm}
+.grp h3{font-size:9pt;margin-bottom:0.6mm}
+.grp p{font-size:8.2pt;line-height:1.33}
+.stp{display:flex;flex-direction:column;gap:1.6mm;counter-reset:s}
+.stp div{display:grid;grid-template-columns:5.5mm 1fr;gap:2mm;font-size:8.2pt;line-height:1.32;counter-increment:s}
+.stp div::before{content:counter(s);font-family:var(--f-display);font-weight:800;font-size:8pt;width:5mm;height:5mm;border-radius:50%;border:0.35mm solid var(--ink);display:grid;place-items:center}
+.ttab{width:100%;border-collapse:collapse;font-size:7.8pt}
+.ttab th{font-size:6pt;padding:1mm 1mm;border-bottom:0.4mm solid var(--ink)}
+.ttab td{height:auto;padding:1.1mm 1mm;border-bottom:0.25mm solid var(--line)}
+.stage2{display:grid;grid-template-columns:8mm 1fr;gap:2.5mm;align-items:start;border-left:1.4mm solid var(--c);padding:0.6mm 0 0.6mm 2.6mm}
+.stage2 .n{font-family:var(--f-display);font-weight:800;font-size:16pt;color:var(--c);line-height:1}
+.stage2 h3{font-size:9pt}
+.stage2 p{font-size:8pt;line-height:1.32}
 </style></head><body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -166,24 +201,21 @@ td{height:9.4mm;border-bottom:0.3mm solid var(--line);padding:0 1.5mm}
     <p class="foot">Basado en estudios de Monash University y en las guías británica y americana de colon irritable (2021).</p>
   </div>
 
+
   <!-- Contratapa -->
   <div class="p">
-    <span class="eb">Mi calendario</span>
-    <h2>Mis 3 etapas</h2>
-    <div class="stage" style="--c:var(--beet)"><span class="n">1</span><div><h3>Quitar · 2 a 6 semanas</h3><div class="row"><span>Desde</span><span class="fill"></span><span>hasta</span><span class="fill"></span></div></div></div>
-    <div class="stage" style="--c:var(--slow)"><span class="n">2</span><div><h3>Probar de a uno · 6 a 8 semanas</h3><div class="row"><span>Desde</span><span class="fill"></span><span>hasta</span><span class="fill"></span></div></div></div>
-    <div class="stage" style="--c:var(--leaf)"><span class="n">3</span><div><h3>Mi dieta personal</h3><p style="font-size:8.2pt">Como de todo, limitando solo lo que me hizo mal.</p></div></div>
-    <div class="box" style="display:flex;flex-direction:column;gap:2mm">
-      <h3>Al terminar la etapa 1, ¿mejoré?</h3>
-      <div class="ck">Sí: paso a la etapa 2</div>
-      <div class="ck">No: vuelvo a comer normal y lo converso con mi médico</div>
+    <span class="eb">El plan</span>
+    <h2>Las 3 etapas</h2>
+    <div class="stage2" style="--c:var(--beet)"><span class="n">1</span><div><h3>Quitar · 2 a 6 semanas</h3><p>Cambia los alimentos altos en FODMAP por otros bajos. Si no mejoras en este plazo, la dieta no es para ti: vuelve a comer normal y consúltalo.</p></div></div>
+    <div class="stage2" style="--c:var(--slow)"><span class="n">2</span><div><h3>Probar de a uno · 6 a 8 semanas</h3><p>Vuelve a comer un grupo a la vez, en cantidad creciente, y anota cómo te sientes.</p></div></div>
+    <div class="stage2" style="--c:var(--leaf)"><span class="n">3</span><div><h3>Tu dieta · para siempre</h3><p>Come de todo y limita solo lo que te hizo mal, en la cantidad que te hizo mal.</p></div></div>
+    <div class="qr"><svg viewBox="-2 -2 33 33" shape-rendering="crispEdges" aria-label="Código QR"><rect x="-2" y="-2" width="33" height="33" fill="#fff"/><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM9 0h1v1h-1zM10 0h1v1h-1zM12 0h1v1h-1zM13 0h1v1h-1zM16 0h1v1h-1zM17 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM22 0h1v1h-1zM23 0h1v1h-1zM24 0h1v1h-1zM25 0h1v1h-1zM26 0h1v1h-1zM27 0h1v1h-1zM28 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM9 1h1v1h-1zM14 1h1v1h-1zM15 1h1v1h-1zM16 1h1v1h-1zM17 1h1v1h-1zM18 1h1v1h-1zM19 1h1v1h-1zM20 1h1v1h-1zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM10 2h1v1h-1zM11 2h1v1h-1zM13 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM18 2h1v1h-1zM22 2h1v1h-1zM24 2h1v1h-1zM25 2h1v1h-1zM26 2h1v1h-1zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM9 3h1v1h-1zM10 3h1v1h-1zM13 3h1v1h-1zM14 3h1v1h-1zM15 3h1v1h-1zM19 3h1v1h-1zM22 3h1v1h-1zM24 3h1v1h-1zM25 3h1v1h-1zM26 3h1v1h-1zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM14 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM19 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM25 4h1v1h-1zM26 4h1v1h-1zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM9 5h1v1h-1zM13 5h1v1h-1zM18 5h1v1h-1zM19 5h1v1h-1zM20 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM23 6h1v1h-1zM24 6h1v1h-1zM25 6h1v1h-1zM26 6h1v1h-1zM27 6h1v1h-1zM28 6h1v1h-1zM9 7h1v1h-1zM10 7h1v1h-1zM11 7h1v1h-1zM12 7h1v1h-1zM13 7h1v1h-1zM14 7h1v1h-1zM16 7h1v1h-1zM17 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM10 8h1v1h-1zM14 8h1v1h-1zM15 8h1v1h-1zM16 8h1v1h-1zM17 8h1v1h-1zM20 8h1v1h-1zM24 8h1v1h-1zM27 8h1v1h-1zM1 9h1v1h-1zM3 9h1v1h-1zM10 9h1v1h-1zM11 9h1v1h-1zM14 9h1v1h-1zM15 9h1v1h-1zM17 9h1v1h-1zM20 9h1v1h-1zM21 9h1v1h-1zM22 9h1v1h-1zM25 9h1v1h-1zM28 9h1v1h-1zM1 10h1v1h-1zM4 10h1v1h-1zM6 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM13 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM27 10h1v1h-1zM28 10h1v1h-1zM1 11h1v1h-1zM3 11h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM8 11h1v1h-1zM12 11h1v1h-1zM15 11h1v1h-1zM17 11h1v1h-1zM18 11h1v1h-1zM27 11h1v1h-1zM0 12h1v1h-1zM3 12h1v1h-1zM5 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM12 12h1v1h-1zM17 12h1v1h-1zM21 12h1v1h-1zM22 12h1v1h-1zM23 12h1v1h-1zM25 12h1v1h-1zM27 12h1v1h-1zM28 12h1v1h-1zM0 13h1v1h-1zM2 13h1v1h-1zM3 13h1v1h-1zM5 13h1v1h-1zM7 13h1v1h-1zM8 13h1v1h-1zM10 13h1v1h-1zM12 13h1v1h-1zM13 13h1v1h-1zM16 13h1v1h-1zM17 13h1v1h-1zM18 13h1v1h-1zM20 13h1v1h-1zM22 13h1v1h-1zM25 13h1v1h-1zM28 13h1v1h-1zM0 14h1v1h-1zM1 14h1v1h-1zM2 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM7 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM11 14h1v1h-1zM14 14h1v1h-1zM18 14h1v1h-1zM22 14h1v1h-1zM23 14h1v1h-1zM24 14h1v1h-1zM25 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM0 15h1v1h-1zM2 15h1v1h-1zM4 15h1v1h-1zM8 15h1v1h-1zM9 15h1v1h-1zM11 15h1v1h-1zM12 15h1v1h-1zM13 15h1v1h-1zM14 15h1v1h-1zM15 15h1v1h-1zM17 15h1v1h-1zM19 15h1v1h-1zM20 15h1v1h-1zM21 15h1v1h-1zM22 15h1v1h-1zM25 15h1v1h-1zM27 15h1v1h-1zM2 16h1v1h-1zM3 16h1v1h-1zM4 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM10 16h1v1h-1zM14 16h1v1h-1zM16 16h1v1h-1zM17 16h1v1h-1zM20 16h1v1h-1zM21 16h1v1h-1zM22 16h1v1h-1zM25 16h1v1h-1zM27 16h1v1h-1zM28 16h1v1h-1zM1 17h1v1h-1zM3 17h1v1h-1zM5 17h1v1h-1zM7 17h1v1h-1zM9 17h1v1h-1zM11 17h1v1h-1zM14 17h1v1h-1zM16 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM20 17h1v1h-1zM21 17h1v1h-1zM22 17h1v1h-1zM25 17h1v1h-1zM26 17h1v1h-1zM28 17h1v1h-1zM0 18h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM10 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM18 18h1v1h-1zM20 18h1v1h-1zM23 18h1v1h-1zM24 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM1 19h1v1h-1zM2 19h1v1h-1zM3 19h1v1h-1zM4 19h1v1h-1zM15 19h1v1h-1zM16 19h1v1h-1zM17 19h1v1h-1zM20 19h1v1h-1zM23 19h1v1h-1zM24 19h1v1h-1zM25 19h1v1h-1zM27 19h1v1h-1zM0 20h1v1h-1zM2 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM9 20h1v1h-1zM11 20h1v1h-1zM15 20h1v1h-1zM16 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM20 20h1v1h-1zM21 20h1v1h-1zM22 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM8 21h1v1h-1zM9 21h1v1h-1zM11 21h1v1h-1zM12 21h1v1h-1zM13 21h1v1h-1zM16 21h1v1h-1zM20 21h1v1h-1zM24 21h1v1h-1zM26 21h1v1h-1zM27 21h1v1h-1zM28 21h1v1h-1zM0 22h1v1h-1zM1 22h1v1h-1zM2 22h1v1h-1zM3 22h1v1h-1zM4 22h1v1h-1zM5 22h1v1h-1zM6 22h1v1h-1zM10 22h1v1h-1zM11 22h1v1h-1zM14 22h1v1h-1zM16 22h1v1h-1zM17 22h1v1h-1zM19 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM25 22h1v1h-1zM27 22h1v1h-1zM28 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h1v1h-1zM10 23h1v1h-1zM11 23h1v1h-1zM13 23h1v1h-1zM14 23h1v1h-1zM15 23h1v1h-1zM16 23h1v1h-1zM17 23h1v1h-1zM18 23h1v1h-1zM20 23h1v1h-1zM24 23h1v1h-1zM25 23h1v1h-1zM27 23h1v1h-1zM28 23h1v1h-1zM0 24h1v1h-1zM2 24h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM8 24h1v1h-1zM10 24h1v1h-1zM11 24h1v1h-1zM14 24h1v1h-1zM16 24h1v1h-1zM17 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM28 24h1v1h-1zM0 25h1v1h-1zM2 25h1v1h-1zM3 25h1v1h-1zM4 25h1v1h-1zM6 25h1v1h-1zM9 25h1v1h-1zM10 25h1v1h-1zM11 25h1v1h-1zM12 25h1v1h-1zM13 25h1v1h-1zM14 25h1v1h-1zM16 25h1v1h-1zM17 25h1v1h-1zM19 25h1v1h-1zM20 25h1v1h-1zM23 25h1v1h-1zM24 25h1v1h-1zM26 25h1v1h-1zM27 25h1v1h-1zM28 25h1v1h-1zM0 26h1v1h-1zM2 26h1v1h-1zM3 26h1v1h-1zM4 26h1v1h-1zM6 26h1v1h-1zM8 26h1v1h-1zM9 26h1v1h-1zM10 26h1v1h-1zM13 26h1v1h-1zM14 26h1v1h-1zM17 26h1v1h-1zM19 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM25 26h1v1h-1zM28 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM10 27h1v1h-1zM11 27h1v1h-1zM12 27h1v1h-1zM13 27h1v1h-1zM14 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM19 27h1v1h-1zM20 27h1v1h-1zM22 27h1v1h-1zM23 27h1v1h-1zM27 27h1v1h-1zM0 28h1v1h-1zM1 28h1v1h-1zM2 28h1v1h-1zM3 28h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM8 28h1v1h-1zM9 28h1v1h-1zM12 28h1v1h-1zM14 28h1v1h-1zM15 28h1v1h-1zM16 28h1v1h-1zM17 28h1v1h-1zM20 28h1v1h-1zM21 28h1v1h-1zM23 28h1v1h-1zM24 28h1v1h-1zM27 28h1v1h-1zM28 28h1v1h-1z" fill="#000"/></svg><div><b>Guía completa en tu celular</b><p>Escanea el código para ver la ficha de la dieta baja en FODMAP, con más ejemplos y trucos. También la puedes imprimir.</p><span class="u">dietario.vercel.app/fodmap</span></div></div>
+    <div class="doc">
+      <h3>Indicaciones de tu médico</h3>
+      <div class="ln"></div><div class="ln"></div>
+      <div class="row"><span>Etapa 1 por</span><span class="fill" style="border-bottom:0.3mm solid var(--ink);flex:0 0 14mm"></span><span>semanas · Nutricionista:</span><span class="fill" style="border-bottom:0.3mm solid var(--ink)"></span></div>
+      <div class="row"><span>Próximo control:</span><span class="fill" style="border-bottom:0.3mm solid var(--ink)"></span></div>
     </div>
-    <div class="box sign">
-      <div class="row"><span>Próximo control:</span><span class="fill"></span></div>
-      <div class="row"><span>Médico/a:</span><span class="fill"></span></div>
-      <div class="row"><span>Nutricionista:</span><span class="fill"></span></div>
-    </div>
-    <p class="foot">Material educativo general. No reemplaza la indicación de tu médico ni la evaluación de un nutricionista. Revisado nov. 2026.</p>
   </div>
 
   <!-- Portada -->
@@ -223,57 +255,49 @@ td{height:9.4mm;border-bottom:0.3mm solid var(--line);padding:0 1.5mm}
       <div class="sw"><span class="hi">Miel, dulces "sin azúcar"</span><span class="lo">Azúcar común en poca cantidad</span></div>
       <div class="sw"><span class="hi">Palta en cantidad</span><span class="lo">Hasta ⅛ de palta por comida</span></div>
     </div>
-    <p class="muted" style="font-size:7.6pt">Carnes, pescados, huevos y aceites no tienen FODMAP. Ojo con cebolla y ajo en polvo e inulina en caldos, aliños y panes.</p>
+    
   </div>
 
-  <!-- Panel 2: reintroducción -->
+  <!-- Panel 2: comer tranquilo -->
+  <div class="p">
+    <span class="eb">Etapa 1</span>
+    <h2>Puedes comer tranquilo</h2>
+    <div class="light l-go" style="--c:var(--go)"><h3>Proteínas y grasas</h3><p class="grp" style="font-size:8.2pt">Carnes, pollo, pescado, huevo, tofu firme y aceites. No tienen FODMAP.</p></div>
+    <div class="light l-go" style="--c:var(--go)"><h3>Cereales y tubérculos</h3><p style="font-size:8.2pt">Arroz, papa, avena, quínoa, pan sin gluten.</p></div>
+    <div class="light l-go" style="--c:var(--go)"><h3>Verduras</h3><p style="font-size:8.2pt">Zanahoria, zapallo italiano, pepino, lechuga, tomate, espinaca, pimentón, parte verde del cebollín.</p></div>
+    <div class="light l-go" style="--c:var(--go)"><h3>Frutas (una por vez)</h3><p style="font-size:8.2pt">Plátano firme, naranja, mandarina, kiwi, frutillas, piña.</p></div>
+    <div class="light l-go" style="--c:var(--go)"><h3>Lácteos</h3><p style="font-size:8.2pt">Leche y yogurt sin lactosa, quesos maduros (gauda, mantecoso, parmesano).</p></div>
+    <div class="grp"><h3>✕ Revisa las etiquetas</h3><p>Evita productos con cebolla o ajo en polvo, inulina, fibra de achicoria, miel o endulzantes terminados en "-ol" (sorbitol, manitol). Suelen estar en caldos, aliños, panes y dulces "sin azúcar".</p></div>
+    <div class="grp"><h3>Errores frecuentes</h3><ul class="lst"><li>Quedarse en la etapa 1 para siempre.</li><li>Confundirla con una dieta sin gluten.</li><li>Quitar más alimentos de los necesarios.</li></ul></div>
+  </div>
+
+  <!-- Panel 3: reintroducción -->
   <div class="p">
     <span class="eb">Etapa 2</span>
-    <h2>Mi registro de pruebas</h2>
-    <p style="font-size:8.2pt">Un grupo a la vez, 3 días de menos a más. Anota tus síntomas de <b>0</b> (nada) a <b>10</b> (muy fuerte). Si te cae mal, para y descansa 2 a 3 días antes del siguiente.</p>
-    <table class="log">
+    <h2>Cómo volver a probar</h2>
+    <div class="stp">
+      <div><span><b>Un grupo a la vez.</b> Sigue la dieta y agrega solo el alimento de prueba.</span></div>
+      <div><span><b>3 días, de menos a más</b>, como en la tabla. Anota tus síntomas.</span></div>
+      <div><span><b>Si te cae mal, para.</b> Espera a estar sin síntomas.</span></div>
+      <div><span><b>Descansa 2 a 3 días</b> antes del siguiente grupo.</span></div>
+    </div>
+    <table class="ttab">
       <thead><tr><th>Grupo · alimento</th><th>Día 1</th><th>Día 2</th><th>Día 3</th></tr></thead>
       <tbody>
-        <tr><td><b>Lactosa</b> · leche</td><td></td><td></td><td></td></tr>
-        <tr><td><b>Fructosa</b> · miel</td><td></td><td></td><td></td></tr>
-        <tr><td><b>Sorbitol</b> · palta</td><td></td><td></td><td></td></tr>
-        <tr><td><b>Manitol</b> · champiñones</td><td></td><td></td><td></td></tr>
-        <tr><td><b>Trigo</b> · pan de molde</td><td></td><td></td><td></td></tr>
-        <tr><td><b>Cebolla</b> · cocida</td><td></td><td></td><td></td></tr>
-        <tr><td><b>Ajo</b></td><td></td><td></td><td></td></tr>
-        <tr><td><b>Legumbres</b> · lentejas</td><td></td><td></td><td></td></tr>
+        <tr><td><b>Lactosa</b> · leche</td><td>¼ taza</td><td>½ taza</td><td>1 taza</td></tr>
+        <tr><td><b>Fructosa</b> · miel</td><td>1 cdta</td><td>2 cdtas</td><td>1 cda</td></tr>
+        <tr><td><b>Sorbitol</b> · palta</td><td>¼</td><td>⅓</td><td>½</td></tr>
+        <tr><td><b>Manitol</b> · champiñón</td><td>¼ taza</td><td>½ taza</td><td>1 taza</td></tr>
+        <tr><td><b>Trigo</b> · pan molde</td><td>½ reb.</td><td>1 reb.</td><td>2 reb.</td></tr>
+        <tr><td><b>Cebolla</b> cocida</td><td>1 cda</td><td>2 cdas</td><td>¼ taza</td></tr>
+        <tr><td><b>Ajo</b></td><td>¼ diente</td><td>½</td><td>1 diente</td></tr>
+        <tr><td><b>Legumbres</b> · lentejas</td><td>¼ taza</td><td>½ taza</td><td>¾ taza</td></tr>
       </tbody>
     </table>
-    <div class="box" style="display:flex;flex-direction:column;gap:1.4mm">
-      <h3>Lo que me hizo mal</h3>
-      <span class="fill" style="width:100%"></span><span class="fill" style="width:100%"></span>
-    </div>
-  </div>
-
-  <!-- Panel 3: indicaciones -->
-  <div class="p">
-    <span class="eb">Acordado en la consulta</span>
-    <h2>Mis indicaciones</h2>
-    <div class="box goals">
-      <div class="ck">Examen de celiaquía antes de dejar el trigo</div>
-      <div class="ck">Etapa 1 por ____ semanas</div>
-      <div class="ck">Hora con nutricionista</div>
-      <div class="ck">Comer a horarios regulares, sin saltarse comidas</div>
-      <div class="ck">Menos café, alcohol y bebidas con gas</div>
-      <div class="ck">Mantener fibra: avena, kiwi, zanahoria, chía o linaza</div>
-      <div class="ck">Tomar 6 a 8 vasos de agua al día</div>
-      <div class="ck">Otra: ____________________</div>
-    </div>
     <div class="warn">
       <h3>Consulta antes si…</h3>
-      <ul>
-        <li>Bajas de peso sin querer o ves sangre en las deposiciones.</li>
-        <li>Los síntomas te despiertan en la noche.</li>
-        <li>Has tenido problemas con la comida o con tu peso.</li>
-      </ul>
+      <ul><li>Bajas de peso sin querer o ves sangre en las deposiciones.</li><li>Los síntomas te despiertan en la noche.</li><li>Has tenido problemas con la comida o con tu peso.</li></ul>
     </div>
-    <p class="foot">Etapa 1 no es para siempre: si no mejoras en 6 semanas, la dieta no es para ti.</p>
   </div>
 </div>
-
 </body></html>

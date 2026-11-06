@@ -96,6 +96,41 @@ td{height:9.4mm;border-bottom:0.3mm solid var(--line);padding:0 1.5mm}
 .warn h3{color:var(--stop);margin-bottom:0.8mm}
 .warn li{font-size:8.4pt}
 .foot{font-size:6.3pt;color:var(--muted);margin-top:auto}
+
+.qr{display:grid;grid-template-columns:25mm 1fr;gap:3mm;align-items:center;border:0.4mm solid var(--ink);border-radius:3mm;padding:2.6mm}
+.qr svg{width:25mm;height:25mm;display:block}
+.qr b{font-family:var(--f-display);font-size:10pt;display:block;margin-bottom:1mm}
+.qr p{font-size:7.8pt;line-height:1.3}
+.qr .u{font-family:var(--f-mono);font-size:7.6pt;margin-top:1.2mm;display:block;font-weight:500}
+.menu{display:flex;flex-direction:column}
+.menu > div{display:grid;grid-template-columns:18mm 1fr;gap:2mm;font-size:8.2pt;line-height:1.32;padding:1.5mm 0;border-top:0.25mm solid var(--line)}
+.menu > div:first-child{border-top:0}
+.menu b{font-family:var(--f-mono);font-size:6.3pt;letter-spacing:.05em;color:var(--leaf);padding-top:.5mm;font-weight:500}
+.lst{margin:0;padding-left:3.6mm;font-size:8.2pt;line-height:1.33}
+.lst li{margin:0.5mm 0}
+.lst.two{columns:2;column-gap:5mm}
+.lst.two li{break-inside:avoid}
+.light .lst{font-size:8.1pt}
+.light{padding-top:1.6mm;padding-bottom:1.6mm}
+.light h3{font-size:9.6pt}
+.doc{border:0.3mm dashed var(--muted);border-radius:3mm;padding:2.6mm;display:flex;flex-direction:column;gap:2.2mm}
+.doc h3{font-size:8.8pt}
+.doc .row{display:flex;gap:2mm;align-items:flex-end;font-size:8pt}
+.doc .row span:first-child{font-weight:700;white-space:nowrap}
+.doc .fill{flex:1;min-width:0;height:4mm}
+.doc .ln{border-bottom:0.3mm solid var(--ink);height:5.2mm}
+.grp h3{font-size:9pt;margin-bottom:0.6mm}
+.grp p{font-size:8.2pt;line-height:1.33}
+.stp{display:flex;flex-direction:column;gap:1.6mm;counter-reset:s}
+.stp div{display:grid;grid-template-columns:5.5mm 1fr;gap:2mm;font-size:8.2pt;line-height:1.32;counter-increment:s}
+.stp div::before{content:counter(s);font-family:var(--f-display);font-weight:800;font-size:8pt;width:5mm;height:5mm;border-radius:50%;border:0.35mm solid var(--ink);display:grid;place-items:center}
+.ttab{width:100%;border-collapse:collapse;font-size:7.8pt}
+.ttab th{font-size:6pt;padding:1mm 1mm;border-bottom:0.4mm solid var(--ink)}
+.ttab td{height:auto;padding:1.1mm 1mm;border-bottom:0.25mm solid var(--line)}
+.stage2{display:grid;grid-template-columns:8mm 1fr;gap:2.5mm;align-items:start;border-left:1.4mm solid var(--c);padding:0.6mm 0 0.6mm 2.6mm}
+.stage2 .n{font-family:var(--f-display);font-weight:800;font-size:16pt;color:var(--c);line-height:1}
+.stage2 h3{font-size:9pt}
+.stage2 p{font-size:8pt;line-height:1.32}
 </style></head><body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -144,21 +179,26 @@ td{height:9.4mm;border-bottom:0.3mm solid var(--line);padding:0 1.5mm}
     <p class="foot">Basado en los estudios DASH (1997) y DASH-Sodio (2001) y en la guía europea de hipertensión 2024.</p>
   </div>
 
+
   <!-- Contratapa -->
   <div class="p">
-    <span class="eb">Mis controles</span>
-    <h2>Registro de mi presión</h2>
-    <div class="goal"><b>Mi meta de presión</b><span class="bp">menos de ____ / ____</span></div>
-    <table>
-      <thead><tr><th style="width:24%">Fecha</th><th style="width:30%">Presión</th><th>¿Cómo me fue con la dieta?</th></tr></thead>
-      <tbody><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></tbody>
-    </table>
-    <div class="box sign">
-      <div class="row"><span>Próximo control:</span><span class="fill"></span></div>
-      <div class="row"><span>Médico/a:</span><span class="fill"></span></div>
-      <div class="row"><span>Centro de salud:</span><span class="fill"></span></div>
+    <span class="eb">Para recordar</span>
+    <h2>Un día DASH a la chilena</h2>
+    <div class="menu">
+      <div><b>DESAYUNO</b><span>Avena cocida en leche descremada, con plátano y un puñadito de nueces.</span></div>
+      <div><b>MEDIA MAÑANA</b><span>Una manzana o una naranja.</span></div>
+      <div><b>ALMUERZO</b><span>Lentejas con zapallo y verduras, sin cubo de caldo. Ensalada chilena con limón y aceite de oliva. Fruta de postre.</span></div>
+      <div><b>ONCE</b><span>Pan integral pequeño con palta y quesillo. Té o café sin azúcar.</span></div>
+      <div><b>CENA</b><span>Pollo al horno sin piel, verduras salteadas y ½ taza de arroz integral.</span></div>
+      <div><b>NOCHE</b><span>Un yogurt descremado sin azúcar.</span></div>
     </div>
-    <p class="foot">Material educativo general. No reemplaza la indicación de tu médico ni la evaluación de un nutricionista. Revisado nov. 2026.</p>
+    <div class="qr"><svg viewBox="-2 -2 33 33" shape-rendering="crispEdges" aria-label="Código QR"><rect x="-2" y="-2" width="33" height="33" fill="#fff"/><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM11 0h1v1h-1zM12 0h1v1h-1zM13 0h1v1h-1zM16 0h1v1h-1zM17 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM22 0h1v1h-1zM23 0h1v1h-1zM24 0h1v1h-1zM25 0h1v1h-1zM26 0h1v1h-1zM27 0h1v1h-1zM28 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h1v1h-1zM10 1h1v1h-1zM12 1h1v1h-1zM13 1h1v1h-1zM14 1h1v1h-1zM15 1h1v1h-1zM17 1h1v1h-1zM18 1h1v1h-1zM20 1h1v1h-1zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM12 2h1v1h-1zM13 2h1v1h-1zM16 2h1v1h-1zM17 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM22 2h1v1h-1zM24 2h1v1h-1zM25 2h1v1h-1zM26 2h1v1h-1zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM11 3h1v1h-1zM12 3h1v1h-1zM13 3h1v1h-1zM14 3h1v1h-1zM15 3h1v1h-1zM19 3h1v1h-1zM22 3h1v1h-1zM24 3h1v1h-1zM25 3h1v1h-1zM26 3h1v1h-1zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM10 4h1v1h-1zM11 4h1v1h-1zM12 4h1v1h-1zM13 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM25 4h1v1h-1zM26 4h1v1h-1zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM11 5h1v1h-1zM12 5h1v1h-1zM13 5h1v1h-1zM14 5h1v1h-1zM17 5h1v1h-1zM18 5h1v1h-1zM19 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM23 6h1v1h-1zM24 6h1v1h-1zM25 6h1v1h-1zM26 6h1v1h-1zM27 6h1v1h-1zM28 6h1v1h-1zM9 7h1v1h-1zM11 7h1v1h-1zM12 7h1v1h-1zM14 7h1v1h-1zM17 7h1v1h-1zM19 7h1v1h-1zM0 8h1v1h-1zM3 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM8 8h1v1h-1zM9 8h1v1h-1zM10 8h1v1h-1zM11 8h1v1h-1zM15 8h1v1h-1zM21 8h1v1h-1zM23 8h1v1h-1zM1 9h1v1h-1zM2 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM7 9h1v1h-1zM9 9h1v1h-1zM12 9h1v1h-1zM14 9h1v1h-1zM15 9h1v1h-1zM17 9h1v1h-1zM20 9h1v1h-1zM21 9h1v1h-1zM22 9h1v1h-1zM25 9h1v1h-1zM28 9h1v1h-1zM0 10h1v1h-1zM1 10h1v1h-1zM3 10h1v1h-1zM6 10h1v1h-1zM8 10h1v1h-1zM10 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM19 10h1v1h-1zM20 10h1v1h-1zM24 10h1v1h-1zM25 10h1v1h-1zM26 10h1v1h-1zM27 10h1v1h-1zM0 11h1v1h-1zM3 11h1v1h-1zM4 11h1v1h-1zM8 11h1v1h-1zM10 11h1v1h-1zM14 11h1v1h-1zM15 11h1v1h-1zM18 11h1v1h-1zM20 11h1v1h-1zM23 11h1v1h-1zM26 11h1v1h-1zM27 11h1v1h-1zM0 12h1v1h-1zM4 12h1v1h-1zM5 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM10 12h1v1h-1zM12 12h1v1h-1zM16 12h1v1h-1zM17 12h1v1h-1zM21 12h1v1h-1zM22 12h1v1h-1zM23 12h1v1h-1zM25 12h1v1h-1zM27 12h1v1h-1zM28 12h1v1h-1zM2 13h1v1h-1zM3 13h1v1h-1zM4 13h1v1h-1zM5 13h1v1h-1zM8 13h1v1h-1zM9 13h1v1h-1zM10 13h1v1h-1zM11 13h1v1h-1zM12 13h1v1h-1zM15 13h1v1h-1zM17 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM20 13h1v1h-1zM0 14h1v1h-1zM4 14h1v1h-1zM6 14h1v1h-1zM8 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM12 14h1v1h-1zM15 14h1v1h-1zM16 14h1v1h-1zM17 14h1v1h-1zM18 14h1v1h-1zM20 14h1v1h-1zM22 14h1v1h-1zM24 14h1v1h-1zM25 14h1v1h-1zM26 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM2 15h1v1h-1zM3 15h1v1h-1zM5 15h1v1h-1zM7 15h1v1h-1zM12 15h1v1h-1zM13 15h1v1h-1zM14 15h1v1h-1zM16 15h1v1h-1zM17 15h1v1h-1zM19 15h1v1h-1zM20 15h1v1h-1zM21 15h1v1h-1zM22 15h1v1h-1zM25 15h1v1h-1zM27 15h1v1h-1zM0 16h1v1h-1zM1 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM10 16h1v1h-1zM11 16h1v1h-1zM13 16h1v1h-1zM14 16h1v1h-1zM15 16h1v1h-1zM17 16h1v1h-1zM19 16h1v1h-1zM20 16h1v1h-1zM21 16h1v1h-1zM27 16h1v1h-1zM3 17h1v1h-1zM5 17h1v1h-1zM8 17h1v1h-1zM10 17h1v1h-1zM15 17h1v1h-1zM18 17h1v1h-1zM21 17h1v1h-1zM22 17h1v1h-1zM23 17h1v1h-1zM25 17h1v1h-1zM28 17h1v1h-1zM0 18h1v1h-1zM2 18h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM9 18h1v1h-1zM11 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM20 18h1v1h-1zM23 18h1v1h-1zM24 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM2 19h1v1h-1zM3 19h1v1h-1zM5 19h1v1h-1zM7 19h1v1h-1zM8 19h1v1h-1zM9 19h1v1h-1zM13 19h1v1h-1zM15 19h1v1h-1zM16 19h1v1h-1zM17 19h1v1h-1zM19 19h1v1h-1zM20 19h1v1h-1zM22 19h1v1h-1zM23 19h1v1h-1zM24 19h1v1h-1zM27 19h1v1h-1zM28 19h1v1h-1zM0 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM14 20h1v1h-1zM15 20h1v1h-1zM16 20h1v1h-1zM18 20h1v1h-1zM20 20h1v1h-1zM21 20h1v1h-1zM22 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM26 20h1v1h-1zM8 21h1v1h-1zM9 21h1v1h-1zM10 21h1v1h-1zM11 21h1v1h-1zM12 21h1v1h-1zM13 21h1v1h-1zM16 21h1v1h-1zM20 21h1v1h-1zM24 21h1v1h-1zM26 21h1v1h-1zM27 21h1v1h-1zM28 21h1v1h-1zM0 22h1v1h-1zM1 22h1v1h-1zM2 22h1v1h-1zM3 22h1v1h-1zM4 22h1v1h-1zM5 22h1v1h-1zM6 22h1v1h-1zM11 22h1v1h-1zM13 22h1v1h-1zM14 22h1v1h-1zM16 22h1v1h-1zM17 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM27 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM8 23h1v1h-1zM10 23h1v1h-1zM12 23h1v1h-1zM13 23h1v1h-1zM18 23h1v1h-1zM20 23h1v1h-1zM24 23h1v1h-1zM25 23h1v1h-1zM26 23h1v1h-1zM27 23h1v1h-1zM0 24h1v1h-1zM2 24h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM6 24h1v1h-1zM9 24h1v1h-1zM10 24h1v1h-1zM11 24h1v1h-1zM14 24h1v1h-1zM17 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM28 24h1v1h-1zM0 25h1v1h-1zM2 25h1v1h-1zM3 25h1v1h-1zM4 25h1v1h-1zM6 25h1v1h-1zM8 25h1v1h-1zM9 25h1v1h-1zM11 25h1v1h-1zM13 25h1v1h-1zM14 25h1v1h-1zM17 25h1v1h-1zM20 25h1v1h-1zM22 25h1v1h-1zM23 25h1v1h-1zM24 25h1v1h-1zM25 25h1v1h-1zM26 25h1v1h-1zM27 25h1v1h-1zM0 26h1v1h-1zM2 26h1v1h-1zM3 26h1v1h-1zM4 26h1v1h-1zM6 26h1v1h-1zM9 26h1v1h-1zM11 26h1v1h-1zM12 26h1v1h-1zM17 26h1v1h-1zM19 26h1v1h-1zM20 26h1v1h-1zM24 26h1v1h-1zM25 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM9 27h1v1h-1zM13 27h1v1h-1zM14 27h1v1h-1zM15 27h1v1h-1zM17 27h1v1h-1zM19 27h1v1h-1zM20 27h1v1h-1zM22 27h1v1h-1zM23 27h1v1h-1zM27 27h1v1h-1zM0 28h1v1h-1zM1 28h1v1h-1zM2 28h1v1h-1zM3 28h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM8 28h1v1h-1zM9 28h1v1h-1zM10 28h1v1h-1zM11 28h1v1h-1zM12 28h1v1h-1zM14 28h1v1h-1zM17 28h1v1h-1zM19 28h1v1h-1zM20 28h1v1h-1zM21 28h1v1h-1zM22 28h1v1h-1zM23 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM27 28h1v1h-1z" fill="#000"/></svg><div><b>Guía completa en tu celular</b><p>Escanea el código para ver la ficha de la dieta DASH, con más ejemplos y trucos. También la puedes imprimir.</p><span class="u">dietario.vercel.app/dash</span></div></div>
+    <div class="doc">
+      <h3>Indicaciones de tu médico</h3>
+      <div class="ln"></div><div class="ln"></div>
+      <div class="row"><span>Mi meta de presión: menos de</span><span class="fill" style="border-bottom:0.3mm solid var(--ink)"></span></div>
+      <div class="row"><span>Próximo control:</span><span class="fill" style="border-bottom:0.3mm solid var(--ink)"></span></div>
+    </div>
   </div>
 
   <!-- Portada -->
@@ -180,58 +220,46 @@ td{height:9.4mm;border-bottom:0.3mm solid var(--line);padding:0 1.5mm}
 <div class="sheet in">
   <!-- Panel 1: porciones -->
   <div class="p">
-    <span class="eb">Mi día en porciones</span>
-    <h2>¿Cuánto comer?</h2>
-    <p class="muted" style="font-size:7.4pt">Para un adulto de unas 2.000 calorías. Marca un círculo por cada porción.</p>
+    <span class="eb">Cuánto comer</span>
+    <h2>Tus porciones del día</h2>
+    <p class="muted" style="font-size:7.6pt">Referencia para un adulto de unas 2.000 calorías. Tu médico o nutricionista puede ajustarla.</p>
     <div id="groups"></div>
   </div>
 
-  <!-- Panel 2: sal y semáforo -->
+  <!-- Panel 2: sal -->
   <div class="p">
     <span class="eb">Lo más importante</span>
     <div class="salt">
       <svg viewBox="0 0 100 120"><path d="M30 40c0-14 8-26 20-26s20 12 20 26v62c0 6-4 10-10 10H40c-6 0-10-4-10-10z" fill="#fff" stroke="#8C2B47" stroke-width="4"/><path d="M30 40h40" stroke="#8C2B47" stroke-width="4"/><circle cx="42" cy="26" r="2.5" fill="#8C2B47"/><circle cx="50" cy="22" r="2.5" fill="#8C2B47"/><circle cx="58" cy="26" r="2.5" fill="#8C2B47"/><text x="50" y="88" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="800" font-size="20" fill="#8C2B47">5 g</text></svg>
       <div>
         <h3>Sal: menos de 1 cucharadita al día</h3>
-        <p style="font-size:7.8pt">En total, sumando la que ya viene en los alimentos. La mayor parte no sale del salero.</p>
-        <div class="chips"><span class="chip">Pan y marraqueta</span><span class="chip">Embutidos</span><span class="chip">Quesos maduros</span><span class="chip">Caldos en cubo</span><span class="chip">Snacks</span><span class="chip">Salsa de soya</span></div>
+        <p style="font-size:8pt">En total, sumando la que ya viene en los alimentos. La mayor parte no sale del salero.</p>
       </div>
     </div>
-    <div style="display:flex;gap:2.5mm;align-items:center"><span class="sello">ALTO EN<br>SODIO</span><p style="font-size:7.8pt">Si ves este sello, busca otra opción o cómelo solo de vez en cuando.</p></div>
-    <h2 style="font-size:12pt;margin-top:1mm">El semáforo</h2>
-    <div class="light l-go" style="--c:var(--go)"><h3>Todos los días</h3><p>Verduras, frutas enteras, porotos, lentejas, garbanzos, avena, arroz y pan integral, leche y yogurt descremados, pescado, pollo sin piel, huevo, nueces sin sal, aceite de oliva, palta, hierbas y limón.</p></div>
-    <div class="light l-slow" style="--c:var(--slow)"><h3>Con moderación</h3><p>Pan blanco y marraqueta, quesos (mejor quesillo o fresco), carne roja magra 1 a 2 veces por semana, jugos de fruta, mantequilla, legumbres en lata enjuagadas.</p></div>
-    <div class="light l-stop" style="--c:var(--stop)"><h3>Evitar</h3><p>Jamón, salame, longaniza y vienesas, cubos de caldo y sopas en sobre, snacks salados, comida rápida, bebidas azucaradas, pasteles y galletas.</p></div>
+    <div class="grp"><h3>Dónde se esconde la sal</h3>
+      <ul class="lst two"><li>Pan y marraqueta</li><li>Jamón, salame, vienesas</li><li>Quesos maduros</li><li>Cubos de caldo y sopas en sobre</li><li>Papas fritas y snacks</li><li>Salsa de soya y kétchup</li></ul></div>
+    <div style="display:flex;gap:2.5mm;align-items:center"><span class="sello">ALTO EN<br>SODIO</span><p style="font-size:8pt">Si ves este sello, busca otra opción o cómelo solo de vez en cuando.</p></div>
+    <div class="grp"><h3>Da sabor sin sal</h3><p>Ajo, cebolla, limón, orégano, comino, pimienta, hierbas frescas y merkén sin sal.</p></div>
+    <div class="grp"><h3>Trucos que funcionan</h3>
+      <ul class="lst"><li>Saca el salero de la mesa.</li><li>Agrega una verdura al almuerzo y otra a la cena.</li><li>Compara el sodio de las etiquetas entre marcas.</li><li>Cocina en casa más seguido.</li><li>El gusto se acostumbra a menos sal en 2 a 3 semanas.</li></ul></div>
   </div>
 
-  <!-- Panel 3: metas con el médico -->
+  <!-- Panel 3: semáforo -->
   <div class="p">
-    <span class="eb">Acordado en la consulta</span>
-    <h2>Mis metas</h2>
-    <p class="muted" style="font-size:7.4pt">Tu médico marca 2 o 3 para empezar. Cuando ya sean costumbre, suma otra.</p>
-    <div class="box goals">
-      <div class="ck">Sacar el salero de la mesa</div>
-      <div class="ck">Una verdura en el almuerzo y otra en la cena</div>
-      <div class="ck">Fruta de postre en vez de dulce</div>
-      <div class="ck">Cambiar a leche y yogurt descremados</div>
-      <div class="ck">Legumbres 2 veces por semana</div>
-      <div class="ck">Cambiar embutidos por huevo, pollo o quesillo</div>
-      <div class="ck">Bajar el pan a ____ al día</div>
-      <div class="ck">Cocinar sin cubos de caldo ni sopas en sobre</div>
-      <div class="ck">Otra: ____________________</div>
-    </div>
+    <span class="eb">Qué comer</span>
+    <h2>El semáforo</h2>
+    <div class="light l-go" style="--c:var(--go)"><h3>Todos los días</h3>
+      <ul class="lst two"><li>Verduras de todos los colores</li><li>Frutas enteras</li><li>Porotos, lentejas, garbanzos</li><li>Avena, arroz y pan integral</li><li>Leche y yogurt descremados</li><li>Pescado</li><li>Pollo sin piel, huevo</li><li>Nueces y almendras sin sal</li><li>Aceite de oliva o canola</li><li>Palta</li></ul></div>
+    <div class="light l-slow" style="--c:var(--slow)"><h3>Con moderación</h3>
+      <ul class="lst"><li>Pan blanco y marraqueta (traen sal)</li><li>Quesos: mejor quesillo o queso fresco</li><li>Carne roja magra, 1 a 2 veces por semana</li><li>Jugos de fruta: mejor la fruta entera</li><li>Mantequilla</li><li>Legumbres en lata: enjuágalas antes</li></ul></div>
+    <div class="light l-stop" style="--c:var(--stop)"><h3>Evitar</h3>
+      <ul class="lst two"><li>Jamón, salame, longaniza</li><li>Cubos de caldo, sopas en sobre</li><li>Snacks salados</li><li>Comida rápida</li><li>Bebidas y jugos azucarados</li><li>Pasteles y galletas</li></ul></div>
     <div class="warn">
       <h3>Avisa a tu médico si…</h3>
-      <ul>
-        <li>Tienes enfermedad renal o te dijeron que tu potasio está alto.</li>
-        <li>Te sientes mareado o débil al levantarte.</li>
-        <li>Tienes diabetes con insulina, celiaquía o intolerancia a la lactosa: la dieta se adapta.</li>
-      </ul>
+      <ul><li>Tienes enfermedad renal o el potasio alto.</li><li>Te sientes mareado al levantarte.</li><li>Tienes diabetes con insulina, celiaquía o intolerancia a la lactosa.</li></ul>
     </div>
-    <p class="foot">Trucos: da sabor con ajo, cebolla, limón, orégano, comino o merkén sin sal. El gusto se acostumbra a menos sal en 2 a 3 semanas.</p>
   </div>
 </div>
-
 <script>
 var G=[
  ["i-veg","--veg","#E3F1E6","Verduras","4–5 al día","1 taza cruda o ½ taza cocida",5],
@@ -244,10 +272,11 @@ var G=[
  ["i-sweet","--sweet","#F8E3ED","Dulces","Máx. 5 a la semana","1 cda de azúcar, mermelada o miel",5,1]
 ];
 document.getElementById("groups").innerHTML=G.map(function(g){
-  var d="";for(var i=0;i<g[6];i++)d+='<span class="dot"></span>';
+  
   return '<div class="g"><span class="ic" style="background:'+g[2]+';color:var('+g[1]+')"><svg><use href="#'+g[0]+'"/></svg></span>'+
   '<div><h3>'+g[3]+'</h3><div class="q" style="color:var('+g[1]+')">'+g[4]+'</div><div class="eq">'+g[5]+'</div></div>'+
-  '<div class="dots" style="color:var('+g[1]+')">'+d+(g[7]?'<span class="wk">por semana</span>':'')+'</div></div>';
+  '<span></span></div>';
 }).join("");
 </script>
-</body></html>
+</body>
+</html>
