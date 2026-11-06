@@ -10,7 +10,8 @@ Sitio estático con pautas de alimentación con evidencia: una ficha web por die
 site/                  ← lo que se publica
   index.html           ← portal: buscador, filtros y catálogo
   dietas/<dieta>.html  ← ficha: #paciente y #medico; ?imprimir abre el diálogo de impresión
-  tripticos/<dieta>.pdf
+  tripticos/<dieta>.pdf      ← color
+  tripticos/<dieta>-bn.pdf   ← blanco y negro
   assets/              ← ficha.css, portal.css, favicon
 src/tripticos/         ← fuente HTML de cada tríptico (A4 apaisado, doble faz)
 tools/                 ← scripts que generan site/ desde los borradores
@@ -29,7 +30,7 @@ Proyecto estático, sin build: `vercel deploy site --prod` (o directorio de sali
 ## Agregar una dieta
 
 1. Ficha en `site/dietas/<dieta>.html` siguiendo la estructura de `dash.html`.
-2. Tríptico en `src/tripticos/<dieta>.html` → exportar a `site/tripticos/<dieta>.pdf` (Chrome, A4 apaisado, márgenes 0, con fondos).
+2. Tríptico en `src/tripticos/<dieta>.html` → `python3 tools/build_tripticos.py <dieta>` genera `<dieta>.pdf` (color) y `<dieta>-bn.pdf` (blanco y negro, reglas en `src/tripticos/bn.css`).
 3. En `site/index.html`, en la lista `D`, marcar la dieta con `on:1, slug:"<dieta>"`.
 
 ## Checklist de revisión por ficha

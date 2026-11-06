@@ -1,0 +1,39 @@
+/* Versión blanco y negro: sin fondos de color (ahorra tinta), contraste alto,
+   y todo lo que el color comunicaba pasa a símbolo, borde o tipografía. */
+:root{
+  --ink:#000; --muted:#333; --line:#9a9a9a;
+  --leaf:#000; --leaf-soft:#fff; --beet:#000; --beet-soft:#fff;
+  --go:#000; --slow:#000; --stop:#000;
+  --veg:#000; --fruit:#000; --grain:#000; --dairy:#000; --prot:#000; --nut:#000; --fat:#000; --sweet:#000;
+}
+body{color:#000}
+.p + .p{border-left-color:#bbb}
+/* Portada sin bloque de color */
+.cover{background:#fff!important;color:#000;border:0.6mm solid #000;margin:6mm;border-radius:3mm;padding:6mm!important}
+.cover .eb,.cover .sub{color:#000!important}
+.cover .who{border:0.3mm solid #000}
+.cover .plate,svg.plate{filter:grayscale(1) contrast(1.15)}
+/* Cajas: borde en vez de relleno */
+.note,.goal,.salt{background:#fff!important;border:0.4mm solid #000}
+.note{color:#000}
+.how .ic,.g .ic,.fl b{background:#fff!important;border:0.3mm solid #000;color:#000!important}
+.chip{border-color:#000}
+.salt svg{filter:grayscale(1)}
+/* Semáforo: símbolo + estilo de borde */
+.l-go{border-left:1.6mm solid #000}
+.l-slow{border-left:1.6mm dashed #000}
+.l-stop{border-left:1.6mm double #000}
+.light h3{color:#000}
+/* Alertas: borde grueso */
+.warn{border:0.7mm solid #000}
+.warn h3{color:#000}
+.warn h3::before{content:"⚠ "}
+/* Etapas y reemplazos (FODMAP) */
+.stage{border-left-color:#000!important}
+.stage .n{color:#000!important;border:0.4mm solid #000;border-radius:50%;width:8mm;height:8mm;display:grid;place-items:center;font-size:13pt}
+.sw .hi{color:#000!important;text-decoration:line-through;text-decoration-thickness:0.3mm}
+.sw .lo::before{color:#000!important}
+.big{color:#000}
+.goal .bp{color:#000}
+.dot{border-color:#000}
+.q{color:#000!important}

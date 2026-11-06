@@ -209,7 +209,7 @@
       if(x.on){
         acts = aud==="pac"
           ? '<a class="p" href="dietas/'+x.slug+'.html#paciente">Ver ficha</a><a class="s" href="dietas/'+x.slug+'.html?imprimir#paciente">Imprimir</a>'
-          : '<a class="p" href="dietas/'+x.slug+'.html#medico">Pauta profesional</a><a class="s" href="tripticos/'+x.slug+'.pdf" target="_blank" rel="noopener">Tríptico PDF</a><a class="s" href="dietas/'+x.slug+'.html#paciente">Ficha paciente</a>';
+          : '<a class="p" href="dietas/'+x.slug+'.html#medico">Pauta profesional</a><a class="s" href="tripticos/'+x.slug+'.pdf" target="_blank" rel="noopener">Tríptico color</a><a class="s" href="tripticos/'+x.slug+'-bn.pdf" target="_blank" rel="noopener">Tríptico B/N</a><a class="s" href="dietas/'+x.slug+'.html#paciente">Ficha paciente</a>';
       } else acts='<span class="na">En preparación</span>';
       return '<article class="card '+(x.on?'on':'soon')+'" style="--c:var('+c.c+')">'+
         '<div class="hd"><span class="ic"><svg><use href="#'+x.ic+'"/></svg></span><div><h3>'+x.n+'</h3><span class="cat">'+c.n+'</span>'+(x.on?'<span class="st">Disponible</span>':'')+'</div></div>'+

@@ -85,6 +85,7 @@ td{height:9.4mm;border-bottom:0.3mm solid var(--line);padding:0 1.5mm}
 .sello{display:inline-grid;place-items:center;width:11mm;height:11mm;background:#111;color:#fff;font-family:var(--f-display);font-weight:800;font-size:4.2pt;line-height:1.05;text-align:center;clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%);flex:none}
 .light{border-left:1.6mm solid var(--c);padding:1.4mm 0 1.4mm 2.6mm}
 .light h3{color:var(--c);font-size:8.8pt;margin-bottom:0.6mm}
+.l-go h3::before{content:"✓  "}.l-slow h3::before{content:"!  "}.l-stop h3::before{content:"✕  "}
 .light p{font-size:8.6pt}
 
 /* Metas */
@@ -198,9 +199,9 @@ td{height:9.4mm;border-bottom:0.3mm solid var(--line);padding:0 1.5mm}
     </div>
     <div style="display:flex;gap:2.5mm;align-items:center"><span class="sello">ALTO EN<br>SODIO</span><p style="font-size:7.8pt">Si ves este sello, busca otra opción o cómelo solo de vez en cuando.</p></div>
     <h2 style="font-size:12pt;margin-top:1mm">El semáforo</h2>
-    <div class="light" style="--c:var(--go)"><h3>Todos los días</h3><p>Verduras, frutas enteras, porotos, lentejas, garbanzos, avena, arroz y pan integral, leche y yogurt descremados, pescado, pollo sin piel, huevo, nueces sin sal, aceite de oliva, palta, hierbas y limón.</p></div>
-    <div class="light" style="--c:var(--slow)"><h3>Con moderación</h3><p>Pan blanco y marraqueta, quesos (mejor quesillo o fresco), carne roja magra 1 a 2 veces por semana, jugos de fruta, mantequilla, legumbres en lata enjuagadas.</p></div>
-    <div class="light" style="--c:var(--stop)"><h3>Evitar</h3><p>Jamón, salame, longaniza y vienesas, cubos de caldo y sopas en sobre, snacks salados, comida rápida, bebidas azucaradas, pasteles y galletas.</p></div>
+    <div class="light l-go" style="--c:var(--go)"><h3>Todos los días</h3><p>Verduras, frutas enteras, porotos, lentejas, garbanzos, avena, arroz y pan integral, leche y yogurt descremados, pescado, pollo sin piel, huevo, nueces sin sal, aceite de oliva, palta, hierbas y limón.</p></div>
+    <div class="light l-slow" style="--c:var(--slow)"><h3>Con moderación</h3><p>Pan blanco y marraqueta, quesos (mejor quesillo o fresco), carne roja magra 1 a 2 veces por semana, jugos de fruta, mantequilla, legumbres en lata enjuagadas.</p></div>
+    <div class="light l-stop" style="--c:var(--stop)"><h3>Evitar</h3><p>Jamón, salame, longaniza y vienesas, cubos de caldo y sopas en sobre, snacks salados, comida rápida, bebidas azucaradas, pasteles y galletas.</p></div>
   </div>
 
   <!-- Panel 3: metas con el médico -->
