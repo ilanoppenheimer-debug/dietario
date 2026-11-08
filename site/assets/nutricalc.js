@@ -184,10 +184,6 @@
     return plan;
   }
 
-  function balanceNitrogenado(proteinaG, nuuG) {
-    return { balance: r1(proteinaG / 6.25 - (nuuG + 4)), proteinaNeutra: r0((nuuG + 4) * 6.25) };
-  }
-
   function velocidadEnteral(metaKcal, kcalPorMl, horas, protPorL) {
     var vol = metaKcal / kcalPorMl;
     var o = { volumen: r0(vol), mlh: r1(vol / horas) };
@@ -197,7 +193,7 @@
 
   var api = { imc: imc, pesoIdealIMC25: pesoIdealIMC25, pesoIdealUCI: pesoIdealUCI, pesoAjustadoHosp: pesoAjustadoHosp,
               pesoAjustadoUCI: pesoAjustadoUCI, perdidaPeso: perdidaPeso, requerimientos: requerimientos,
-              realimentacion: realimentacion, planRealimentacion: planRealimentacion, balanceNitrogenado: balanceNitrogenado, velocidadEnteral: velocidadEnteral,
+              realimentacion: realimentacion, planRealimentacion: planRealimentacion, velocidadEnteral: velocidadEnteral,
               SITUACIONES: SITUACIONES, RENAL: RENAL };
   if (typeof module !== "undefined" && module.exports) module.exports = api; else root.NutriCalc = api;
 })(this);

@@ -1,5 +1,5 @@
 """Genera site/herramientas/nutricion-hospitalaria.html (torpedo) desde los datos de este archivo.
-Regla: solo cifras de guías vigentes; las fórmulas clásicas del manual 2014 van marcadas como tales.
+Regla: solo cifras de guías vigentes, con la guía al lado.
 Uso: python3 tools/build_torpedo.py"""
 import os, html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -14,7 +14,6 @@ def table(head, rows):
     return f'<div class="tbl"><table><thead><tr>{th}</tr></thead><tbody>{body}</tbody></table></div>'
 
 T = lambda s: f'<span class="tag">{s}</span>'
-OLD = '<span class="tag old">Manual 2014</span>'
 
 S = []  # (id, título, html)
 
@@ -91,29 +90,6 @@ S.append(("dm", "Diabético hospitalizado", table(
     ["NP", "Insulina regular en la bolsa, 1 U por 10 g de dextrosa, si usó &gt;20 U de corrección en 24 h"],
     ["Hipoglicemia (&lt;70)", "15 g de hidrato rápido; repetir y medir cada 15 min hasta &gt;70"],
     ]) + '<p class="src">' + T("ADA Standards of Care 2026, cap. 16") + " Dieta con hidratos controlados; ADA no fija un porcentaje. No indicar dieta hipocalórica.</p>"))
-
-S.append(("formulas", "Fórmulas clásicas", table(
-    ["Fórmula", "Uso"], [
-    ["% pérdida de peso = (habitual − actual) × 100 ÷ habitual", "Significativa: 1–2 % en 1 semana; 5 % en 1 mes; 7,5 % en 3 meses; 10 % en 6 meses"],
-    ["IMC = kg ÷ m²", "&lt;18,5 bajo peso; 25 sobrepeso; 30 obesidad"],
-    ["Balance N = proteína ÷ 6,25 − (NUU + 4)", "Meta +2 a +4 g/d; en el crítico, el menos negativo posible"],
-    ["Proteína para BN neutro = (NUU + 4) × 6,25", "NUU 16 g/d → 125 g/d de proteína"],
-    ["NUU sin aporte proteico (g/d)", "&lt;5 normal; 5–10 hipercatabolismo leve; 11–15 moderado; &gt;15 severo"],
-    ["1 g N = 6,25 g de proteína", "—"],
-    ["Densidad energética", "Aminoácidos 4 kcal/g; dextrosa 3,4 kcal/g; lípidos al 10/20/30 % = 1,1/2,1/3,1 kcal/mL"],
-    ]) + '<p class="src">' + OLD + " Conceptos y aritmética del Manual de Terapia Nutricional UDD 2014. Los requerimientos de ese manual fueron reemplazados por las guías de arriba.</p>"))
-
-S.append(("cambios", "Qué cambió respecto del manual 2014", '''<ul class="lst changes">
-<li><b>Crítico:</b> proteína 1,3 g/kg (no 1,5 con techo 2,5); energía &lt;70 % la primera semana si se estima con ecuaciones.</li>
-<li><b>Sala:</b> 30 kcal/kg y ≥1,2 g/kg con riesgo; en el polimórbido ≥65 años, 27 kcal/kg y 1,2–1,5 g/kg.</li>
-<li><b>Peso ajustado:</b> ideal + 0,33 del exceso en sala; ideal + 20–25 % en UCI.</li>
-<li><b>Obeso hospitalizado:</b> no hipocalórico.</li>
-<li><b>Renal:</b> no restringir proteína en el agudo ni para retrasar la diálisis; peso habitual, no real.</li>
-<li><b>Cirrosis:</b> no restringir proteína, tampoco con encefalopatía; con ascitis, peso ideal.</li>
-<li><b>Lípidos EV:</b> hasta 1 g/kg/d, con tolerancia hasta 1,5.</li>
-<li><b>Realimentación:</b> inicio 10–20 kcal/kg (ASPEN) o 5–15 (ESPEN), subiendo 33 % cada 1–2 días.</li>
-<li><b>Pancreatitis leve:</b> comer en 24–48 h, sin ayuno de varios días.</li>
-</ul>'''))
 
 SHORT = {"peso":"Peso","req":"Requerimientos","renal":"Renal","realim":"Realimentación","uci":"UCI","pancreatitis":"Pancreatitis","dm":"Diabetes","formulas":"Fórmulas","cambios":"Cambios 2014"}
 toc = "".join(f'<button role="tab" id="t-{i}" aria-controls="{i}" data-tab="{i}">{SHORT.get(i,t)}</button>' for i, t, _ in S)

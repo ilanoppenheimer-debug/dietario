@@ -18,7 +18,7 @@ eq("Ajustado hosp sin exceso = real", C.pesoAjustadoHosp(60, 175), 60, 0.001);
 eq("Ajustado UCI mujer 120/160 al 25 %", C.pesoAjustadoUCI("F", 120, 160, 0.25), 48.6 + 0.25 * 71.4, 0.001);
 eq("Pérdida 72→66,5", C.perdidaPeso(72, 66.5), 7.64, 0.01);
 
-// Caso 1 manual: politrauma UCI, hombre 76 kg 1,75 m (IMC 24,8 → peso real)
+// Caso 1: politrauma UCI, hombre 76 kg 1,75 m (IMC 24,8 → peso real)
 let r = C.requerimientos({ sexo: "M", edad: 25, peso: 76, talla: 175, situacion: "uci" });
 eq("UCI caso1 kcal min", r.energia.min, 1520); eq("UCI caso1 kcal max", r.energia.max, 1900);
 eq("UCI caso1 semana1 <70 %", r.energia.semana1.max, 1330); eq("UCI caso1 proteína", r.proteina.min, 99);
@@ -29,7 +29,7 @@ r = C.requerimientos({ sexo: "F", edad: 50, peso: 120, talla: 160, situacion: "u
 eq("UCI obesa kcal min", r.energia.min, Math.round(20 * 62.88)); eq("UCI obesa kcal max", r.energia.max, Math.round(25 * 66.45));
 eq("UCI obesa prot min", r.proteina.min, Math.round(1.3 * 62.88)); eq("UCI obesa prot max", r.proteina.max, Math.round(1.3 * 66.45));
 
-// Caso 2 manual: pancreatitis UCI, 75 kg IMC 30,1 (talla ≈157,9) mujer → peso ajustado UCI
+// Caso 2: pancreatitis UCI, 75 kg IMC 30,1 (talla ≈157,9) mujer → peso ajustado UCI
 r = C.requerimientos({ sexo: "F", edad: 57, peso: 75, talla: 157.9, situacion: "uci" });
 const id2 = 0.9 * (157.9 - 106);
 eq("Caso2 prot min", r.proteina.min, Math.round(1.3 * (id2 + 0.2 * (75 - id2))));
@@ -82,8 +82,6 @@ let pl = C.planRealimentacion(1800, 600, 1);
 igual("Plan días", pl.map(x=>x.dia).join(","), "1,2,3"); igual("Plan kcal", pl.map(x=>x.kcal).join(","), "600,1194,1800");
 pl = C.planRealimentacion(2000, 1000, 2); igual("Plan cada 2 días", pl.map(x=>x.dia+":"+x.kcal).join(","), "1:1000,3:1660,5:2000");
 
-let b = C.balanceNitrogenado(100, 12);
-eq("BN 100 g prot, NUU 12", b.balance, -0.0, 0.05); eq("Proteína neutra NUU 16", C.balanceNitrogenado(0, 16).proteinaNeutra, 125);
 let v = C.velocidadEnteral(1800, 1.2, 24, 56);
 eq("NE volumen", v.volumen, 1500); eq("NE mL/h", v.mlh, 62.5, 0.05); eq("NE proteína", v.proteina, 84);
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Calculadora nutricional · Guías de Alimentación</title>
-<meta name="description" content="Requerimientos de energía y proteína, síndrome de realimentación, balance nitrogenado y velocidad de nutrición enteral en adultos hospitalizados.">
+<meta name="description" content="Requerimientos de energía y proteína, síndrome de realimentación y velocidad de nutrición enteral en adultos hospitalizados.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +33,7 @@
 
   <!-- Datos del paciente: compartidos por todas las pestañas -->
   <form id="f" class="pt" autocomplete="off" novalidate>
-    <div class="pt-head"><b>Paciente</b><span class="example" id="exnote">Ejemplo: caso 1 del manual</span></div>
+    <div class="pt-head"><b>Paciente</b><span class="example" id="exnote">Datos de ejemplo</span></div>
     <div class="pt-grid">
       <div class="fld"><span class="lbl">Sexo</span>
         <div class="seg2" role="radiogroup" aria-label="Sexo">
@@ -52,7 +52,6 @@
   <div class="ctabs" role="tablist" aria-label="Cálculos">
     <button role="tab" id="t-requerimientos" aria-controls="p-requerimientos" data-tab="requerimientos">Requerimientos</button>
     <button role="tab" id="t-realimentacion" aria-controls="p-realimentacion" data-tab="realimentacion">Realimentación</button>
-    <button role="tab" id="t-balance" aria-controls="p-balance" data-tab="balance">Balance N</button>
     <button role="tab" id="t-enteral" aria-controls="p-enteral" data-tab="enteral">Nutrición enteral</button>
   </div>
 
@@ -145,20 +144,6 @@
     </div>
   </section>
 
-  <!-- 3. Balance nitrogenado -->
-  <section class="panel-t" role="tabpanel" id="p-balance" aria-labelledby="t-balance" hidden>
-    <div class="blk narrow">
-      <div class="bh"><h2>Balance nitrogenado</h2>
-        <details class="pop"><summary aria-label="Fórmula">?</summary><div>BN = proteína ÷ 6,25 − (NUU + 4). Proteína para balance neutro = (NUU + 4) × 6,25. Meta +2 a +4 g/d; en el crítico, el menos negativo posible. En oligoanuria el NUU no sirve. Fuente: Manual UDD 2014.</div></details>
-      </div>
-      <div class="frow">
-        <div class="fld"><label for="bn-prot">Proteína aportada</label><div class="unit"><input id="bn-prot" type="number" inputmode="decimal" min="0" step="1" value="90"><span>g/d</span></div></div>
-        <div class="fld"><label for="bn-nuu">NUU</label><div class="unit"><input id="bn-nuu" type="number" inputmode="decimal" min="0" step="0.1" value="16"><span>g/d</span></div></div>
-      </div>
-      <div class="mini" id="bn-out"></div>
-    </div>
-  </section>
-
   <!-- 4. Nutrición enteral -->
   <section class="panel-t" role="tabpanel" id="p-enteral" aria-labelledby="t-enteral" hidden>
     <div class="blk narrow">
@@ -176,7 +161,7 @@
     </div>
   </section>
 
-  <details class="more foot"><summary>Fuentes</summary><div>ESPEN hospitalaria 2021 (Thibault), ESPEN polimórbido 2024 (Wunderle), ESPEN UCI 2023 (Singer), ESPEN renal 2024 (Sabatino), ESPEN hígado 2020 (Bischoff), ESPEN geriatría 2019 (Volkert), ASPEN realimentación 2020 (da Silva), ESPEN micronutrientes 2024 (Berger). Fórmulas clásicas: Manual de Terapia Nutricional UDD 2014. Revisión: noviembre 2026.</div></details>
+  <details class="more foot"><summary>Fuentes</summary><div>ESPEN hospitalaria 2021 (Thibault), ESPEN polimórbido 2024 (Wunderle), ESPEN UCI 2023 (Singer), ESPEN renal 2024 (Sabatino), ESPEN hígado 2020 (Bischoff), ESPEN geriatría 2019 (Volkert), ASPEN realimentación 2020 (da Silva), ESPEN micronutrientes 2024 (Berger). Revisión: noviembre 2026.</div></details>
 </main>
 </div>
 
@@ -189,7 +174,7 @@
   var last = null, metaTocada = false;
 
   /* ---------- Pestañas ---------- */
-  var TABS = ["requerimientos","realimentacion","balance","enteral"];
+  var TABS = ["requerimientos","realimentacion","enteral"];
   function show(t){
     if (TABS.indexOf(t) < 0) t = "requerimientos";
     TABS.forEach(function(x){
@@ -293,13 +278,6 @@
       '</div><p class="src">Alternativa: 100–150 g de dextrosa el día 1. Incluye la dextrosa de sueros y diluciones.</p>';
   }
 
-  function bn(){
-    var p = num("bn-prot"), n = num("bn-nuu");
-    if (p == null || n == null) { $("bn-out").innerHTML = ""; return; }
-    var b = C.balanceNitrogenado(p, n);
-    $("bn-out").innerHTML = '<div class="out"><span class="k">Balance</span><span class="v">' + (b.balance > 0 ? "+" : "") + nf(b.balance, 1) + '<small> g N/d</small></span></div>' +
-      '<div class="out"><span class="k">Para BN neutro</span><span class="v">' + nf(b.proteinaNeutra) + '<small> g prot/d</small></span></div>';
-  }
   function ne(){
     var k = num("ne-kcal"), d = num("ne-dens"), h = num("ne-h"), p = num("ne-p");
     if (!k || !d || !h) { $("ne-out").innerHTML = ""; return; }
@@ -317,7 +295,6 @@
   $("crit").addEventListener("change", refeed);
   $("rf-meta").addEventListener("input", function(){ metaTocada = true; refeed(); });
   ["rf-ini","rf-cada"].forEach(function(id){ $(id).addEventListener("change", refeed); });
-  ["bn-prot","bn-nuu"].forEach(function(id){ $(id).addEventListener("input", bn); });
   ["ne-dens","ne-h","ne-p"].forEach(function(id){ $(id).addEventListener("input", ne); });
   $("ne-kcal").addEventListener("input", function(){ $("ne-sync").checked = false; ne(); });
   $("ne-sync").addEventListener("change", render);
@@ -326,7 +303,7 @@
     if (e.target.classList && e.target.classList.contains("pop") && e.target.open)
       document.querySelectorAll("details.pop[open]").forEach(function(d){ if (d !== e.target) d.open = false; });
   }, true);
-  show(location.hash.slice(1)); render(); bn(); ne();
+  show(location.hash.slice(1)); render(); ne();
 })();
 </script>
 </body>
