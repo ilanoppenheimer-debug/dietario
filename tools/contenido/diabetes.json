@@ -12,6 +12,14 @@
     "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3"
    ],
    [
+    "note",
+    "",
+    [
+     "ADA 2026 (sección 16) propone 100–180 mg/dL fuera de UCI si se logra sin hipoglicemia. El consenso chileno, posterior (mayo 2026), mantiene 140–180: se usa este."
+    ],
+    ""
+   ],
+   [
     "warn",
     "Ayuno <100 mg/dL es una señal de alerta",
     [
@@ -65,6 +73,16 @@
      "Sin hiperglicemia inequívoca, confirmar con una segunda prueba."
     ],
     "ADA 2026, sección 2"
+   ],
+   [
+    "card",
+    "Metas fuera del hospital",
+    [
+     "HbA1c <7 % para muchos adultos; <6,5 % si hay buena salud y bajo riesgo de hipoglicemia; menos estricta con fragilidad, deterioro cognitivo o comorbilidad severa.",
+     "Glicemia capilar: 80–130 mg/dL antes de comer y <180 en el peak posprandial.",
+     "Con monitoreo continuo: tiempo en rango 70–180 >70 %; bajo 70 <4 % (<1 % en mayores) y bajo 54 <1 %."
+    ],
+    "ADA Standards of Care 2026, sección 6, 6.3–6.5 y tabla 6.3"
    ]
   ],
   "ingreso": [
@@ -568,31 +586,61 @@
   "nut": [
    [
     "card",
-    "Lo que sí define el consenso",
+    "Principios",
     [
-     "Meta cercana a 180 mg/dL: es un estado posprandial continuo y metas más bajas aumentan la hipoglicemia.",
-     "Glicemia cada 4 h con análogo o cada 6 h con cristalina.",
-     "Suspender o reducir la nutrición sin ajustar la insulina es causa frecuente de hipoglicemia: coordinar con nutrición y enfermería."
+     "Mantener la basal y cubrir aparte la parte nutricional: 1 UI por cada 10–15 g de carbohidratos de la fórmula.",
+     "No cubrir todo con basal: aumenta la hipoglicemia si la nutrición se suspende.",
+     "DM1: nunca suspender la basal, aunque se suspenda la nutrición.",
+     "Meta cercana a 180: buscar <140 con nutrición continua aumenta mucho la hipoglicemia."
     ],
-    "Consenso intrahospitalario SOCHIDIAB 2026, caps. 3 y 7"
+    "ADA Standards of Care 2026, sección 16; Consenso intrahospitalario SOCHIDIAB 2026, cap. 3"
    ],
    [
-    "card",
+    "table",
     "Insulina según el tipo de nutrición",
+    "0.9fr 1.6fr",
     [
-     "NE continua: mantener la basal y agregar 1 UI por cada 10–15 g de carbohidratos de la fórmula, más corrección.",
-     "Si la NE se interrumpe: dextrosa EV para evitar hipoglicemia.",
-     "NP: insulina cristalina en la bolsa, 1 UI por cada 10 g de dextrosa, si usó >20 UI de corrección en 24 h."
+     "Nutrición",
+     "Insulina nutricional"
+    ],
+    [
+     [
+      "Enteral continua",
+      "Cristalina cada 6 h, análogo cada 4 h o NPH cada 8–12 h. La cristalina se asoció a mejor control con menos inyecciones"
+     ],
+     [
+      "Enteral en bolos",
+      "Cerca de 1 UI de análogo rápido por cada 10–15 g de carbohidratos, antes de cada bolo, más corrección"
+     ],
+     [
+      "Enteral nocturna",
+      "NPH al iniciar la infusión"
+     ],
+     [
+      "Parenteral",
+      "Cristalina en la bolsa, 1 UI por cada 10 g de dextrosa, sobre todo si usó >20 UI de corrección en 24 h; ajustar a diario. Glargina SC es alternativa"
+     ]
     ],
     "ADA Standards of Care 2026, sección 16"
    ],
    [
-    "pend",
-    "Confirmar con la fuente",
+    "card",
+    "Corrección y controles",
     [
-     "Estas tres reglas vienen de la sección 16 de ADA 2026, que no está en tu carpeta: confirmarlas con el PDF.",
-     "Nutrición cíclica y en bolos: falta detallarlas."
-    ]
+     "Corrección SC cada 6 h con cristalina o cada 4 h con análogo.",
+     "Glicemia cada 6 h (cristalina) o cada 4 h (análogo)."
+    ],
+    "ADA Standards of Care 2026, sección 16; Consenso intrahospitalario SOCHIDIAB 2026, cap. 7"
+   ],
+   [
+    "warn",
+    "Si la nutrición se interrumpe",
+    [
+     "Dextrosa EV mientras dure el efecto de la insulina ya administrada.",
+     "La insulina en la bolsa de parenteral es lo más seguro: se suspende junto con la nutrición.",
+     "Avisar a enfermería y nutrición: la suspensión no ajustada es causa frecuente de hipoglicemia."
+    ],
+    "ADA Standards of Care 2026, sección 16; Consenso intrahospitalario SOCHIDIAB 2026, cap. 7"
    ]
   ],
   "hipo": [
@@ -816,30 +864,67 @@
     "card",
     "Cuándo iniciar insulina en DM2",
     [
-     "HbA1c sobre la meta pese a 2 o más fármacos en dosis terapéuticas (frecuente con >8 %), idealmente ya con arGLP-1.",
-     "Debut con hiperglicemia sintomática severa (glicemia >300 y/o HbA1c ≥9 %): basal + metformina; evitar iSGLT-2 al inicio y titular de cerca."
+     "Considerarla con síntomas de hiperglicemia, HbA1c >10 % o glicemia ≥300 mg/dL, sea cual sea el tratamiento previo.",
+     "Sin hiperglicemia severa ni crisis, se prefiere la terapia basada en GLP-1 antes que la insulina.",
+     "Al iniciar insulina, mantener los otros fármacos y combinarla con arGLP-1 (o GIP/GLP-1)."
     ],
-    "Consenso SOCHIDIAB 2022 (DM2)"
+    "ADA Standards of Care 2026, sección 9, 9.20–9.23"
+   ],
+   [
+    "note",
+    "",
+    [
+     "El consenso SOCHIDIAB 2022 usaba HbA1c ≥9 % y glicemia >300 en el debut sintomático. ADA 2026 es posterior: gana."
+    ],
+    ""
+   ],
+   [
+    "table",
+    "Basal: inicio y titulación",
+    "0.9fr 1.6fr",
+    [
+     "Paso",
+     "Indicación"
+    ],
+    [
+     [
+      "Inicio",
+      "10 UI/día o 0,1–0,2 UI/kg/día, según peso y grado de hiperglicemia (análogo o NPH al acostarse)"
+     ],
+     [
+      "Titulación",
+      "Fijar meta de ayuno (80–130) y subir 2 UI cada 3 días hasta lograrla sin hipoglicemia"
+     ],
+     [
+      "Hipoglicemia",
+      "Buscar la causa; si no hay una clara, bajar 10–20 %"
+     ],
+     [
+      "Intensificar",
+      "Prandial: 4 UI o 10 % de la basal en la comida principal, bajando la basal 4 UI o 10 %"
+     ]
+    ],
+    "ADA Standards of Care 2026, sección 9, figura 9.5"
+   ],
+   [
+    "warn",
+    "Sobrebasalización",
+    [
+     "Sospechar con diferencia grande entre la glicemia al acostarse y la de la mañana, o entre posprandial y preprandial; hipoglicemias; o alta variabilidad.",
+     "Reevaluar el esquema en vez de seguir subiendo la basal."
+    ],
+    "ADA Standards of Care 2026, sección 9, 9.26"
    ],
    [
     "card",
-    "Cómo",
+    "Siempre",
     [
-     "Partir con basal; preferir análogos sobre NPH por menos hipoglicemia.",
-     "Para intensificar, preferir arGLP-1 antes que bolo prandial.",
-     "Basal-bolo si sigue fuera de meta.",
-     "Premezcladas: no recomendadas, salvo casos especiales.",
-     "Requiere glucometría; MCG en casos seleccionados."
+     "Prescribir glucagón a todo paciente con insulina.",
+     "Monitoreo continuo recomendado con insulina.",
+     "Análogos basales: menos hipoglicemia nocturna que NPH.",
+     "Revisar el tratamiento cada 3–6 meses; no retrasar la intensificación."
     ],
-    "Consenso SOCHIDIAB 2022 (DM2)"
-   ],
-   [
-    "pend",
-    "Dosis inicial, titulación y metas",
-    [
-     "El consenso 2022 no fija dosis y es anterior a ADA 2026: si discrepan, gana la más reciente.",
-     "Faltan en tu carpeta las secciones 6 (metas) y 9 (tratamiento farmacológico) de ADA 2026."
-    ]
+    "ADA Standards of Care 2026, sección 9, 9.14, 9.25 y 9.28"
    ]
   ],
   "alta": [
@@ -868,21 +953,20 @@
     "card",
     "Usadas en este tema",
     [
-     "Consenso intrahospitalario SOCHIDIAB 2026: manejo de diabetes e hiperglicemia en el adulto (caps. 1, 3, 4, 5 y 7).",
+     "Consenso intrahospitalario SOCHIDIAB 2026 (mayo): manejo de diabetes e hiperglicemia en el adulto, caps. 1, 3, 4, 5, 6 y 7.",
+     "ADA Standards of Care 2026: secciones 2 (diagnóstico), 5 (nutrición), 6 (metas, hipoglicemia y crisis), 9 (tratamiento farmacológico) y 16 (hospital).",
      "Consenso SOCHIDIAB 2022: enfrentamiento integral de la DM2 (Errázuriz et al.).",
-     "ADA Standards of Care 2026: secciones 2 (diagnóstico) y 5 (conductas y nutrición).",
-     "JBDS 2023: hipoglicemia en adultos hospitalizados.",
-     "Crisis hiperglicémicas: consenso 2026, cap. 6, basado en el consenso internacional ADA/EASD 2024.",
-     "ADA Standards of Care 2026: sección 16 (nutrición enteral y parenteral; pendiente de confirmar con el PDF)."
+     "JBDS 2023: hipoglicemia en adultos hospitalizados."
     ],
     ""
    ],
    [
-    "pend",
-    "Para completar",
+    "note",
+    "",
     [
-     "ADA 2026 secciones 6 y 9 (metas e insulina ambulatoria) y el PDF de la sección 16."
-    ]
+     "Discordancias resueltas por la regla \"gana la más reciente\": metas hospitalarias y esquema de inicio en sala (consenso chileno 2026 sobre ADA 2026); inicio de insulina ambulatoria (ADA 2026 sobre SOCHIDIAB 2022)."
+    ],
+    ""
    ]
   ]
  },
@@ -997,10 +1081,10 @@
     "card",
     "Tus metas",
     [
-     "Las fija tu médico según tu edad y tu salud. Anótalas aquí:",
-     "Ayunas ______ · HbA1c ______"
+     "Las fija tu médico según tu edad y tu salud. Para muchos adultos: HbA1c bajo 7 % y glicemia en ayunas entre 80 y 130.",
+     "Las tuyas: Ayunas ______ · HbA1c ______"
     ],
-    ""
+    "ADA 2026, sección 6"
    ],
    [
     "card",
