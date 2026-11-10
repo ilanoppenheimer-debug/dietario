@@ -1,0 +1,11 @@
+{
+  "name": "dietario",
+  "private": true,
+  "description": "Dietario: guías de alimentación con evidencia (sitio estático + acceso profesional en Vercel).",
+  "scripts": {
+    "test": "node tools/test_nutricalc.js"
+  },
+  "dependencies": {
+    "@vercel/functions": "^3.11.1"
+  }
+}

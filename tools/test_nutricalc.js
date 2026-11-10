@@ -85,5 +85,37 @@ pl = C.planRealimentacion(2000, 1000, 2); igual("Plan cada 2 días", pl.map(x=>x
 let v = C.velocidadEnteral(1800, 1.2, 24, 56);
 eq("NE volumen", v.volumen, 1500); eq("NE mL/h", v.mlh, 62.5, 0.05); eq("NE proteína", v.proteina, 84);
 
+
+// Gasto energético basal: H 25 años 175 cm 76 kg
+eq("Mifflin H", C.gebMifflin("M", 76, 175, 25), 1733.75, 0.01);
+eq("Harris-Benedict revisada H", C.gebHarrisBenedict("M", 76, 175, 25), 1804.4, 0.1);
+eq("Mifflin M", C.gebMifflin("F", 60, 160, 40), 1239, 0.01);
+
+// Insulina basal (consenso SOCHIDIAB 2026, cap. 3)
+let ib = C.insulinaBasal({ peso: 80, previa: 0, sens: "normal", sobre200: false, tipo: "glargina" });
+eq("Basal 0,2 UI/kg", ib.dosis, 16);
+ib = C.insulinaBasal({ peso: 80, previa: 0, sens: "normal", sobre200: true, tipo: "nph" });
+eq("Basal 0,3 UI/kg con >200", ib.dosis, 24); eq("NPH 2/3 AM", ib.posologia.am, 16); eq("NPH 1/3 PM", ib.posologia.pm, 8);
+ib = C.insulinaBasal({ peso: 70, previa: 0, sens: "sensible", tipo: "glargina" }); eq("Insulinosensible 0,1", ib.dosis, 7);
+ib = C.insulinaBasal({ peso: 90, previa: 30, sens: "normal", tipo: "glargina" }); eq("70 % de la previa", ib.dosis, 21);
+ib = C.insulinaBasal({ peso: 90, previa: 30, sens: "sensible", tipo: "glargina" }); eq("50 % de la previa", ib.dosis, 15);
+ib = C.insulinaBasal({ peso: 60, previa: 40, sens: "normal", tipo: "glargina" }); eq("Sobrebasalizado → por peso", ib.dosis, 12); igual("Alerta sobrebasalización", !!ib.alerta, true);
+igual("Columna resistente", C.insulinaBasal({ peso: 70, sens: "resistente" }).correccion.join(","), "0,4,6,8,10,12,14,16");
+
+// Corticoides: los 3 casos clínicos del consenso (cap. 5)
+let ic = C.insulinaCorticoides({ peso: 80, grupo: 2, corticoide: "prednisona", dosisMg: 60, prandial: "analogo" });
+eq("Caso 1 total", ic.total, 72); eq("Caso 1 basal", ic.basal, 28); eq("Caso 1 por comida (4)", ic.porComida, 10);
+ic = C.insulinaCorticoides({ peso: 61, grupo: 1, corticoide: "dexametasona", dosisMg: 16, prandial: "cristalina" });
+eq("Caso 2 total", ic.total, 42); eq("Caso 2 basal", ic.basal, 16); eq("Caso 2 por comida (3)", ic.porComida, 8);
+ic = C.insulinaCorticoides({ peso: 54, grupo: 1, corticoide: "hidrocortisona", dosisMg: 150, prandial: "cristalina" });
+eq("Caso 3 total", ic.total, 32); eq("Caso 3 basal", ic.basal, 12); eq("Caso 3 por comida", ic.porComida, 6);
+ic = C.insulinaCorticoides({ peso: 70, grupo: 1, corticoide: "prednisona", dosisMg: 35, prandial: "analogo" });
+eq("Dosis entre tramos → tramo inferior", ic.extra, 0.3);
+igual("Prednisona ≤10 avisa", !!C.insulinaCorticoides({ peso: 70, grupo: 1, corticoide: "prednisona", dosisMg: 10 }).aviso, true);
+igual("Tabla grupo 2 >300", C.insulinaCorticoides({ peso: 80, grupo: 2, corticoide: "prednisona", dosisMg: 60, prandial: "analogo" }).tabla[6].dosis, 20);
+
+// Crisis hiperglicémicas
+eq("Na corregido", C.sodioCorregido(138, 720), 147.92, 0.01); eq("Osm efectiva", C.osmolaridadEfectiva(138, 720), 316, 0.01);
+
 console.log(fallas ? `\n${fallas} de ${n} pruebas fallaron` : `✓ ${n} pruebas OK`);
 process.exit(fallas ? 1 : 0);

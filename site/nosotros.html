@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nosotros · Dietario</title>
+<meta name="description" content="Nosotros">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A7A4B">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
+<link rel="stylesheet" href="assets/app.css">
+
+</head>
+<body class="a-app" data-root="" data-nav="nosotros">
+<header class="a-top"><span class="a-mark"><svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 27C5 13 13 5 27 5c0 14-8 22-22 22z" fill="#FFFFFF"/></svg></span><span class="a-brand">Nosotros</span><span class="a-proto" title="Contenido en revisión, aún no validado por el equipo clínico">Prototipo</span><a class="a-chip" data-perfil href="index.html?perfil">Perfil</a></header>
+<main class="a-body">
+ <div class="a-head" style="--c:var(--a-green)"><h1 class="a-h a-h1">Quiénes somos</h1></div>
+ <div class="a-card"><b class="a-h" style="font-size:17px">[NOMBRE DEL PROYECTO / EQUIPO]</b><span>[Autor: nombre, título, institución] · [Revisión: nutricionista, especialistas]</span><span class="a-foot" style="font-size:13px">Cada ficha muestra su fecha de revisión y se actualiza una vez al año.</span></div>
+ <div class="a-card"><b>Cómo se hace</b><span>Las recomendaciones vienen de guías clínicas vigentes y de los estudios que las respaldan. Ante discordancias, manda la guía más reciente.</span></div>
+ <div class="a-card"><b>Aviso</b><span>Material educativo general. No reemplaza la indicación de tu médico ni la evaluación de un nutricionista. Las herramientas profesionales son apoyo y no sustituyen el juicio clínico.</span></div>
+ <div class="a-card"><b>Tus datos</b><span>Dietario no tiene cuentas ni guarda datos en un servidor. Tu perfil, tus dietas guardadas y tu registro de presión y glicemia quedan solo en este dispositivo. Las calculadoras profesionales no guardan nada.</span></div>
+ <div class="a-card list">
+  <a class="a-row" href="index.html?perfil"><span class="a-tx"><b>Cambiar perfil</b><span id="perfil-actual"></span></span><svg class="a-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+  <a class="a-row" href="index.html?intro"><span class="a-tx"><b>Ver la introducción otra vez</b></span><svg class="a-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+ </div>
+ <p class="a-p a-foot">Prototipo en revisión: contenido aún no validado por el equipo clínico.</p>
+</main>
+<script>document.getElementById("perfil-actual").textContent = "Ahora: " + ((window.localStorage && localStorage.getItem("dietario.perfil") === '"pro"') ? "profesional" : "paciente");</script>
+<nav class="a-nav"></nav>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

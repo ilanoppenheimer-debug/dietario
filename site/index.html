@@ -3,263 +3,74 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Guías de Alimentación</title>
-<meta name="description" content="Pautas de alimentación con evidencia para explicar en la consulta y llevar a la casa.">
+<title>Inicio · Dietario</title>
+<meta name="description" content="Dietario: guías de alimentación con evidencia para pacientes y profesionales de salud.">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A7A4B">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=IBM+Plex+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="assets/portal.css">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
+<link rel="stylesheet" href="assets/app.css">
+
 </head>
-<body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <symbol id="i-leaf" viewBox="0 0 32 32"><path d="M5 27C5 13 13 5 27 5c0 14-8 22-22 22z" fill="currentColor"/><path d="M5 27L20 12" stroke="var(--leaf)" stroke-width="2" stroke-linecap="round"/></symbol>
-  <symbol id="i-heart" viewBox="0 0 32 32"><path d="M16 27S4 20 4 11.5A6.5 6.5 0 0 1 16 8a6.5 6.5 0 0 1 12 3.5C28 20 16 27 16 27z" fill="currentColor"/><path d="M8 15h4l2-3 3 6 2-3h5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linejoin="round" stroke-linecap="round"/></symbol>
-  <symbol id="i-olive" viewBox="0 0 32 32"><path d="M6 26C10 16 18 10 27 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="13" rx="4" ry="6" transform="rotate(-30 12 13)" fill="currentColor"/><ellipse cx="21" cy="19" rx="4" ry="6" transform="rotate(50 21 19)" fill="currentColor" opacity=".7"/></symbol>
-  <symbol id="i-salt" viewBox="0 0 32 32"><path d="M10 12c0-5 3-8 6-8s6 3 6 8v13c0 2-1 3-3 3h-6c-2 0-3-1-3-3z" fill="currentColor"/><circle cx="14" cy="8" r="1" fill="#fff"/><circle cx="18" cy="8" r="1" fill="#fff"/></symbol>
-  <symbol id="i-gut" viewBox="0 0 32 32"><path d="M9 7h14a4 4 0 0 1 0 8H9a4 4 0 0 0 0 8h14" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"/></symbol>
-  <symbol id="i-wheat" viewBox="0 0 32 32"><path d="M16 29V9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><g fill="currentColor"><ellipse cx="12.5" cy="12" rx="2.6" ry="4" transform="rotate(-35 12.5 12)"/><ellipse cx="19.5" cy="12" rx="2.6" ry="4" transform="rotate(35 19.5 12)"/><ellipse cx="12.5" cy="18" rx="2.6" ry="4" transform="rotate(-35 12.5 18)"/><ellipse cx="19.5" cy="18" rx="2.6" ry="4" transform="rotate(35 19.5 18)"/><ellipse cx="16" cy="6" rx="2.4" ry="3.6"/></g></symbol>
-  <symbol id="i-milk" viewBox="0 0 32 32"><path d="M11 4h10v4l3 5v15c0 1-1 1-1 1H9s-1 0-1-1V13l3-5z" fill="currentColor"/><path d="M8 17h16v6H8z" fill="#fff" opacity=".85"/></symbol>
-  <symbol id="i-kidney" viewBox="0 0 32 32"><path d="M13 5c-6 0-9 5-9 11s3 11 9 11c4 0 5-3 4-6-1-2-3-3-3-5s2-3 3-5c1-3 0-6-4-6z" fill="currentColor"/><path d="M19 5c6 0 9 5 9 11s-3 11-9 11" stroke="currentColor" stroke-width="2.4" fill="none" opacity=".55"/></symbol>
-  <symbol id="i-drop" viewBox="0 0 32 32"><path d="M16 3c4 7 9 12 9 17a9 9 0 0 1-18 0c0-5 5-10 9-17z" fill="currentColor"/><path d="M12 21a4 4 0 0 0 4 4" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
-  <symbol id="i-liver" viewBox="0 0 32 32"><path d="M4 12c0-4 4-6 10-6 7 0 14 1 14 6 0 6-6 13-12 14-3 0-3-4-6-5-4-1-6-4-6-9z" fill="currentColor"/></symbol>
-  <symbol id="i-joint" viewBox="0 0 32 32"><circle cx="11" cy="11" r="5" fill="currentColor"/><circle cx="21" cy="21" r="5" fill="currentColor" opacity=".7"/><path d="M13 13l6 6" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></symbol>
-  <symbol id="i-pill" viewBox="0 0 32 32"><rect x="4" y="11" width="24" height="10" rx="5" transform="rotate(-35 16 16)" fill="currentColor"/><path d="M12.5 10.5l7 11" stroke="#fff" stroke-width="2" transform="rotate(0)"/></symbol>
-  <symbol id="i-spoon" viewBox="0 0 32 32"><ellipse cx="16" cy="9" rx="5" ry="6.5" fill="currentColor"/><path d="M16 15v13" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
-  <symbol id="i-fire" viewBox="0 0 32 32"><path d="M16 3c1 5 8 8 8 15a8 8 0 0 1-16 0c0-4 2-6 4-8 0 3 1 4 2 4 0-5 1-8 2-11z" fill="currentColor"/></symbol>
-  <symbol id="i-fiber" viewBox="0 0 32 32"><path d="M6 26c4-1 8-5 9-11M14 26c2-3 4-7 4-12M22 26c0-4 2-8 5-11" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/></symbol>
-  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
-  <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 21c0-4.5 3.6-7 8-7s8 2.5 8 7z" fill="currentColor"/></symbol>
-  <symbol id="i-steth" viewBox="0 0 24 24"><path d="M6 3v6a4 4 0 0 0 8 0V3M10 13v3a5 5 0 0 0 10 0v-2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="20" cy="12" r="2" fill="currentColor"/></symbol>
-  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2" fill="currentColor"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2" fill="currentColor"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2" fill="currentColor"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2" fill="currentColor"/></symbol>
-  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5c3-1.5 6-1.5 8 0v15c-2-1.5-5-1.5-8 0zM20 5c-3-1.5-6-1.5-8 0v15c2-1.5 5-1.5 8 0z" fill="currentColor"/></symbol>
-  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor"/><path d="M12 11v6M12 7.5v.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></symbol>
-</defs></svg>
+<body class="a-app" data-root="" data-nav="home">
+<header class="a-top"><span class="a-mark"><svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 27C5 13 13 5 27 5c0 14-8 22-22 22z" fill="#FFFFFF"/></svg></span><span class="a-brand">Inicio</span><span class="a-proto" title="Contenido en revisión, aún no validado por el equipo clínico">Prototipo</span><a class="a-chip" data-perfil href="index.html?perfil">Perfil</a></header>
 
-<div class="proto"><b>Prototipo en revisión.</b> Contenido aún no validado por el equipo clínico; no usar para indicar tratamiento.</div>
-<header class="hdr">
-  <div class="in">
-    <a class="brand" href="index.html"><span class="mark"><svg><use href="#i-leaf"/></svg></span><span class="nm"><b>Guías de Alimentación</b><span>Material educativo con evidencia</span></span></a>
-    <nav class="main" aria-label="Secciones">
-      <a href="#dietas">Dietas</a>
-      <a href="#herramientas">Herramientas</a>
-      <a href="#uso">Cómo usarlas</a>
-      <a href="#metodo">Cómo se hacen</a>
-    </nav>
+<div class="a-solo tint" data-estado="perfil" hidden>
+ <div class="a-panel">
+  <div class="a-solohead"><span class="a-mark"><svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 27C5 13 13 5 27 5c0 14-8 22-22 22z" fill="#FFFFFF"/></svg></span><span class="a-brand">Dietario</span><span class="a-proto">Prototipo</span></div>
+  <div class="a-head" style="margin-top:24px"><h1 class="a-h" style="font-size:30px">¿Cómo vas a usar Dietario?</h1><p class="a-p a-muted">Puedes cambiarlo después desde el menú.</p></div>
+  <button class="a-card a-tile" type="button" data-elegir="pac" style="padding:20px;align-items:flex-start">
+   <span class="a-dot lg" style="width:48px;height:48px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2A7A4B" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></span>
+   <span class="a-tx"><b>Soy paciente</b><span>Guías de alimentación en lenguaje simple, para leer e imprimir.</span></span></button>
+  <a class="a-card a-tile" href="codigo.html" style="padding:20px;align-items:flex-start">
+   <span class="a-dot lg" style="width:48px;height:48px;--soft:var(--a-blue-soft)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2F5D8A" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 3v6a4 4 0 0 0 8 0V3"/><path d="M10 13v3a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="12" r="2"/></svg></span>
+   <span class="a-tx"><b>Soy profesional de salud</b><span>Pautas con evidencia, trípticos, calculadoras y temas clínicos. Requiere código.</span></span></a>
+  <p class="a-p a-foot" style="margin-top:auto;text-align:center;font-size:12.5px">Material educativo. No reemplaza la indicación de tu médico.</p>
+ </div>
+</div>
+
+<div class="a-solo" data-estado="intro" hidden>
+ <div class="a-panel">
+  <div style="display:flex;justify-content:space-between;align-items:center"><div class="a-solohead"><span class="a-mark"><svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 27C5 13 13 5 27 5c0 14-8 22-22 22z" fill="#FFFFFF"/></svg></span><span class="a-brand">Dietario</span></div>
+   <button class="a-btn ghost" type="button" data-intro="saltar">Saltar</button></div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:18px">
+   <div id="intro-ico" style="width:120px;height:120px;border-radius:32px;background:var(--a-green-soft);display:grid;place-items:center"></div>
+   <span class="a-chip" id="intro-para" style="align-self:flex-start"></span>
+   <h1 class="a-h" id="intro-t" style="font-size:30px"></h1>
+   <p class="a-p" id="intro-d" style="font-size:17px;color:var(--a-ink2)"></p>
   </div>
-</header>
+  <div class="a-dots" id="intro-dots"><i></i><i></i><i></i></div>
+  <button class="a-btn" type="button" data-intro="siguiente" id="intro-btn">Siguiente</button>
+ </div>
+</div>
 
-<section class="hero">
-  <div class="in">
-    <div class="txt">
-      <span class="eb">Material educativo con evidencia</span>
-      <h1>Pautas de alimentación <em>claras</em>, para explicar en la consulta y llevar a la casa</h1>
-      <p class="lede">Aquí encontrará fichas de las dietas más indicadas en la práctica clínica. Cada una resume qué es, para quién sirve y cómo llevarla a la mesa, con alimentos y medidas de uso habitual en Chile. No reemplazan la evaluación de un nutricionista: ayudan a empezar con información confiable.</p>
-      <div class="aud">
-        <span class="lbl">¿Quién está leyendo?</span>
-        <div class="seg" role="group" aria-label="Tipo de lector">
-          <button type="button" id="aud-pac" data-aud="pac" aria-pressed="true"><svg><use href="#i-person"/></svg>Soy paciente</button>
-          <button type="button" id="aud-pro" data-aud="pro" aria-pressed="false"><svg><use href="#i-steth"/></svg>Soy profesional de salud</button>
-        </div>
-        <span class="hint" id="aud-hint">Le mostramos primero la ficha para pacientes, escrita en lenguaje simple.</span>
-      </div>
-    </div>
+<main class="a-body" data-estado="inicio" hidden>
+ <div class="a-head"><h1 class="a-h a-h1" id="hola">Hola</h1><p class="a-p a-muted" id="hola-sub"></p></div>
+ <div data-pac>
+  <div class="a-banner" data-qrnuevo hidden><span style="flex:1"><b>¿Primera vez en Dietario?</b> Guarda tu dieta y conoce el resto de la app.</span></div>
+ </div>
+ <div data-pac style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;justify-content:space-between;align-items:center"><span class="a-lbl">Mis dietas</span><a class="a-btn ghost" href="dietas/index.html">+ Agregar</a></div>
+  <a class="a-card dash" href="dietas/index.html" id="sin-mis" style="color:inherit"><b>Aún no guardas ninguna dieta</b><span class="a-muted" style="font-size:14px">Busca la que te indicaron y guárdala para tenerla aquí.</span></a>
+  <a class="a-card a-tile" data-misitem="dash" href="dietas/dash.html#paciente" hidden><span class="a-dot lg" style="--c:#C2534A;--soft:#F8E6E4"><i></i></span><span class="a-tx"><b>Dieta DASH</b><span>Para bajar la presión arterial</span></span><svg class="a-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><a class="a-card a-tile" data-misitem="fodmap" href="dietas/fodmap.html#paciente" hidden><span class="a-dot lg" style="--c:#C98A1E;--soft:#F7EEDC"><i></i></span><span class="a-tx"><b>Baja en FODMAP</b><span>Colon irritable, en 3 etapas</span></span><svg class="a-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+  <div class="a-card soft" id="combinar" hidden style="background:#F1EEF8;border-color:#DCD3EE;color:#38554C"><span class="a-lbl" style="color:#6A4C96">Próximamente</span><b class="a-h" style="font-size:17px;color:var(--a-ink)">Combinar mis dietas</b><span>Qué alimentos sirven para tus dos dietas a la vez y cuáles chocan entre sí. Si chocan, conviene conversarlo con tu nutricionista.</span></div>
+  <div class="a-card soft" style="flex-direction:row;align-items:center;gap:12px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" style="flex:none"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 18h3v3h-3z"/></svg><span><b>¿Te entregaron un tríptico?</b> Escanea su código QR y llegas directo a tu dieta.</span></div>
+  <span class="a-lbl" style="margin-top:6px">Mi salud</span>
+  <div class="a-card list"><a class="a-row" href="salud/presion-alta.html"><span class="a-dot" style="--c:#C2534A;--soft:#F8E6E4"><i></i></span><span class="a-tx"><b>Presión alta</b><span>Hipertensión</span></span><svg class="a-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><a class="a-row" href="salud/diabetes.html"><span class="a-dot" style="--c:#2A7A4B;--soft:#E3F0E6"><i></i></span><span class="a-tx"><b>Diabetes</b><span>Qué es, alimentación y control</span></span><svg class="a-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="a-row static"><span class="a-dot" style="--c:#7C5BA8;--soft:#EEE8F6"><i></i></span><span class="a-tx"><b>Colesterol alto</b><span>En preparación</span></span></div><a class="a-row" href="dietas/fodmap.html#paciente"><span class="a-dot" style="--c:#C98A1E;--soft:#F7EEDC"><i></i></span><span class="a-tx"><b>Colon irritable</b><span>Dieta baja en FODMAP disponible</span></span><svg class="a-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="a-row static"><span class="a-dot" style="--c:#3E78B8;--soft:#E3EDF7"><i></i></span><span class="a-tx"><b>Enfermedad renal</b><span>En preparación</span></span></div><div class="a-row static"><span class="a-dot" style="--c:#5B746C;--soft:#EEF2EF"><i></i></span><span class="a-tx"><b>Obesidad</b><span>En preparación</span></span></div></div>
+ </div>
+ <div data-pro hidden style="display:flex;flex-direction:column;gap:12px">
+  <span class="a-lbl">Nutrición clínica</span>
+  <div class="a-grid2 a-tgrid"><a class="a-card a-gtile" href="clinica/evaluar.html" style="min-height:112px"><span class="a-dot" style="--soft:var(--a-blue-soft);color:var(--a-blue)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 3.6-6.5 8-6.5M16 16l2 2 4-4"/></svg></span><b>Evaluar un paciente</b></a><a class="a-card a-gtile" href="clinica/calculadoras.html" style="min-height:112px"><span class="a-dot" style="--soft:var(--a-blue-soft);color:var(--a-blue)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 3h14v18H5zM8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg></span><b>Calculadoras</b></a><a class="a-card a-gtile" href="clinica/index.html#temas" style="min-height:112px"><span class="a-dot" style="--soft:var(--a-blue-soft);color:var(--a-blue)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM9 12h7M9 16h7"/></svg></span><b>Temas clínicos</b></a><a class="a-card a-gtile" href="dietas/index.html#tripticos" style="min-height:112px"><span class="a-dot" style="--soft:var(--a-blue-soft);color:var(--a-blue)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 5l6-2 6 2 6-2v16l-6 2-6-2-6 2zM9 3v16M15 5v16"/></svg></span><b>Trípticos para imprimir</b></a></div>
+  <span class="a-lbl" style="margin-top:6px">Dietas por tema</span>
+  <div class="a-card list"><a class="a-row" href="dietas/index.html#cv"><span class="a-dot" style="--c:#C2534A;--soft:#F8E6E4"><i></i></span><span class="a-tx"><b>Corazón y presión</b><span>Dieta DASH</span></span><svg class="a-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><a class="a-row" href="dietas/index.html#gi"><span class="a-dot" style="--c:#C98A1E;--soft:#F7EEDC"><i></i></span><span class="a-tx"><b>Digestivo</b><span>Baja en FODMAP</span></span><svg class="a-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><a class="a-row" href="dietas/index.html#ren"><span class="a-dot" style="--c:#3E78B8;--soft:#E3EDF7"><i></i></span><span class="a-tx"><b>Riñón</b><span>En preparación</span></span><svg class="a-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><a class="a-row" href="dietas/index.html#met"><span class="a-dot" style="--c:#7C5BA8;--soft:#EEE8F6"><i></i></span><span class="a-tx"><b>Metabolismo</b><span>En preparación</span></span><svg class="a-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
+  <p class="a-p a-foot" style="font-size:13px">En preparación: mediterránea, sin gluten, sin lactosa, renal y más.</p>
+ </div>
+</main>
 
-    <div class="formats" aria-label="Cada dieta viene en tres formatos">
-      <svg viewBox="0 0 480 300" role="img" aria-label="Tres formatos: página web, hoja imprimible y tríptico para la consulta">
-        <ellipse cx="240" cy="270" rx="220" ry="18" fill="var(--mint)"/>
-        <!-- página web -->
-        <g transform="translate(14 40) rotate(-4)">
-          <rect width="150" height="200" rx="14" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
-          <rect x="0" y="0" width="150" height="24" rx="14" fill="var(--mint)"/><rect x="0" y="12" width="150" height="12" fill="var(--mint)"/>
-          <circle cx="14" cy="12" r="3" fill="var(--sage)"/><circle cx="24" cy="12" r="3" fill="var(--sage)"/>
-          <rect x="14" y="38" width="90" height="10" rx="3" fill="var(--ink)"/>
-          <rect x="14" y="54" width="70" height="10" rx="3" fill="var(--ink)"/>
-          <rect x="14" y="72" width="120" height="5" rx="2" fill="var(--line)"/><rect x="14" y="82" width="110" height="5" rx="2" fill="var(--line)"/>
-          <circle cx="44" cy="128" r="28" fill="var(--leaf)"/><path d="M44 128 L44 100 A28 28 0 0 1 72 128Z" fill="var(--gut)"/><path d="M44 128 L72 128 A28 28 0 0 1 44 156Z" fill="var(--meta)"/>
-          <rect x="84" y="108" width="52" height="7" rx="3" fill="var(--sage)"/><rect x="84" y="122" width="40" height="7" rx="3" fill="var(--sage)"/><rect x="84" y="136" width="46" height="7" rx="3" fill="var(--sage)"/>
-          <rect x="14" y="172" width="58" height="16" rx="8" fill="var(--leaf)"/><rect x="78" y="172" width="58" height="16" rx="8" fill="var(--mint)"/>
-        </g>
-        <!-- hoja A4 -->
-        <g transform="translate(166 24)">
-          <rect width="150" height="212" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
-          <rect x="14" y="16" width="40" height="5" rx="2" fill="var(--leaf)"/>
-          <rect x="14" y="28" width="104" height="10" rx="3" fill="var(--ink)"/>
-          <g transform="translate(14 52)">
-            <rect width="122" height="22" rx="4" fill="var(--mint)"/><circle cx="12" cy="11" r="6" fill="var(--leaf)"/><rect x="24" y="8" width="50" height="6" rx="3" fill="var(--sage)"/><g fill="none" stroke="var(--leaf)" stroke-width="1.5"><circle cx="90" cy="11" r="3.5"/><circle cx="100" cy="11" r="3.5"/><circle cx="110" cy="11" r="3.5"/></g>
-          </g>
-          <g transform="translate(14 80)">
-            <rect width="122" height="22" rx="4" fill="#FBEDEA"/><circle cx="12" cy="11" r="6" fill="var(--heart)"/><rect x="24" y="8" width="44" height="6" rx="3" fill="#EBC3BE"/><g fill="none" stroke="var(--heart)" stroke-width="1.5"><circle cx="100" cy="11" r="3.5"/><circle cx="110" cy="11" r="3.5"/></g>
-          </g>
-          <g transform="translate(14 108)">
-            <rect width="122" height="22" rx="4" fill="#F7EEDC"/><circle cx="12" cy="11" r="6" fill="var(--gut)"/><rect x="24" y="8" width="56" height="6" rx="3" fill="#E7CF9F"/><g fill="none" stroke="var(--gut)" stroke-width="1.5"><circle cx="80" cy="11" r="3.5"/><circle cx="90" cy="11" r="3.5"/><circle cx="100" cy="11" r="3.5"/><circle cx="110" cy="11" r="3.5"/></g>
-          </g>
-          <rect x="14" y="142" width="38" height="52" rx="4" fill="none" stroke="var(--leaf)" stroke-width="2" stroke-dasharray="0" /><rect x="56" y="142" width="38" height="52" rx="4" fill="none" stroke="var(--gut)" stroke-width="2"/><rect x="98" y="142" width="38" height="52" rx="4" fill="none" stroke="var(--heart)" stroke-width="2"/>
-          <rect x="20" y="150" width="26" height="4" rx="2" fill="var(--leaf)"/><rect x="62" y="150" width="26" height="4" rx="2" fill="var(--gut)"/><rect x="104" y="150" width="26" height="4" rx="2" fill="var(--heart)"/>
-        </g>
-        <!-- tríptico -->
-        <g transform="translate(318 56) rotate(5)">
-          <path d="M0 6 L50 0 L50 190 L0 196Z" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
-          <path d="M50 0 L100 6 L100 196 L50 190Z" fill="#FAFCF9" stroke="var(--line)" stroke-width="2"/>
-          <path d="M100 6 L150 0 L150 190 L100 196Z" fill="var(--leaf)"/>
-          <rect x="108" y="30" width="34" height="9" rx="2" fill="#fff"/><rect x="108" y="44" width="26" height="9" rx="2" fill="#fff"/>
-          <circle cx="125" cy="100" r="18" fill="#fff"/><circle cx="125" cy="100" r="12" fill="var(--sage)"/>
-          <rect x="106" y="150" width="38" height="20" rx="3" fill="#fff"/>
-          <g fill="none" stroke="var(--ink)" stroke-width="1.6"><rect x="58" y="30" width="7" height="7" rx="1.5"/><rect x="58" y="46" width="7" height="7" rx="1.5"/><rect x="58" y="62" width="7" height="7" rx="1.5"/></g>
-          <path d="M60 33l2 2 4-5" stroke="var(--leaf)" stroke-width="2" fill="none"/>
-          <rect x="69" y="31" width="24" height="5" rx="2" fill="var(--line)"/><rect x="69" y="47" width="20" height="5" rx="2" fill="var(--line)"/><rect x="69" y="63" width="22" height="5" rx="2" fill="var(--line)"/>
-          <g stroke="var(--line)" stroke-width="1.5"><path d="M8 40h34M8 56h34M8 72h34M8 88h34M8 104h34"/></g>
-          <rect x="8" y="22" width="24" height="7" rx="2" fill="var(--ink)"/>
-        </g>
-      </svg>
-      <div class="flabels">
-        <div><b>Página</b>Para leer en el celular</div>
-        <div><b>Hoja</b>Para imprimir y pegar en el refri</div>
-        <div><b>Tríptico</b>Para explicar en la consulta</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="finder" id="dietas">
-  <div class="in">
-    <div class="top">
-      <div style="display:flex;flex-direction:column;gap:6px"><span class="eb">Catálogo</span><h2>Elija una dieta</h2></div>
-      <label class="search"><svg><use href="#i-search"/></svg><input id="q" type="search" placeholder="Buscar por dieta o problema de salud: presión, colon, riñón…" aria-label="Buscar dieta"></label>
-    </div>
-    <div class="chips" id="chips" role="group" aria-label="Filtrar por tema"></div>
-    <div class="grid" id="grid"></div>
-    <p class="empty" id="empty" hidden>No encontramos dietas con esa búsqueda. Pruebe con otra palabra o elija "Todas".</p>
-  </div>
-</section>
-
-<section class="tools" id="herramientas">
-  <div class="in">
-    <div style="display:flex;flex-direction:column;gap:6px"><span class="eb" style="color:#2F5D8A">Para profesionales</span><h2>Herramientas clínicas</h2></div>
-    <div class="tgrid">
-      <a class="tcard" href="herramientas/calculadora.html">
-        <span class="tic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="3" fill="currentColor"/><rect x="7" y="5" width="10" height="4" rx="1" fill="#fff"/><g fill="#fff"><circle cx="8.5" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15.5" cy="13" r="1.2"/><circle cx="8.5" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15.5" cy="17" r="1.2"/></g></svg></span>
-        <span><b>Calculadora nutricional</b><span>Energía y proteína según la situación clínica, riesgo de realimentación, balance nitrogenado y velocidad de nutrición enteral.</span></span>
-      </a>
-      <a class="tcard" href="herramientas/nutricion-hospitalaria.html">
-        <span class="tic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h10l4 4v14H5z" fill="currentColor"/><path d="M8 11h8M8 14h8M8 17h5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-        <span><b>Torpedo: nutrición en el hospitalizado</b><span>Peso de cálculo, requerimientos por situación, realimentación, UCI, renal, pancreatitis y diabetes, con la guía de cada cifra.</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="how" id="uso">
-  <div class="in">
-    <div style="display:flex;flex-direction:column;gap:6px"><span class="eb">Cómo usarlas</span><h2 id="how-title">Pensadas para conversarse con su equipo de salud</h2></div>
-    <div class="steps" id="steps"></div>
-  </div>
-</section>
-
-<section class="make" id="metodo">
-  <div class="in">
-    <div class="l">
-      <span class="eb">Cómo se hacen</span>
-      <h2>Cada ficha parte de la evidencia</h2>
-      <p>Las recomendaciones se basan en guías clínicas vigentes y en los estudios que las respaldan. Después se traducen a alimentos, porciones y costumbres de Chile.</p>
-    </div>
-    <div class="pillars">
-      <div class="pl"><span class="k">EVIDENCIA</span><b>Guías y ensayos clínicos</b><p>Cada ficha profesional cita sus fuentes y el nivel de evidencia.</p></div>
-      <div class="pl"><span class="k">CHILE</span><b>Adaptada a lo local</b><p>Alimentos de uso habitual, medidas caseras y los sellos de advertencia.</p></div>
-      <div class="pl"><span class="k">REVISIÓN</span><b>Médico y nutricionista</b><p>Las versiones para pacientes se revisan antes de publicarse.</p></div>
-      <div class="pl"><span class="k">VIGENCIA</span><b>Fecha visible</b><p>Cada ficha muestra cuándo se revisó y se actualiza una vez al año.</p></div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="in">
-    <div class="brand"><span class="mark"><svg><use href="#i-leaf"/></svg></span><span class="nm"><b>Guías de Alimentación</b><span>Prototipo · noviembre 2026</span></span></div>
-    <p style="max-width:62ch">Material educativo general. No reemplaza la indicación de su médico ni la evaluación de un nutricionista.</p>
-  </div>
-</footer>
-
-<nav class="tabbar" aria-label="Navegación">
-  <a href="#dietas" class="cur"><svg><use href="#i-grid"/></svg>Dietas</a>
-  <a href="#herramientas"><svg><use href="#i-steth"/></svg>Herramientas</a>
-  <a href="#uso"><svg><use href="#i-book"/></svg>Cómo usar</a>
-  <a href="#metodo"><svg><use href="#i-info"/></svg>Método</a>
-</nav>
-
-<script>
-(function(){
-  
-  var CATS=[
-    {k:"all",n:"Todas"},
-    {k:"cv",n:"Corazón y presión",c:"--heart"},
-    {k:"gi",n:"Digestivo",c:"--gut"},
-    {k:"ren",n:"Riñón",c:"--kidney"},
-    {k:"met",n:"Metabolismo",c:"--meta"},
-    {k:"oth",n:"Otras",c:"--other"}
-  ];
-  var D=[
-    {n:"DASH",cat:"cv",ic:"i-heart",d:"Para bajar la presión arterial. Más verduras, frutas y lácteos descremados, menos sal.",kw:"presion hipertension sal sodio corazon",on:1,slug:"dash"},
-    {n:"Baja en FODMAP",cat:"gi",ic:"i-gut",d:"Para el colon irritable. Prueba en 3 etapas para descubrir qué alimentos producen síntomas.",kw:"colon irritable intestino gases hinchazon distension sii",on:1,slug:"fodmap"},
-    {n:"Mediterránea",cat:"cv",ic:"i-olive",d:"Patrón con aceite de oliva, legumbres, pescado y frutos secos para proteger el corazón.",kw:"corazon colesterol cardiovascular oliva"},
-    {n:"Hiposódica",cat:"cv",ic:"i-salt",d:"Menos sal para hipertensión, insuficiencia cardiaca y retención de líquido.",kw:"sal sodio presion insuficiencia cardiaca edema"},
-    {n:"Sin gluten (celiaquía)",cat:"gi",ic:"i-wheat",d:"Dieta estricta y de por vida para la enfermedad celíaca. Cómo evitar la contaminación cruzada.",kw:"celiaco celiaquia gluten trigo"},
-    {n:"Sin lactosa",cat:"gi",ic:"i-milk",d:"Para la intolerancia a la lactosa, sin dejar de lado el calcio.",kw:"lactosa leche intolerancia lacteos"},
-    {n:"Reflujo",cat:"gi",ic:"i-fire",d:"Hábitos y alimentos que ayudan a controlar la acidez y el reflujo.",kw:"reflujo acidez erge drge ardor"},
-    {n:"Baja en residuos",cat:"gi",ic:"i-fiber",d:"Antes de una colonoscopía o en algunas crisis intestinales.",kw:"colonoscopia residuos fibra"},
-    {n:"Enfermedad renal",cat:"ren",ic:"i-kidney",d:"Ajuste de proteínas, potasio, fósforo y sal según la etapa de la enfermedad.",kw:"riñon renal erc potasio fosforo dialisis"},
-    {n:"Diabetes",cat:"met",ic:"i-drop",d:"Cómo combinar los alimentos para un mejor control de la glicemia.",kw:"diabetes azucar glicemia carbohidratos insulina"},
-    {n:"Cirrosis",cat:"met",ic:"i-liver",d:"Proteína suficiente, colación nocturna y menos sal en la enfermedad hepática.",kw:"higado cirrosis hepatico"},
-    {n:"Gota",cat:"met",ic:"i-joint",d:"Qué alimentos y bebidas elevan el ácido úrico y cuáles conviene preferir.",kw:"gota acido urico articulaciones"},
-    {n:"Anticoagulantes y vitamina K",cat:"oth",ic:"i-pill",d:"Para quienes usan acenocumarol o warfarina: constancia más que prohibición.",kw:"tac acenocumarol warfarina vitamina k neosintron"},
-    {n:"Disfagia",cat:"oth",ic:"i-spoon",d:"Texturas seguras para personas con dificultad para tragar (IDDSI).",kw:"tragar disfagia texturas espesar iddsi"}
-  ];
-  var aud="pac", cat="all", q="";
-  try{aud=localStorage.getItem("aud")||"pac"}catch(e){}
-  var chips=document.getElementById("chips"), grid=document.getElementById("grid");
-  chips.innerHTML=CATS.map(function(c){return '<button type="button" class="chip" id="cat-'+c.k+'" data-k="'+c.k+'" aria-pressed="'+(c.k===cat)+'"'+(c.c?' style="--c:var('+c.c+')"':'')+'>'+(c.c?'<i></i>':'')+c.n+'</button>'}).join("");
-  function norm(s){return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")}
-  function render(){
-    var list=D.filter(function(x){return (cat==="all"||x.cat===cat)&&(!q||norm(x.n+" "+x.d+" "+x.kw).indexOf(q)>-1)});
-    list.sort(function(a,b){return (b.on||0)-(a.on||0)});
-    grid.innerHTML=list.map(function(x){
-      var c=CATS.filter(function(k){return k.k===x.cat})[0];
-      var acts;
-      if(x.on){
-        acts = aud==="pac"
-          ? '<a class="p" href="dietas/'+x.slug+'.html#paciente">Ver ficha</a><a class="s" href="dietas/'+x.slug+'.html?imprimir#paciente">Imprimir</a>'
-          : '<a class="p" href="dietas/'+x.slug+'.html#medico">Pauta profesional</a><a class="s" href="tripticos/'+x.slug+'.pdf" target="_blank" rel="noopener">Tríptico color</a><a class="s" href="tripticos/'+x.slug+'-bn.pdf" target="_blank" rel="noopener">Tríptico B/N</a><a class="s" href="dietas/'+x.slug+'.html#paciente">Ficha paciente</a>';
-      } else acts='<span class="na">En preparación</span>';
-      return '<article class="card '+(x.on?'on':'soon')+'" style="--c:var('+c.c+')">'+
-        '<div class="hd"><span class="ic"><svg><use href="#'+x.ic+'"/></svg></span><div><h3>'+x.n+'</h3><span class="cat">'+c.n+'</span>'+(x.on?'<span class="st">Disponible</span>':'')+'</div></div>'+
-        '<p class="d">'+x.d+'</p><div class="acts">'+acts+'</div></article>';
-    }).join("");
-    document.getElementById("empty").hidden=list.length>0;
-  }
-  var STEPS={
-    pac:{t:"Pensadas para conversarse con su equipo de salud",s:[
-      ["Hable con su médico","Antes de cambiar su alimentación, confirme que la dieta es adecuada para usted."],
-      ["Lea la ficha con calma","Está escrita en lenguaje simple, con ejemplos de comidas y porciones caseras."],
-      ["Imprímala y úsela","Marque sus porciones del día y lleve la hoja a su próximo control."]]},
-    pro:{t:"Tres formatos para cada momento de la atención",s:[
-      ["Revise la pauta médica","Indicaciones, precauciones, magnitud del efecto y referencias en una página."],
-      ["Explique con el tríptico","Marque las metas acordadas en la consulta y anote el próximo control."],
-      ["Comparta la ficha","El paciente revisa en su casa la versión web o la hoja imprimible."]]}
-  };
-  function setAud(a){
-    aud=a; try{localStorage.setItem("aud",a)}catch(e){}
-    document.querySelectorAll(".seg button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.aud===a)});
-    document.getElementById("aud-hint").textContent = a==="pac" ? "Le mostramos primero la ficha para pacientes, escrita en lenguaje simple." : "Le mostramos primero la pauta médica, con evidencia y referencias.";
-    document.getElementById("how-title").textContent=STEPS[a].t;
-    document.getElementById("steps").innerHTML=STEPS[a].s.map(function(s){return '<div class="step"><h3>'+s[0]+'</h3><p>'+s[1]+'</p></div>'}).join("");
-    render();
-  }
-  document.querySelector(".seg").addEventListener("click",function(e){var b=e.target.closest("button");if(b)setAud(b.dataset.aud)});
-  chips.addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;cat=b.dataset.k;chips.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed",c===b)});render()});
-  document.getElementById("q").addEventListener("input",function(e){q=norm(e.target.value.trim());render()});
-  var tabs=document.querySelectorAll(".tabbar a");
-  tabs.forEach(function(t){t.addEventListener("click",function(){tabs.forEach(function(x){x.classList.toggle("cur",x===t)})})});
-  setAud(aud);
-})();
-</script>
+<nav class="a-nav"></nav>
+<script src="assets/app.js"></script>
+<script src="assets/inicio.js"></script>
 </body>
 </html>

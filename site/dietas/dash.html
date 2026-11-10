@@ -10,9 +10,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=IBM+Plex+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="../assets/ficha.css">
+<link rel="stylesheet" href="../assets/app.css">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+<meta name="theme-color" content="#2A7A4B">
 
 </head>
-<body>
+<body class="a-app" data-root="../" data-nav="dietas" data-qr>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="i-veg" viewBox="0 0 32 32"><path d="M16 29c-1-6-1-11 0-16 1 5 1 10 0 16z" fill="currentColor"/><path d="M16 14C10 13 6 8 7 3c5 0 9 4 9 11z" fill="currentColor" opacity=".75"/><path d="M16 14c6-1 10-6 9-11-5 0-9 4-9 11z" fill="currentColor"/></symbol>
@@ -26,20 +30,19 @@
     <symbol id="i-leaf" viewBox="0 0 32 32"><path d="M5 27C5 13 13 5 27 5c0 14-8 22-22 22z" fill="currentColor"/><path d="M5 27L20 12" stroke="var(--bg)" stroke-width="2" stroke-linecap="round"/></symbol>
   <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 8V3h10v5" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/><rect x="3" y="8" width="18" height="9" rx="2" fill="currentColor"/><rect x="7" y="14" width="10" height="7" rx="1" fill="#fff" stroke="currentColor" stroke-width="2"/></symbol></defs>
 </svg>
-<div class="proto"><b>Prototipo en revisión.</b> Contenido aún no validado por el equipo clínico; no usar para indicar tratamiento.</div>
-<header class="sitebar">
-  <div class="in">
-    <a class="home" href="../index.html"><span class="mark"><svg><use href="#i-leaf"/></svg></span>Guías de Alimentación</a>
-    <nav class="tabs" aria-label="Versión de la ficha">
-      <a href="#paciente" data-view="paciente">Paciente</a>
-      <a href="#medico" data-view="medico">Profesional</a>
-    </nav>
-    <button class="printbtn" id="printbtn" type="button"><svg aria-hidden="true"><use href="#i-print"/></svg><span>Imprimir</span></button>
-  </div>
-</header>
+<header class="a-top"><a class="a-back" href="index.html" aria-label="Volver a Dietas"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><span class="a-brand">Dietas</span><span class="a-proto" title="Contenido en revisión, aún no validado por el equipo clínico">Prototipo</span><a class="a-chip" data-perfil href="../index.html?perfil">Perfil</a></header>
 <div class="page">
 <div class="wrap">
-  <a class="crumb" href="../index.html#dietas">← Todas las dietas</a>
+  <div class="a-banner" id="qr-nuevo" hidden><span style="flex:1"><b>¿Primera vez en Dietario?</b> Guarda esta dieta y conoce el resto de la app.</span><a class="a-chip" href="../index.html?intro" style="background:var(--a-green);color:#fff">Conocer</a><button class="a-x" type="button" aria-label="Cerrar aviso">✕</button></div>
+  <div class="a-fbar a-noprint" style="display:flex;flex-direction:column;gap:10px">
+   <div class="a-seg" data-pro hidden role="group" aria-label="Versión de la ficha"><a href="#paciente" data-view="paciente">Paciente</a><a href="#medico" data-view="medico">Profesional</a></div>
+   <div style="display:flex;flex-wrap:wrap;gap:8px">
+    <button class="a-btn pill line" type="button" data-mis="dash" data-pac aria-pressed="false">+ Agregar a Mis dietas</button>
+    <button class="a-btn pill line" type="button" id="printbtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="7" y="14" width="10" height="7"/></svg><span>Imprimir hoja</span></button>
+    <a class="a-btn pill line" href="../tripticos/dash.pdf" data-pro hidden>Tríptico color</a>
+    <a class="a-btn pill line" href="../tripticos/dash-bn.pdf" data-pro hidden>Tríptico B/N</a>
+   </div>
+  </div>
 <!-- ===================== VISTA PACIENTE ===================== -->
   <main data-v="paciente" class="wrap" style="padding:0">
     <div class="hero">
@@ -67,6 +70,8 @@
       </svg>
     </div>
 
+    <div data-secs>
+    <div data-sec="¿Cuánto ayuda?">
     <section class="panel big">
       <div class="num mono" style="font-family:var(--f-display)">−11<small>mmHg</small></div>
       <div>
@@ -75,6 +80,8 @@
       </div>
     </section>
 
+    </div>
+    <div data-sec="Porciones">
     <section>
       <div><span class="eyebrow">Tu día en porciones</span><h2>¿Cuánto comer de cada grupo?</h2></div>
       <p class="muted">Referencia para un adulto que necesita unas 2.000 calorías al día. Marca un círculo por cada porción que comas, o imprime la hoja y márcalo con lápiz.</p>
@@ -82,6 +89,8 @@
       <button class="reset" id="reset" type="button">Empezar un día nuevo</button>
     </section>
 
+    </div>
+    <div data-sec="La sal">
     <section class="salt">
       <svg viewBox="0 0 100 120" aria-hidden="true">
         <path d="M30 40c0-14 8-26 20-26s20 12 20 26v62c0 6-4 10-10 10H40c-6 0-10-4-10-10z" fill="var(--surface)" stroke="var(--beet)" stroke-width="4"/>
@@ -99,6 +108,8 @@
       </div>
     </section>
 
+    </div>
+    <div data-sec="Qué elegir">
     <section>
       <div><span class="eyebrow">Semáforo</span><h2>¿Qué elegir?</h2></div>
       <div class="lights">
@@ -111,6 +122,8 @@
       </div>
     </section>
 
+    </div>
+    <div data-sec="Un día de ejemplo">
     <section class="pb">
       <div><span class="eyebrow">Ejemplo</span><h2>Un día DASH a la chilena</h2></div>
       <div class="day">
@@ -123,6 +136,8 @@
       </div>
     </section>
 
+    </div>
+    <div data-sec="Trucos">
     <section class="panel">
       <h2>Trucos que funcionan</h2>
       <ul class="tips">
@@ -137,6 +152,8 @@
       </ul>
     </section>
 
+    </div>
+    <div data-sec="Antes de empezar">
     <section class="warn">
       <h2>Habla con tu médico antes de empezar si…</h2>
       <ul>
@@ -146,6 +163,8 @@
       </ul>
     </section>
 
+    </div>
+    </div>
     <footer>
       <p>Material educativo general. No reemplaza la indicación de tu médico ni la evaluación de un nutricionista.</p>
       <p>Basado en los estudios DASH (1997) y DASH-Sodio (2001), y en la guía ESC 2024 de hipertensión. Revisado: noviembre 2026.</p>
@@ -161,6 +180,8 @@
       <div class="badge-row"><span class="badge">Indicación principal: HTA y PA normal-alta</span><span class="badge b">Efecto aditivo con restricción de sodio</span></div>
     </div>
 
+    <div data-secs>
+    <div data-sec="Resumen">
     <section class="kv">
       <div class="panel"><h3>Indicaciones</h3><ul>
         <li>HTA en cualquier etapa, con o sin fármacos</li><li>PA normal-alta (prevención)</li><li>Riesgo cardiovascular elevado, dislipidemia</li><li>Útil como base en DM2, obesidad y litiasis cálcica</li></ul></div>
@@ -169,6 +190,8 @@
       <div class="panel"><h3>Mecanismo propuesto</h3><p>Mayor ingesta de K, Mg, Ca y fibra; menor sodio y grasa saturada. Natriuresis, mejoría de función endotelial y menor rigidez arterial.</p></div>
     </section>
 
+    </div>
+    <div data-sec="Magnitud del efecto">
     <section>
       <div><span class="eyebrow">Magnitud del efecto</span><h2>Reducción de PA sistólica vs dieta control</h2></div>
       <div class="panel">
@@ -183,6 +206,8 @@
       </div>
     </section>
 
+    </div>
+    <div data-sec="Evidencia">
     <section>
       <h2>Evidencia</h2>
       <div class="tbl"><table>
@@ -197,6 +222,8 @@
       </table></div>
     </section>
 
+    </div>
+    <div data-sec="Prescribir">
     <section class="pb">
       <h2>Prescribirla en 2 minutos</h2>
       <div class="panel">
@@ -217,6 +244,8 @@
         <li>ERC estadio 3b–5 o hiperkalemia</li><li>DM con insulina o hipoglicemias</li><li>Obesidad con meta de baja de peso</li><li>Desnutrición o adulto mayor frágil</li><li>Sin adherencia tras 2–3 controles</li></ul></div>
     </section>
 
+    </div>
+    <div data-sec="Referencias">
     <section>
       <h2>Referencias</h2>
       <ol class="refs">
@@ -230,6 +259,8 @@
       </ol>
     </section>
 
+    </div>
+    </div>
     <footer>
       <p>Pauta general para orientar la indicación. No reemplaza la evaluación nutricional individual.</p>
       <p>Revisión: noviembre 2026 · Próxima revisión sugerida: noviembre 2027.</p>
@@ -239,6 +270,8 @@
   
 </div>
 </div>
+<nav class="a-nav"></nav>
+<script src="../assets/app.js"></script>
 <script>
 (function(){
   var GROUPS=[
@@ -277,11 +310,12 @@
   document.getElementById("reset").addEventListener("click",function(){state={};save();render()});
   render();
 
-  var views=document.querySelectorAll("main[data-v]"), links=document.querySelectorAll(".sitebar .tabs a");
+  var views=document.querySelectorAll("main[data-v]"), links=document.querySelectorAll("[data-view]");
   function route(){
-    var v=(location.hash||"#paciente").slice(1); if(v!=="medico") v="paciente";
+    var v=(location.hash||"#paciente").slice(1); if(v!=="medico"||!Dietario.isPro()) v="paciente";
     views.forEach(function(m){m.hidden=m.dataset.v!==v});
     links.forEach(function(a){if(a.dataset.view===v)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+    document.querySelectorAll('main[data-v="'+v+'"] [data-secs]').forEach(function(b){Dietario.secciones(b)});
   }
   window.addEventListener("hashchange",route); route();
 
@@ -292,6 +326,8 @@
   if(/[?&]imprimir/.test(location.search)&&!framed){
     (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){setTimeout(function(){window.print()},300)});
   }
+  var qb=document.getElementById("qr-nuevo");
+  if(Dietario.get("qrNuevo",false)&&!Dietario.get("intro.pac",false)&&!Dietario.isPro()){qb.hidden=false;qb.querySelector(".a-x").addEventListener("click",function(){Dietario.set("intro.pac",true);qb.hidden=true});}
 })();
 </script>
 </body>

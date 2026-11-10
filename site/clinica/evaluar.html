@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Evaluar un paciente · Dietario</title>
+<meta name="description" content="Evaluación nutricional transitoria del paciente hospitalizado.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A7A4B">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
+<link rel="stylesheet" href="../assets/app.css">
+<link rel="stylesheet" href="../assets/ficha.css"><link rel="stylesheet" href="../assets/herramientas.css"><link rel="stylesheet" href="../assets/app.css">
+</head>
+<body class="a-app" data-root="../" data-nav="clinica">
+<header class="a-top"><a class="a-back" href="../clinica/index.html" aria-label="Volver"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><span class="a-brand">Evaluar paciente</span><span class="a-proto" title="Contenido en revisión, aún no validado por el equipo clínico">Prototipo</span><a class="a-chip" data-perfil href="../index.html?perfil">Perfil</a></header>
+<main class="a-body a-blue" style="max-width:1000px">
+ <div class="a-head" style="--c:var(--a-blue)"><span class=a-lbl>Profesional</span><h1 class="a-h a-h1">Evaluar un paciente</h1><p class=a-p style=color:var(--a-muted)>Ingresa los datos una vez: requerimientos según su situación y alertas por riesgo. No se guarda nada.</p></div>
+ <form id="f" class="pt" autocomplete="off" novalidate>
+  <div class="pt-head"><b>Paciente</b><span class="example" id="exnote">Datos de ejemplo</span></div>
+  <div class="pt-grid">
+   <div class="fld"><span class="lbl">Sexo</span><div class="seg2" role="radiogroup" aria-label="Sexo">
+    <label><input type="radio" name="sexo" id="sexo-m" value="M" checked>H</label><label><input type="radio" name="sexo" id="sexo-f" value="F">M</label></div></div>
+   <div class="fld"><label for="edad">Edad</label><div class="unit"><input id="edad" type="number" inputmode="numeric" min="18" max="110" value="25"><span>años</span></div></div>
+   <div class="fld"><label for="talla">Talla</label><div class="unit"><input id="talla" type="number" inputmode="decimal" min="120" max="230" step="0.5" value="175"><span>cm</span></div></div>
+   <div class="fld"><label for="peso">Peso actual</label><div class="unit"><input id="peso" type="number" inputmode="decimal" min="25" max="350" step="0.1" value="76"><span>kg</span></div></div>
+   <div class="fld"><label for="habitual">Peso habitual</label><div class="unit"><input id="habitual" type="number" inputmode="decimal" min="25" max="350" step="0.1" placeholder="opc."><span>kg</span></div></div>
+  </div>
+  <div class="kpis" id="kpis"></div>
+ </form>
+ <span class="a-lbl">Contexto clínico</span>
+ <div class="a-pills" id="ctx"><button type="button" class="a-pill" data-ctx="riesgo" aria-pressed="false">Riesgo nutricional</button><button type="button" class="a-pill" data-ctx="ayuno" aria-pressed="false">Ingesta &lt;50 % por &gt;5 días</button><button type="button" class="a-pill" data-ctx="uci" aria-pressed="false">UCI</button><button type="button" class="a-pill" data-ctx="erc" aria-pressed="false">Enfermedad renal</button><button type="button" class="a-pill" data-ctx="cirr" aria-pressed="false">Cirrosis</button></div>
+ <div id="ctx-extra" style="display:flex;flex-direction:column;gap:10px">
+  <div class="fld" id="ev-renal-box" hidden><label for="ev-renal">Escenario renal</label><select id="ev-renal">
+   <option value="erc_estable">ERC sin enfermedad aguda</option><option value="erc_hd">ERC en hemodiálisis crónica</option>
+   <option value="ira_no_critico">IRA o IRA sobre ERC, no crítico</option><option value="agudo_sin_trr" selected>Agudo o crítico, sin terapia de reemplazo</option>
+   <option value="critico_hdi">Crítico con diálisis intermitente</option><option value="critico_trrc">Crítico con terapia continua</option></select></div>
+  <label class="chk" id="ev-ascitis-box" hidden><input type="checkbox" id="ev-ascitis">Ascitis</label>
+ </div>
+ <span class="a-lbl">Alertas</span>
+ <div id="ev-alertas" style="display:flex;flex-direction:column;gap:10px"></div>
+ <span class="a-lbl">Requerimientos</span>
+ <div id="ev-res" class="a-grid2"></div>
+ <p class="a-p a-foot" id="ev-src"></p>
+ <a class="a-btn line" href="calculadoras.html#requerimientos">Ajustar en la calculadora completa</a>
+</main>
+<nav class="a-nav"></nav>
+<script src="../assets/app.js"></script>
+<script src="../assets/nutricalc.js"></script><script src="../assets/evaluar.js"></script>
+</body>
+</html>

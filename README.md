@@ -1,48 +1,52 @@
-# Guías de Alimentación (prototipo)
+# Dietario (prototipo)
 
-Sitio estático con pautas de alimentación con evidencia: una ficha web por dieta (vista paciente y vista profesional, imprimible en A4) y un tríptico PDF para entregar en la consulta.
+App web (instalable, funciona sin conexión) con pautas de alimentación con evidencia, en dos perfiles:
+
+- **Paciente:** fichas de dietas en lenguaje simple, Mi salud por condición (presión alta, diabetes), Mis dietas y registro de presión y glicemia para llevar al control (impreso, archivo o QR).
+- **Profesional** (con código): vista profesional de cada ficha, trípticos, evaluar un paciente, calculadoras (requerimientos, gasto energético, realimentación, enteral, insulina, sodio corregido y osmolaridad) y temas clínicos (diabetes, realimentación, renal, UCI, pancreatitis).
 
 > **Prototipo en revisión.** El contenido aún no está validado por el equipo clínico.
 
 ## Estructura
 
 ```
-site/                  ← lo que se publica
-  index.html           ← portal: buscador, filtros y catálogo
-  dietas/<dieta>.html  ← ficha: #paciente y #medico; ?imprimir abre el diálogo de impresión
-  tripticos/<dieta>.pdf      ← color
-  tripticos/<dieta>-bn.pdf   ← blanco y negro
-  assets/              ← ficha.css, portal.css, favicon
-src/tripticos/         ← fuente HTML de cada tríptico (A4 apaisado, doble faz)
-tools/                 ← scripts que generan site/ desde los borradores
+site/                         ← lo que se publica
+  index.html                  ← elegir perfil → introducción (solo la primera vez) → inicio
+  salud/  registro/  dietas/  clinica/  nosotros.html  codigo.html
+  dietas/<dieta>.html         ← ficha: #paciente y #medico (solo perfil profesional); ?imprimir abre la impresión
+  tripticos/<dieta>(-bn).pdf  ← color y blanco y negro
+  assets/app.css, app.js      ← estructura común: navegación, perfiles, selector de secciones, Mis dietas
+  assets/nutricalc.js         ← cálculos (funciones puras, con pruebas)
+  assets/registro.js          ← registro del paciente (solo en el dispositivo)
+  manifest.webmanifest, sw.js ← app instalable y sin conexión
+middleware.ts, api/acceso.ts  ← acceso profesional (Vercel)
+src/tripticos/                ← fuente HTML de cada tríptico
+tools/build_app.py            ← genera las páginas de la app (el contenido se edita ahí y en tools/contenido/)
+tools/adaptar_fichas.py       ← integra una ficha nueva a la app (barra, secciones, Mis dietas)
 ```
 
-## Herramientas profesionales
+## Reglas de contenido
 
-- `site/herramientas/calculadora.html` usa `site/assets/nutricalc.js` (funciones puras). Antes de publicar un cambio: `node tools/test_nutricalc.js` (todas las pruebas deben pasar).
-- `site/herramientas/nutricion-hospitalaria.html` se genera con `python3 tools/build_torpedo.py`; el contenido se edita en ese script.
-- Regla: solo cifras de guías vigentes, con la guía al lado. Ante discordancia, ganan las guías.
+Solo cifras de guías vigentes, con la guía al lado. Ante discordancia, gana la más reciente. Términos: "insulina cristalina".
 
-## Ver en local
+## Privacidad
+
+Sin cuentas ni base de datos. Perfil, Mis dietas y registro de presión y glicemia quedan en el dispositivo (localStorage). El QR del registro lleva los datos dentro de la URL (después de `#`, que no llega al servidor). Las calculadoras no guardan nada.
+
+## Acceso profesional
+
+`/clinica/*` solo se sirve con la cookie que entrega `/api/acceso` al ingresar el código. El código es la variable de entorno **`PRO_CODE`** del proyecto en Vercel (Production y Preview). Si no está definida, nadie entra. Cambiarla deja fuera todas las sesiones anteriores.
+
+## Antes de publicar
 
 ```
-python3 -m http.server 8000 -d site
+node tools/test_nutricalc.js      # todas las pruebas deben pasar
+python3 tools/build_app.py        # regenera las páginas
+python3 -m http.server 8000 -d site   # ver en local (sin el acceso profesional, que es de Vercel)
 ```
-
-## Publicar en Vercel
-
-Proyecto estático, sin build: `vercel deploy site --prod` (o directorio de salida `site` en el panel).
 
 ## Agregar una dieta
 
-1. Ficha en `site/dietas/<dieta>.html` siguiendo la estructura de `dash.html`.
-2. Tríptico en `src/tripticos/<dieta>.html` → `python3 tools/build_tripticos.py <dieta>` genera `<dieta>.pdf` (color) y `<dieta>-bn.pdf` (blanco y negro, reglas en `src/tripticos/bn.css`).
-3. En `site/index.html`, en la lista `D`, marcar la dieta con `on:1, slug:"<dieta>"`.
-
-## Checklist de revisión por ficha
-
-- [ ] Cifras verificadas contra la fuente primaria (abstract o texto completo)
-- [ ] Guías vigentes a la fecha de revisión
-- [ ] Vista paciente revisada por nutricionista
-- [ ] Vista profesional revisada por especialista del área
-- [ ] Fecha de revisión actualizada
+1. Ficha en `site/dietas/<dieta>.html` siguiendo la estructura de `dash.html`; agregarla a `GRUPOS` en `tools/adaptar_fichas.py` y correrlo.
+2. Agregarla a `CATS` en `tools/build_app.py`.
+3. Tríptico en `src/tripticos/<dieta>.html` → `python3 tools/build_tripticos.py <dieta>`.

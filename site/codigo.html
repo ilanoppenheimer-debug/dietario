@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Acceso profesional · Dietario</title>
+<meta name="description" content="Acceso profesional">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A7A4B">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
+<link rel="stylesheet" href="assets/app.css">
+
+</head>
+<body class="a-app a-bare" data-root="" data-nav="">
+
+<div class="a-solo">
+ <div class="a-panel">
+  <a class="a-btn ghost" href="index.html?perfil" style="align-self:flex-start">← Volver</a>
+  <span class="a-dot" style="width:56px;height:56px;border-radius:16px;--soft:var(--a-blue-soft)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2F5D8A" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+  <div class="a-head"><h1 class="a-h" style="font-size:28px">Acceso profesional</h1><p class="a-p" style="color:var(--a-ink2)">Ingresa el código de tu servicio o institución.</p></div>
+  <form method="post" action="/api/acceso" id="f-codigo" style="display:flex;flex-direction:column;gap:16px">
+   <label class="a-field"><span>Código</span><input class="a-code" name="codigo" autocomplete="off" autocapitalize="characters" required aria-describedby="cod-err"></label>
+   <input type="hidden" name="next" id="cod-next" value="/clinica/index.html">
+   <p class="a-p" id="cod-err" hidden style="color:#B03A2E;font-weight:700;font-size:14px;margin-top:-6px">Código incorrecto.</p>
+   <button class="a-btn blue" type="submit">Entrar</button>
+  </form>
+  <p class="a-p a-foot" style="margin-top:auto;font-size:13.5px">¿No tienes código? Pídelo a [CONTACTO DEL PROYECTO]. Queda recordado en este dispositivo.</p>
+ </div>
+</div>
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  if (q.has("error")) document.getElementById("cod-err").hidden = false;
+  var n = q.get("next"); if (n && n.charAt(0) === "/" && n.charAt(1) !== "/") document.getElementById("cod-next").value = n;
+})();
+</script>
+
+<script src="assets/app.js"></script>
+
+</body>
+</html>

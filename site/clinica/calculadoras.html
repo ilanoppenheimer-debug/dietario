@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calculadoras · Dietario</title>
+<meta name="description" content="Calculadoras de nutrición e insulina para adultos hospitalizados.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A7A4B">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap">
+<link rel="stylesheet" href="../assets/app.css">
+<link rel="stylesheet" href="../assets/ficha.css"><link rel="stylesheet" href="../assets/herramientas.css"><link rel="stylesheet" href="../assets/app.css">
+</head>
+<body class="a-app" data-root="../" data-nav="clinica">
+<header class="a-top"><a class="a-back" href="../clinica/index.html" aria-label="Volver"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><span class="a-brand">Calculadoras</span><span class="a-proto" title="Contenido en revisión, aún no validado por el equipo clínico">Prototipo</span><a class="a-chip" data-perfil href="../index.html?perfil">Perfil</a></header>
+<main class="a-body" style="max-width:1000px">
+ <div class="a-head" style="--c:var(--a-blue)"><span class=a-lbl>Herramienta profesional · adultos hospitalizados</span><h1 class="a-h a-h1">Calculadoras</h1></div>
+ <div id="pac-box"><form id="f" class="pt" autocomplete="off" novalidate>
+  <div class="pt-head"><b>Paciente</b><span class="example" id="exnote">Datos de ejemplo</span></div>
+  <div class="pt-grid">
+   <div class="fld"><span class="lbl">Sexo</span><div class="seg2" role="radiogroup" aria-label="Sexo">
+    <label><input type="radio" name="sexo" id="sexo-m" value="M" checked>H</label><label><input type="radio" name="sexo" id="sexo-f" value="F">M</label></div></div>
+   <div class="fld"><label for="edad">Edad</label><div class="unit"><input id="edad" type="number" inputmode="numeric" min="18" max="110" value="25"><span>años</span></div></div>
+   <div class="fld"><label for="talla">Talla</label><div class="unit"><input id="talla" type="number" inputmode="decimal" min="120" max="230" step="0.5" value="175"><span>cm</span></div></div>
+   <div class="fld"><label for="peso">Peso actual</label><div class="unit"><input id="peso" type="number" inputmode="decimal" min="25" max="350" step="0.1" value="76"><span>kg</span></div></div>
+   <div class="fld"><label for="habitual">Peso habitual</label><div class="unit"><input id="habitual" type="number" inputmode="decimal" min="25" max="350" step="0.1" placeholder="opc."><span>kg</span></div></div>
+  </div>
+  <div class="kpis" id="kpis"></div>
+ </form></div>
+ <div data-secs data-hash id="calcs">
+ <section data-sec="Requerimientos" id="requerimientos">
+  <div class="calc">
+   <div class="fset">
+    <div class="fld"><label for="situacion">Situación clínica</label><select id="situacion" form="f"><option value="sala_riesgo">Sala, con riesgo nutricional</option><option value="sala_sin_riesgo">Sala, sin riesgo nutricional</option><option value="polimorbido">Paciente médico polimórbido ≥65 años</option><option value="geriatria">Adulto mayor (guía geriátrica)</option><option value="uci" selected>UCI / paciente crítico</option><option value="renal">Enfermedad renal (ERC o IRA)</option><option value="cirrosis">Cirrosis</option></select></div>
+    <div class="fld" id="box-renal" hidden><label for="renal">Escenario renal</label><select id="renal" form="f">
+     <option value="erc_estable">ERC sin enfermedad aguda</option><option value="erc_hd">ERC en hemodiálisis crónica</option>
+     <option value="ira_no_critico">IRA o IRA sobre ERC, no crítico</option><option value="agudo_sin_trr" selected>Agudo o crítico, sin terapia de reemplazo</option>
+     <option value="critico_hdi">Crítico con diálisis intermitente</option><option value="critico_trrc">Crítico con terapia continua</option></select></div>
+    <div id="box-cirrosis" hidden class="stack"><label class="chk"><input type="checkbox" id="ascitis" form="f">Ascitis</label><label class="chk"><input type="checkbox" id="desnutrido" form="f">Desnutrido o con pérdida muscular</label></div>
+    <label class="chk" id="box-tfg" hidden><input type="checkbox" id="tfg" form="f">TFGe &lt;30 sin terapia de reemplazo</label>
+    <div class="fld" id="box-geria" hidden><label for="enfermedad">Enfermedad</label><select id="enfermedad" form="f">
+     <option value="ninguna">Sin enfermedad relevante</option><option value="aguda" selected>Aguda o crónica</option><option value="severa">Severa, lesión o desnutrición</option></select></div>
+   </div>
+   <div class="results" aria-live="polite" id="results"></div>
+  </div>
+ </section>
+ <section data-sec="Gasto energético (Harris-Benedict)" id="gasto">
+  <div class="blk">
+   <div class="mini" id="geb-out"></div>
+   <div class="frow"><div class="fld"><label for="f-act">Factor de actividad</label><input id="f-act" type="number" inputmode="decimal" step="0.05" min="1" max="2" value="1.2"></div>
+    <div class="fld"><label for="f-est">Factor de estrés</label><input id="f-est" type="number" inputmode="decimal" step="0.05" min="1" max="2" value="1.0"></div></div>
+   <div class="mini" id="get-out"></div>
+   <p class="src">Mifflin-St Jeor (1990) y Harris-Benedict revisada (Roza y Shizgal, 1984). GET = GEB × actividad × estrés; los factores los ingresas tú: las guías no fijan sus valores.</p>
+  </div>
+  <div class="a-card note">Referencia de uso habitual. Las guías prefieren calorimetría o kcal/kg: en UCI estas ecuaciones pueden errar hasta 60 % (ESPEN UCI 2023) y Harris-Benedict sobrestimó 29 % en adultos mayores polimórbidos (ESPEN 2024). "Evaluar un paciente" usa las kcal/kg de las guías.</div>
+ </section>
+ <section data-sec="Síndrome de realimentación" id="realimentacion">
+  <div class="rsteps">
+   <div class="blk"><div class="bh"><span class="num">1</span><h2>¿Está en riesgo?</h2>
+     <details class="pop"><summary aria-label="Cómo se clasifica">?</summary><div>Criterios ASPEN 2020. <b>Significativo:</b> 1 criterio de la columna significativa. <b>Moderado:</b> 2 criterios de la columna moderada. El IMC se toma de los datos del paciente.</div></details></div>
+    <div class="crit" id="crit"></div><div id="refeed-out"></div></div>
+   <div class="blk"><div class="bh"><span class="num">2</span><h2>Plan de inicio</h2>
+     <details class="pop"><summary aria-label="Regla">?</summary><div>ASPEN 2020: 10–20 kcal/kg o 100–150 g de dextrosa las primeras 24 h, contando sueros y diluciones; subir 33 % de la meta cada 1–2 días. ESPEN hospitalaria 2021 propone 5–15 kcal/kg según el riesgo.</div></details></div>
+    <div class="frow3">
+     <div class="fld"><label for="rf-ini">Inicio</label><select id="rf-ini"><option value="10" selected>10 kcal/kg</option><option value="15">15 kcal/kg</option><option value="20">20 kcal/kg</option></select></div>
+     <div class="fld"><label for="rf-meta">Meta</label><div class="unit"><input id="rf-meta" type="number" inputmode="numeric" min="300" step="10"><span>kcal</span></div></div>
+     <div class="fld"><label for="rf-cada">Subir cada</label><select id="rf-cada"><option value="1">1 día</option><option value="2" selected>2 días</option></select></div>
+    </div><div id="plan"></div></div>
+   <div class="blk"><div class="bh"><span class="num">3</span><h2>Tiamina y electrolitos</h2></div>
+    <ul class="checks">
+     <li><b>Tiamina 100 mg</b> antes de alimentar o de iniciar sueros glucosados.</li>
+     <li><b>Tiamina 100 mg/día por 5–7 días</b> si hay ayuno severo, alcoholismo u otro riesgo alto de déficit.</li>
+     <li><b>Multivitamínico</b> por ≥10 días (en NP, diario mientras dure).</li>
+     <li><b>K, P y Mg</b> antes de iniciar y cada 12 h los primeros 3 días en riesgo alto. Si están muy bajos, corregir antes de partir.</li>
+     <li><b>Si caen o cuesta corregirlos:</b> bajar 50 % las calorías y volver a subir 33 % de la meta cada 1–2 días.</li>
+     <li><b>Signos vitales</b> cada 4 h las primeras 24 h; peso y balance hídrico diarios.</li>
+    </ul>
+    <p class="src">ASPEN 2020 (da Silva), tabla 6. Más detalle en el tema <a href="realimentacion.html" style="color:var(--tool)">Síndrome de realimentación</a>.</p></div>
+  </div>
+ </section>
+ <section data-sec="Nutrición enteral" id="enteral">
+  <div class="blk narrow"><div class="bh"><h2>Velocidad de nutrición enteral</h2>
+    <details class="pop"><summary aria-label="Cómo se calcula">?</summary><div>Volumen = meta de kcal ÷ densidad; velocidad = volumen ÷ horas. Toma la densidad y la proteína por litro de la etiqueta del producto que se dispensa.</div></details></div>
+   <div class="frow">
+    <div class="fld"><label for="ne-kcal">Meta</label><div class="unit"><input id="ne-kcal" type="number" inputmode="numeric" min="0" step="10" value="1900"><span>kcal</span></div></div>
+    <div class="fld"><label for="ne-dens">Densidad</label><div class="unit"><input id="ne-dens" type="number" inputmode="decimal" min="0.5" max="2.5" step="0.05" value="1.2"><span>kcal/mL</span></div></div>
+    <div class="fld"><label for="ne-h">Horas</label><div class="unit"><input id="ne-h" type="number" inputmode="numeric" min="1" max="24" value="24"><span>h</span></div></div>
+    <div class="fld"><label for="ne-p">Proteína</label><div class="unit"><input id="ne-p" type="number" inputmode="decimal" min="0" step="1" placeholder="opc."><span>g/L</span></div></div>
+   </div>
+   <label class="chk"><input type="checkbox" id="ne-sync" checked>Usar la meta de Requerimientos</label>
+   <div class="mini" id="ne-out"></div></div>
+ </section>
+ <section data-sec="Insulina en el hospitalizado" id="insulina" class="a-blue">
+  <div class="a-seg" role="group" aria-label="Modo"><button type="button" data-modo="basal" aria-pressed="true">Basal y corrección</button><button type="button" data-modo="cort" aria-pressed="false">Con corticoides</button></div>
+  <label class="a-field"><span>Peso real (kg)</span><input class="a-in" id="i-peso" inputmode="decimal" value="80" autocomplete="off"></label>
+  <div data-modo-box="basal" style="display:flex;flex-direction:column;gap:16px">
+   <div class="a-card" style="gap:12px">
+    <span class="a-lbl">¿Usaba insulina basal?</span><div class="a-pills"><button type="button" class="a-pill" data-g="prev" data-v="no" aria-pressed="true">No</button><button type="button" class="a-pill" data-g="prev" data-v="si" aria-pressed="false">Sí</button></div>
+    <label class="a-field" id="i-prev-box" hidden><span>Dosis basal previa (UI/día)</span><input class="a-in" id="i-prev" inputmode="decimal" autocomplete="off"></label>
+    <span class="a-lbl">Sensibilidad</span><div class="a-pills"><button type="button" class="a-pill" data-g="sens" data-v="sensible" aria-pressed="false">Sensible</button><button type="button" class="a-pill" data-g="sens" data-v="normal" aria-pressed="true">Habitual</button><button type="button" class="a-pill" data-g="sens" data-v="resistente" aria-pressed="false">Resistente</button></div>
+    <span class="a-foot">Sensible: mayor frágil, ERC avanzada, IMC &lt;20, baja ingesta o ayuno prolongado. Resistente: IMC &gt;30, diabetes de larga data, requerimientos altos o corticoides.</span>
+    <span class="a-lbl">Glicemias sobre 200</span><div class="a-pills"><button type="button" class="a-pill" data-g="hi" data-v="0" aria-pressed="true">No</button><button type="button" class="a-pill" data-g="hi" data-v="1" aria-pressed="false">Sí</button></div>
+    <span class="a-lbl">Insulina basal</span><div class="a-pills"><button type="button" class="a-pill" data-g="tipo" data-v="glargina" aria-pressed="true">Glargina U100</button><button type="button" class="a-pill" data-g="tipo" data-v="nph" aria-pressed="false">NPH</button></div>
+   </div>
+   <div id="ib-out" aria-live="polite" style="display:flex;flex-direction:column;gap:16px"></div>
+  </div>
+  <div data-modo-box="cort" hidden style="display:flex;flex-direction:column;gap:16px">
+   <div class="a-card" style="gap:12px">
+    <span class="a-lbl">Grupo</span><div class="a-pills"><button type="button" class="a-pill" data-g="grupo" data-v="1" aria-pressed="false">Grupo 1 · 0,3</button><button type="button" class="a-pill" data-g="grupo" data-v="2" aria-pressed="true">Grupo 2 · 0,5</button></div>
+    <span class="a-foot" id="grupo-txt"></span>
+    <span class="a-lbl">Corticoide</span><div class="a-pills"><button type="button" class="a-pill" data-g="cort" data-v="prednisona" aria-pressed="true">Prednisona</button><button type="button" class="a-pill" data-g="cort" data-v="metilprednisolona" aria-pressed="false">Metilprednisolona</button><button type="button" class="a-pill" data-g="cort" data-v="hidrocortisona" aria-pressed="false">Hidrocortisona</button><button type="button" class="a-pill" data-g="cort" data-v="dexametasona" aria-pressed="false">Dexametasona</button><button type="button" class="a-pill" data-g="cort" data-v="betametasona" aria-pressed="false">Betametasona</button></div>
+    <label class="a-field"><span>Dosis diaria (mg)</span><input class="a-in" id="i-cd" inputmode="decimal" value="60" autocomplete="off"></label>
+    <span class="a-lbl">Insulina prandial</span><div class="a-pills"><button type="button" class="a-pill" data-g="prand" data-v="analogo" aria-pressed="true">Análogo rápido · 4 comidas</button><button type="button" class="a-pill" data-g="prand" data-v="cristalina" aria-pressed="false">Cristalina · 3 comidas</button></div>
+   </div>
+   <div id="ic-out" aria-live="polite" style="display:flex;flex-direction:column;gap:16px"></div>
+  </div>
+  <div class="a-card note">Cálculo de apoyo según el consenso; la indicación final es del médico tratante. No se guarda ningún dato. Más detalle en el tema <a href="diabetes.html#basal" style="font-weight:800">Diabetes</a>.</div>
+ </section>
+ <section data-sec="Sodio corregido y osmolaridad" id="osmolaridad" class="a-blue">
+  <div class="a-fgrid"><label class="a-field"><span>Sodio medido (mEq/L)</span><input class="a-in" id="o-na" inputmode="decimal" value="138" autocomplete="off"></label>
+   <label class="a-field"><span>Glicemia (mg/dL)</span><input class="a-in" id="o-gl" inputmode="decimal" value="720" autocomplete="off"></label></div>
+  <div id="o-out" aria-live="polite" style="display:flex;flex-direction:column;gap:16px"></div>
+  <p class="a-p a-foot">Consenso SOCHIDIAB 2026, cap. 6. Sospecha y estudio en el tema <a href="diabetes.html#crisis" style="font-weight:800">Diabetes → Crisis hiperglicémicas</a>.</p>
+ </section>
+ </div>
+ <details class="more foot"><summary>Fuentes</summary><div>ESPEN hospitalaria 2021 (Thibault), ESPEN polimórbido 2024 (Wunderle), ESPEN UCI 2023 (Singer), ESPEN renal 2024 (Sabatino), ESPEN hígado 2020 (Bischoff), ESPEN geriatría 2019 (Volkert), ASPEN realimentación 2020 (da Silva), ESPEN micronutrientes 2024 (Berger), Consenso intrahospitalario SOCHIDIAB 2026. Revisión: noviembre 2026.</div></details>
+</main>
+<nav class="a-nav"></nav>
+<script src="../assets/app.js"></script>
+<script src="../assets/nutricalc.js"></script><script src="../assets/calculadoras.js"></script>
+</body>
+</html>

@@ -13,6 +13,7 @@
      o previo al ingreso antes que el ideal; no usar el peso real.
    - ESPEN hígado 2020 (Bischoff): 30–35 kcal/kg y 1,2–1,5 g/kg (1,5 si desnutrido); con ascitis, peso ideal según talla.
    - ESPEN geriatría 2019 (Volkert): 30 kcal/kg; proteína ≥1,0 g/kg, 1,2–1,5 con enfermedad, hasta 2,0 si es severa.
+   - Consenso intrahospitalario SOCHIDIAB 2026 (mayo): insulina basal, corrección y corticoides (caps. 3 y 5); crisis (cap. 6).
    - ASPEN realimentación 2020 (da Silva): criterios de riesgo (tabla 3); inicio 10–20 kcal/kg o 100–150 g de dextrosa
      las primeras 24 h, subir 33 % de la meta cada 1–2 días; tiamina 100 mg antes de alimentar.
 */
@@ -191,9 +192,64 @@
     return o;
   }
 
+
+  /* ---------- Gasto energético basal (ecuaciones de uso habitual; las guías prefieren calorimetría o kcal/kg) ---------- */
+  function gebMifflin(sexo, peso, talla, edad) { return 10 * peso + 6.25 * talla - 5 * edad + (sexo === "F" ? -161 : 5); }
+  function gebHarrisBenedict(sexo, peso, talla, edad) { /* revisada, Roza y Shizgal 1984 */
+    return sexo === "F" ? 447.593 + 9.247 * peso + 3.098 * talla - 4.330 * edad : 88.362 + 13.397 * peso + 4.799 * talla - 5.677 * edad;
+  }
+
+  /* ---------- Insulina en el hospitalizado no crítico · Consenso intrahospitalario SOCHIDIAB 2026 (caps. 3 y 5) ---------- */
+  var CORRECCION = { tramos: ["<140", "141–180", "181–220", "221–260", "261–300", "301–350", "351–400", ">400"],
+    sensible: [0, 0, 2, 4, 6, 8, 10, 12], normal: [0, 2, 4, 6, 8, 10, 12, 14], resistente: [0, 4, 6, 8, 10, 12, 14, 16] };
+  /* o: {peso, previa (UI/día o 0), sens: "sensible"|"normal"|"resistente", sobre200: bool, tipo: "glargina"|"nph"} */
+  function insulinaBasal(o) {
+    var out = { alerta: null };
+    if (!(o.peso >= 25 && o.peso <= 350)) return { ok: false, error: "Peso fuera de rango (25–350 kg)." };
+    var dosis, como;
+    if (o.previa > 0 && o.previa / o.peso <= 0.5) {
+      var f = o.sens === "sensible" ? 0.5 : 0.7; dosis = o.previa * f; como = Math.round(f * 100) + " % de la dosis previa";
+    } else {
+      var u = o.sens === "sensible" ? (o.sobre200 ? 0.15 : 0.1) : o.sens === "resistente" ? 0.3 : (o.sobre200 ? 0.3 : 0.2);
+      dosis = u * o.peso; como = u.toString().replace(".", ",") + " UI/kg";
+      if (o.previa > 0) out.alerta = "La dosis previa (" + (o.previa / o.peso).toFixed(2).replace(".", ",") + " UI/kg) supera 0,5 UI/kg: posible sobrebasalización, se recalculó por peso.";
+    }
+    dosis = Math.floor(dosis);
+    if (!out.alerta && dosis / o.peso > 0.5) out.alerta = "Sobre 0,5 UI/kg/día: más riesgo de hipoglicemia por sobrebasalización.";
+    out.ok = true; out.dosis = dosis; out.como = como;
+    if (o.tipo === "nph") { var am = Math.round(dosis * 2 / 3); out.posologia = { nph: true, am: am, pm: dosis - am }; }
+    else out.posologia = { nph: false, unica: dosis };
+    out.correccion = CORRECCION[o.sens] || CORRECCION.normal;
+    return out;
+  }
+  var CORTICOIDES = { prednisona: [10, 20, 30, 40], metilprednisolona: [8, 16, 24, 32], hidrocortisona: [50, 100, 150, 200],
+    dexametasona: [2, 4, 6, 8], betametasona: [1.2, 2.4, 3.6, 4.8] };
+  /* o: {peso, grupo: 1|2, corticoide, dosisMg, prandial: "analogo"|"cristalina"}
+     Dosis entre tramos: se asigna el tramo inferior (menos insulina), validado por el autor. */
+  function insulinaCorticoides(o) {
+    var t = CORTICOIDES[o.corticoide];
+    if (!t) return { ok: false, error: "Elige el corticoide." };
+    if (!(o.peso >= 25 && o.peso <= 350)) return { ok: false, error: "Peso fuera de rango (25–350 kg)." };
+    if (!(o.dosisMg > 0)) return { ok: false, error: "Ingresa la dosis diaria del corticoide." };
+    var extra = o.dosisMg >= t[3] ? 0.4 : o.dosisMg >= t[2] ? 0.3 : o.dosisMg >= t[1] ? 0.2 : 0.1;
+    var base = o.grupo === 1 ? 0.3 : 0.5, total = Math.floor((base + extra) * o.peso);
+    var basal = Math.floor(total * 0.4), prandial = Math.floor(total * 0.6), comidas = o.prandial === "cristalina" ? 3 : 4, porComida = Math.floor(prandial / comidas);
+    var off = o.grupo === 1 ? [-4, -2, 0, 2, 4, 6, 8] : [-4, -2, 0, 4, 6, 8, 10];
+    var tramos = ["70–100", "101–140", "141–180", "181–220", "221–260", "261–300", ">300"];
+    var aviso = null;
+    if (o.corticoide === "prednisona" && o.dosisMg <= 10) aviso = "Prednisona ≤10 mg/día: suspender el componente prandial; solo basal + corrección.";
+    else if (o.corticoide === "prednisona" && o.dosisMg < 20) aviso = "Prednisona <20 mg/día: el consenso sugiere basal/corrección en vez de basal-bolo.";
+    return { ok: true, base: base, extra: extra, total: total, basal: basal, prandial: prandial, comidas: comidas, porComida: porComida, aviso: aviso,
+      tabla: tramos.map(function (x, i) { return { tramo: x, ajuste: off[i], dosis: Math.max(0, porComida + off[i]) }; }) };
+  }
+  /* ---------- Crisis hiperglicémicas · Consenso SOCHIDIAB 2026, cap. 6 ---------- */
+  function sodioCorregido(na, glicemia) { return na + 1.6 * Math.max(0, glicemia - 100) / 100; }
+  function osmolaridadEfectiva(na, glicemia) { return 2 * na + glicemia / 18; }
   var api = { imc: imc, pesoIdealIMC25: pesoIdealIMC25, pesoIdealUCI: pesoIdealUCI, pesoAjustadoHosp: pesoAjustadoHosp,
               pesoAjustadoUCI: pesoAjustadoUCI, perdidaPeso: perdidaPeso, requerimientos: requerimientos,
               realimentacion: realimentacion, planRealimentacion: planRealimentacion, velocidadEnteral: velocidadEnteral,
-              SITUACIONES: SITUACIONES, RENAL: RENAL };
+              SITUACIONES: SITUACIONES, RENAL: RENAL,
+              gebMifflin: gebMifflin, gebHarrisBenedict: gebHarrisBenedict, insulinaBasal: insulinaBasal, insulinaCorticoides: insulinaCorticoides,
+              CORRECCION: CORRECCION, CORTICOIDES: CORTICOIDES, sodioCorregido: sodioCorregido, osmolaridadEfectiva: osmolaridadEfectiva };
   if (typeof module !== "undefined" && module.exports) module.exports = api; else root.NutriCalc = api;
 })(this);

@@ -2,26 +2,15 @@
   "outputDirectory": "site",
   "cleanUrls": false,
   "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex"
-        }
-      ]
-    }
+    { "source": "/(.*)", "headers": [ { "key": "X-Robots-Tag", "value": "noindex" } ] },
+    { "source": "/sw.js", "headers": [ { "key": "Cache-Control", "value": "no-cache" } ] },
+    { "source": "/clinica/(.*)", "headers": [ { "key": "Cache-Control", "value": "private, no-cache" } ] }
   ],
   "redirects": [
-    {
-      "source": "/dash",
-      "destination": "/dietas/dash.html#paciente",
-      "permanent": false
-    },
-    {
-      "source": "/fodmap",
-      "destination": "/dietas/fodmap.html#paciente",
-      "permanent": false
-    }
+    { "source": "/dash", "destination": "/dietas/dash.html#paciente", "permanent": false },
+    { "source": "/fodmap", "destination": "/dietas/fodmap.html#paciente", "permanent": false },
+    { "source": "/herramientas/calculadora.html", "destination": "/clinica/calculadoras.html", "permanent": true },
+    { "source": "/herramientas/nutricion-hospitalaria.html", "destination": "/clinica/index.html", "permanent": true },
+    { "source": "/clinica", "destination": "/clinica/index.html", "permanent": false }
   ]
 }

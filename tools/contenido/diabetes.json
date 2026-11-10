@@ -1,0 +1,1044 @@
+{
+ "DM_PRO": {
+  "metas": [
+   [
+    "card",
+    "Meta en unidad no crítica: 140–180 mg/dL",
+    [
+     "Para la mayoría de los hospitalizados.",
+     "Hasta 250 mg/dL: frágiles, múltiples comorbilidades, hipoglicemia inadvertida, ERC IV–V o cuidados paliativos.",
+     "Nutrición enteral o parenteral continua: aceptar cerca de 180 mg/dL."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3"
+   ],
+   [
+    "warn",
+    "Ayuno <100 mg/dL es una señal de alerta",
+    [
+     "Predice hipoglicemia en las 24 h siguientes: bajar cerca de 10 % la basal."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, caps. 3 y 7"
+   ],
+   [
+    "card",
+    "HbA1c al ingreso",
+    [
+     "Si la glicemia es >140 mg/dL y no hay una de los últimos 3 meses: distingue hiperglicemia de estrés de diabetes no diagnosticada.",
+     "Poco confiable con hemoglobinopatías, anemia severa, transfusión reciente, ERC o hemodiálisis, daño hepático avanzado o salicilatos en dosis altas."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3"
+   ],
+   [
+    "table",
+    "Frecuencia de glicemia capilar",
+    "1.1fr 1fr 1fr",
+    [
+     "Situación",
+     "Insulina cristalina",
+     "Análogo rápido"
+    ],
+    [
+     [
+      "Vía oral",
+      "Antes de desayuno, almuerzo y cena",
+      "Antes de desayuno, almuerzo, once y cena"
+     ],
+     [
+      "Ayuno, NE, NP o suero glucosado",
+      "Cada 6 h",
+      "Cada 4 h"
+     ],
+     [
+      "Infusión EV",
+      "Cada 1 h",
+      "—"
+     ]
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, caps. 3 y 7"
+   ],
+   [
+    "card",
+    "Diagnóstico (fuera del hospital)",
+    [
+     "Diabetes: HbA1c ≥6,5 % · ayuno ≥126 · PTGO 2 h ≥200 · al azar ≥200 con síntomas.",
+     "Prediabetes: HbA1c 5,7–6,4 % · ayuno 100–125 · PTGO 2 h 140–199.",
+     "Sin hiperglicemia inequívoca, confirmar con una segunda prueba."
+    ],
+    "ADA 2026, sección 2"
+   ]
+  ],
+  "ingreso": [
+   [
+    "card",
+    "Al ingresar",
+    [
+     "Paso 1: glicemia capilar a todos.",
+     "Paso 2: si es >140 mg/dL, pedir HbA1c."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3"
+   ],
+   [
+    "table",
+    "Conducta según glicemia de ingreso",
+    "0.9fr 1.3fr",
+    [
+     "Glicemia",
+     "Conducta"
+    ],
+    [
+     [
+      "<140",
+      "Controles preprandiales; reevaluar en 24–48 h"
+     ],
+     [
+      "140–180 · DM2 con insulina",
+      "Basal al 70 % + corrección; suspender bolos fijos"
+     ],
+     [
+      "140–180 · DM2 sin insulina",
+      "iDPP-4 + corrección"
+     ],
+     [
+      "140–180 · sin diabetes",
+      "Solo corrección; si <140 por 48 h, suspender controles"
+     ],
+     [
+      ">180",
+      "Basal + corrección"
+     ]
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3, figura 1"
+   ],
+   [
+    "table",
+    "Complejidad y esquema",
+    "1.4fr 1fr",
+    [
+     "Perfil",
+     "Esquema"
+    ],
+    [
+     [
+      "Baja: sin DM o DM sin insulina, ingreso <200, HbA1c <8 %, bajo riesgo de hipoglicemia",
+      "Corrección + iDPP-4"
+     ],
+     [
+      "Mediana: basal <0,5 UI/kg, HbA1c 8–10 %, riesgo intermedio",
+      "Basal/corrección ± iDPP-4"
+     ],
+     [
+      "Alta: insulina intensificada, DM1, basal >0,5 UI/kg o HbA1c >10 %",
+      "Basal/bolo; evaluar con diabetología"
+     ]
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3, tabla 1 (mod. de Galindo 2022)"
+   ],
+   [
+    "card",
+    "Por qué basal/corrección de entrada",
+    [
+     "Basal/bolo controla mejor, pero con más hipoglicemia: el consenso sugiere basal/corrección para la realidad nacional.",
+     "iDPP-4: útil en hiperglicemia leve (<200), solo en formulaciones sin metformina ni iSGLT-2.",
+     "Preferir análogos. Si hay que elegir, priorizar el análogo prandial y mantener NPH como basal."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3"
+   ]
+  ],
+  "basal": [
+   [
+    "table",
+    "Dosis inicial de insulina basal",
+    "1.2fr 1fr 1fr",
+    [
+     "",
+     "Habitual",
+     "Insulinosensible*"
+    ],
+    [
+     [
+      "Sin insulina previa",
+      "0,2–0,3 UI/kg/día",
+      "0,1–0,15 UI/kg/día"
+     ],
+     [
+      "Con basal previa, sin sobrebasalización",
+      "70 % de la dosis",
+      "50 % de la dosis"
+     ]
+    ],
+    "* Mayor frágil, desnutrición, ingesta <50 % o TFGe <30. Extremo superior si glicemia >200. Consenso intrahospitalario SOCHIDIAB 2026, cap. 3, tabla 2"
+   ],
+   [
+    "card",
+    "Posología",
+    [
+     "NPH: 2/3 en la mañana y 1/3 a las 22 h.",
+     "Glargina U100: preferir monodosis nocturna.",
+     "Glargina U300: monodosis, mañana o noche."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3"
+   ],
+   [
+    "warn",
+    "0,5 UI/kg/día es una alerta",
+    [
+     "Sobre ese umbral, no seguir subiendo la basal: reforzar la corrección y considerar basal/bolo.",
+     "Si la dosis previa supera 0,5 UI/kg, recalcular por peso."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3"
+   ],
+   [
+    "table",
+    "Ajuste diario según glicemia de ayuno",
+    "1fr 1.4fr",
+    [
+     "Ayuno (mg/dL)",
+     "Basal"
+    ],
+    [
+     [
+      "<54",
+      "−50 %"
+     ],
+     [
+      "54–70",
+      "−20 %"
+     ],
+     [
+      "71–99",
+      "−10 %"
+     ],
+     [
+      "100–180",
+      "Sin cambios"
+     ],
+     [
+      "181–250",
+      "+10 %"
+     ],
+     [
+      ">250",
+      "+20 %; si ya >0,5 UI/kg, evaluar prandial"
+     ]
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3, tabla 3"
+   ],
+   [
+    "btn",
+    "Calcular dosis basal y corrección",
+    "basal"
+   ]
+  ],
+  "corr": [
+   [
+    "table",
+    "Corrección: UI antes de cada comida",
+    "1.1fr 1fr 1fr 1fr",
+    [
+     "Glicemia",
+     "Sensible",
+     "Normal",
+     "Resistente"
+    ],
+    [
+     [
+      "<140",
+      "0",
+      "0",
+      "0"
+     ],
+     [
+      "141–180",
+      "0",
+      "2",
+      "4"
+     ],
+     [
+      "181–220",
+      "2",
+      "4",
+      "6"
+     ],
+     [
+      "221–260",
+      "4",
+      "6",
+      "8"
+     ],
+     [
+      "261–300",
+      "6",
+      "8",
+      "10"
+     ],
+     [
+      "301–350",
+      "8",
+      "10",
+      "12"
+     ],
+     [
+      "351–400",
+      "10",
+      "12",
+      "14"
+     ],
+     [
+      ">400",
+      "12",
+      "14",
+      "16"
+     ]
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3, tabla 4"
+   ],
+   [
+    "card",
+    "Qué columna usar",
+    [
+     "Sensible: mayor frágil, ERC avanzada, IMC <20, baja ingesta o ayuno prolongado.",
+     "Resistente: IMC >30, diabetes de larga data, requerimientos altos o corticoides."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 1"
+   ],
+   [
+    "card",
+    "Cómo usarla",
+    [
+     "Insulina cristalina: solo antes de desayuno, almuerzo y cena. No corregir en la once: se superpone con la dosis de la cena.",
+     "Análogo rápido: hasta 4 comidas.",
+     "Si no se logra la meta: +2 UI por tramo. Se pueden agregar tramos más bajos (100–140) para acercarla a un bolo."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3"
+   ],
+   [
+    "warn",
+    "No corregir de noche sin comida",
+    [
+     "La corrección nocturna sin ingesta es una de las causas más frecuentes de hipoglicemia hospitalaria."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 7"
+   ]
+  ],
+  "cort": [
+   [
+    "table",
+    "Insulina según corticoide",
+    "1fr 1.3fr",
+    [
+     "Corticoide",
+     "Insulina · esquema"
+    ],
+    [
+     [
+      "Hidrocortisona",
+      "Cristalina o análogo rápido antes de cada dosis · corrección"
+     ],
+     [
+      "Prednisona, metilprednisolona",
+      "NPH a la misma hora del corticoide · basal-bolo"
+     ],
+     [
+      "Dexametasona, betametasona",
+      "Glargina · basal-bolo"
+     ]
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 5, tabla 2"
+   ],
+   [
+    "card",
+    "Sin diabetes previa",
+    [
+     "Controlar glicemia antes de cada comida por al menos 48 h: 94 % de las hiperglicemias aparece en los días 1–2.",
+     "Todas <140 por 72 h: suspender controles.",
+     "140–180: corrección (0 · 2 · 4 · 6 · 8 · 10 UI por tramos desde 141).",
+     ">20 UI/día de corrección o ≥2 glicemias >180 en 24 h: pasar a basal-bolo."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 5, tabla 3"
+   ],
+   [
+    "card",
+    "Diabetes o hiperglicemia >180 sostenida",
+    [
+     "1. Dosis base: grupo 1 = 0,3 UI/kg/día · grupo 2 = 0,5 UI/kg/día (peso real).",
+     "2. Sumar la insulina por corticoide (tabla).",
+     "3. Total final: 40 % basal · 60 % prandial repartido en las comidas · + corrección."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 5, figura 2"
+   ],
+   [
+    "table",
+    "Insulina extra por corticoide (mg/día)",
+    "0.8fr 1fr 1fr 1fr 0.8fr 0.8fr",
+    [
+     "UI/kg",
+     "Predn.",
+     "Metilpr.",
+     "Hidroc.",
+     "Dexa",
+     "Beta"
+    ],
+    [
+     [
+      "+0,1",
+      "10",
+      "8",
+      "50",
+      "2",
+      "1,2"
+     ],
+     [
+      "+0,2",
+      "20",
+      "16",
+      "100",
+      "4",
+      "2,4"
+     ],
+     [
+      "+0,3",
+      "30",
+      "24",
+      "150",
+      "6",
+      "3,6"
+     ],
+     [
+      "+0,4",
+      "≥40",
+      "≥32",
+      "≥200",
+      "≥8",
+      "≥4,8"
+     ]
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 5, tabla 5"
+   ],
+   [
+    "card",
+    "Grupos",
+    [
+     "Grupo 1 (0,3): sin diabetes con hiperglicemia persistente; DM sin insulina con HbA1c <8,5 %; o ≥70 años, IMC <20 o VFG <30.",
+     "Grupo 2 (0,5): DM <70 años con insulina previa, o sin insulina con HbA1c >8,5 %; con IMC >20 y VFG >30."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 5, tabla 4"
+   ],
+   [
+    "card",
+    "Ajustes",
+    [
+     "Prednisona <20 mg/día: basal/corrección. Dexa, beta o prednisona >20: basal-bolo desde el inicio.",
+     "Prednisona matinal: la glicemia baja en la noche; vigilar hipoglicemia nocturna.",
+     "Al llegar a 10 mg de prednisona (o equivalente): suspender el componente prandial.",
+     "Ingesta <50 %: solo basal + corrección.",
+     "Si cambia la dosis del corticoide: recalcular."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 5"
+   ],
+   [
+    "table",
+    "Ajuste de basal con corticoides",
+    "1fr 1.4fr",
+    [
+     "Ayuno (mg/dL)",
+     "Basal"
+    ],
+    [
+     [
+      "<100",
+      "−20 %"
+     ],
+     [
+      "100–140",
+      "−10 %"
+     ],
+     [
+      "141–180",
+      "Mantener"
+     ],
+     [
+      "181–220",
+      "+10 %"
+     ],
+     [
+      ">220",
+      "+20 %"
+     ]
+    ],
+    "Con NPH, ajustar la dosis nocturna. Consenso intrahospitalario SOCHIDIAB 2026, cap. 5, tabla 7"
+   ],
+   [
+    "btn",
+    "Calcular esquema con corticoides",
+    "cort"
+   ]
+  ],
+  "ayuno": [
+   [
+    "table",
+    "Insulina antes de la cirugía",
+    "1.2fr 1fr 1fr",
+    [
+     "Insulina",
+     "Día previo",
+     "Día de cirugía"
+    ],
+    [
+     [
+      "NPH, solo nocturna",
+      "PM −20 %",
+      "—"
+     ],
+     [
+      "NPH, dos dosis",
+      "Mantener",
+      "AM −50 %"
+     ],
+     [
+      "Glargina U100 nocturna",
+      "PM −20 %",
+      "—"
+     ],
+     [
+      "Glargina U100 matinal",
+      "—",
+      "AM −20 %"
+     ],
+     [
+      "Glargina U300, degludec",
+      "Mantener",
+      "Mantener"
+     ],
+     [
+      "Prandial",
+      "Mantener",
+      "Solo corrección si >180 (esquema sensible)"
+     ]
+    ],
+    "DM1: nunca suspender la basal. Consenso intrahospitalario SOCHIDIAB 2026, cap. 4"
+   ],
+   [
+    "card",
+    "Ayuno que se prolonga",
+    [
+     "Corregir cada 4 h con análogo o cada 6 h con cristalina.",
+     "Intraoperatorio: meta 140–180; infusión EV en cirugía mayor, inestabilidad o mal control persistente."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 4"
+   ],
+   [
+    "table",
+    "Antidiabéticos no insulínicos",
+    "1fr 1fr 1fr",
+    [
+     "Fármaco",
+     "Día previo",
+     "Día de cirugía"
+    ],
+    [
+     [
+      "Metformina",
+      "Mantener",
+      "Suspender"
+     ],
+     [
+      "Secretagogos",
+      "Mantener",
+      "Suspender"
+     ],
+     [
+      "iDPP-4",
+      "Mantener",
+      "Mantener"
+     ],
+     [
+      "iSGLT-2",
+      "Suspender 3 días antes",
+      "Suspender"
+     ],
+     [
+      "arGLP-1, GLP-1/GIP",
+      "Mantener*",
+      "Suspender"
+     ]
+    ],
+    "* Si hay que suspenderlos: liraglutida 5 días antes; semanales 4–6 semanas antes. Consenso intrahospitalario SOCHIDIAB 2026, cap. 4"
+   ]
+  ],
+  "nut": [
+   [
+    "card",
+    "Lo que sí define el consenso",
+    [
+     "Meta cercana a 180 mg/dL: es un estado posprandial continuo y metas más bajas aumentan la hipoglicemia.",
+     "Glicemia cada 4 h con análogo o cada 6 h con cristalina.",
+     "Suspender o reducir la nutrición sin ajustar la insulina es causa frecuente de hipoglicemia: coordinar con nutrición y enfermería."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, caps. 3 y 7"
+   ],
+   [
+    "card",
+    "Insulina según el tipo de nutrición",
+    [
+     "NE continua: mantener la basal y agregar 1 UI por cada 10–15 g de carbohidratos de la fórmula, más corrección.",
+     "Si la NE se interrumpe: dextrosa EV para evitar hipoglicemia.",
+     "NP: insulina cristalina en la bolsa, 1 UI por cada 10 g de dextrosa, si usó >20 UI de corrección en 24 h."
+    ],
+    "ADA Standards of Care 2026, sección 16"
+   ],
+   [
+    "pend",
+    "Confirmar con la fuente",
+    [
+     "Estas tres reglas vienen de la sección 16 de ADA 2026, que no está en tu carpeta: confirmarlas con el PDF.",
+     "Nutrición cíclica y en bolos: falta detallarlas."
+    ]
+   ]
+  ],
+  "hipo": [
+   [
+    "table",
+    "Niveles",
+    "0.8fr 1.6fr",
+    [
+     "Nivel",
+     "Definición"
+    ],
+    [
+     [
+      "1",
+      "≤70 mg/dL: alerta, tratar"
+     ],
+     [
+      "2",
+      "<54 mg/dL: clínicamente significativa"
+     ],
+     [
+      "3",
+      "Conciencia alterada o necesita ayuda, con cualquier valor"
+     ]
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 7 (IHSG)"
+   ],
+   [
+    "card",
+    "Regla de los 15 · consciente y con vía oral",
+    [
+     "15 g de azúcar: 3 cucharaditas o 1 cucharada sopera en agua, o 3 sobres.",
+     "Glicemia a los 15 min; repetir hasta >70.",
+     "Luego adelantar la comida o dar 20 g de carbohidrato lento (2 rebanadas de pan de molde o 5 galletas de soda)."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 7"
+   ],
+   [
+    "warn",
+    "Sin vía oral",
+    [
+     "Con vía venosa: SG 30 %, 3 ampollas de 20 mL en bolo (o SG 20 % 90 mL · SG 10 % 180 mL).",
+     "Sin vía venosa: glucagón 1 mg IM, repetible una vez a los 15 min.",
+     "Después: SG 5 % a 100 mL/h hasta definir el aporte."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 7"
+   ],
+   [
+    "card",
+    "Después del episodio: ajustar",
+    [
+     "En ayunas o antes de comer: exceso de basal, bajar 20 %.",
+     "Unas 2 h después de comer: exceso de prandial o corrección, pasar a un esquema más sensible.",
+     "NPH en dos dosis: riesgo cerca de las 3 AM y antes del almuerzo (peak a las 6 h).",
+     "Error frecuente: no ajustar nada tras el episodio.",
+     "Hasta 44 % de los episodios es asintomático."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 7"
+   ]
+  ],
+  "crisis": [
+   [
+    "card",
+    "Cuándo sospechar",
+    [
+     "Diabetes conocida o uso de iSGLT-2, con vómitos, dolor abdominal, sed y orina abundante, deshidratación, respiración de Kussmaul o compromiso de conciencia.",
+     "CAD: se instala en horas a días. SHH: en días a semanas, típicamente en mayores con DM2.",
+     "Hasta un tercio son mixtas: medir siempre cetonas y osmolaridad.",
+     "En Chile la causa más frecuente es la omisión de insulina, seguida de infecciones."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 6 (basado en el consenso internacional 2024)"
+   ],
+   [
+    "card",
+    "Desencadenantes que buscar",
+    [
+     "Omisión de insulina o falta de ajuste ante una intercurrencia.",
+     "Infección (urinaria, respiratoria, gastrointestinal).",
+     "Infarto, ACV, pancreatitis o trauma.",
+     "Fármacos: corticoides, antipsicóticos, inmunoterapia, iSGLT-2.",
+     "Alcohol y drogas; crisis previa (40 % repite en el año)."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 6, tabla 1"
+   ],
+   [
+    "table",
+    "Criterios diagnósticos",
+    "0.9fr 1.2fr 1.2fr",
+    [
+     "",
+     "CAD (los 3)",
+     "SHH (los 4)"
+    ],
+    [
+     [
+      "Glicemia",
+      "≥200 o diabetes conocida",
+      ">600"
+     ],
+     [
+      "Cetonas",
+      "BHB ≥3 mmol/L o cetonuria ≥++",
+      "BHB <3 o cetonuria <++"
+     ],
+     [
+      "Ácido-base",
+      "pH <7,3 y/o HCO₃ <18",
+      "pH ≥7,3 o HCO₃ ≥15"
+     ],
+     [
+      "Osmolaridad",
+      "—",
+      "Efectiva >300"
+     ]
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 6, tablas 2 y 4"
+   ],
+   [
+    "warn",
+    "CAD euglicémica",
+    [
+     "Cetosis y acidosis con glicemia <200: 2,6–3,2 % de las CAD, cada vez más por iSGLT-2.",
+     "También en embarazo, ayuno o dieta muy baja en carbohidratos, alcohol, sepsis y pancreatitis.",
+     "Sin hiperglicemia marcada no hay poliuria ni sed: con vómitos o malestar en un usuario de iSGLT-2, medir cetonas aunque la glicemia sea normal."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 6 (basado en el consenso internacional 2024)"
+   ],
+   [
+    "table",
+    "Gravedad de la CAD",
+    "0.9fr 1fr 1fr 1fr",
+    [
+     "",
+     "Leve",
+     "Moderada",
+     "Severa"
+    ],
+    [
+     [
+      "BHB (mmol/L)",
+      "3–6",
+      "3–6",
+      ">6"
+     ],
+     [
+      "pH",
+      "7,25–7,30",
+      "7,0–7,25",
+      "<7,0"
+     ],
+     [
+      "HCO₃",
+      "15–18",
+      "10–15",
+      "<10"
+     ],
+     [
+      "Conciencia",
+      "Alerta",
+      "Alerta o somnolencia",
+      "Somnolencia o coma"
+     ],
+     [
+      "Dónde",
+      "Sala básica",
+      "Intermedio",
+      "Intensivo"
+     ]
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 6, tabla 3"
+   ],
+   [
+    "card",
+    "Estudio inicial",
+    [
+     "Glicemia, BUN, creatinina y fósforo.",
+     "Electrolitos plasmáticos y gases venosos.",
+     "Hemograma.",
+     "β-hidroxibutirato plasmático o capilar (preferido) o cetonuria.",
+     "ECG: hiperkalemia e isquemia.",
+     "Buscar la causa: infección, isquemia u otra."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 6, tabla 6"
+   ],
+   [
+    "card",
+    "Cálculos",
+    [
+     "Sodio corregido: Na medido + 1,6 por cada 100 mg/dL de glicemia sobre 100.",
+     "Osmolaridad efectiva: 2 × Na medido + glicemia/18.",
+     "El anión gap ya no es criterio de diagnóstico ni de resolución: úsalo solo si no hay cetonas."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 6 (basado en el consenso internacional 2024)"
+   ],
+   [
+    "btn",
+    "Calcular sodio corregido y osmolaridad",
+    "osm"
+   ],
+   [
+    "warn",
+    "Trampas",
+    [
+     "El dolor abdominal puede ser la CAD o su causa: reevaluar si persiste tras corregir la acidosis.",
+     "La glicemia baja antes que la cetosis: <250 mg/dL no es resolución.",
+     "La mortalidad del SHH (hasta 45 %) depende más de la causa precipitante que de la glicemia."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 6 (basado en el consenso internacional 2024)"
+   ],
+   [
+    "card",
+    "Manejo",
+    [
+     "No se detalla aquí: seguir el protocolo local o el algoritmo del consenso (cap. 6, figura 2). Volumen, potasio antes que insulina si K <3,5, e infusión de insulina."
+    ],
+    ""
+   ]
+  ],
+  "amb": [
+   [
+    "card",
+    "Cuándo iniciar insulina en DM2",
+    [
+     "HbA1c sobre la meta pese a 2 o más fármacos en dosis terapéuticas (frecuente con >8 %), idealmente ya con arGLP-1.",
+     "Debut con hiperglicemia sintomática severa (glicemia >300 y/o HbA1c ≥9 %): basal + metformina; evitar iSGLT-2 al inicio y titular de cerca."
+    ],
+    "Consenso SOCHIDIAB 2022 (DM2)"
+   ],
+   [
+    "card",
+    "Cómo",
+    [
+     "Partir con basal; preferir análogos sobre NPH por menos hipoglicemia.",
+     "Para intensificar, preferir arGLP-1 antes que bolo prandial.",
+     "Basal-bolo si sigue fuera de meta.",
+     "Premezcladas: no recomendadas, salvo casos especiales.",
+     "Requiere glucometría; MCG en casos seleccionados."
+    ],
+    "Consenso SOCHIDIAB 2022 (DM2)"
+   ],
+   [
+    "pend",
+    "Dosis inicial, titulación y metas",
+    [
+     "El consenso 2022 no fija dosis y es anterior a ADA 2026: si discrepan, gana la más reciente.",
+     "Faltan en tu carpeta las secciones 6 (metas) y 9 (tratamiento farmacológico) de ADA 2026."
+    ]
+   ]
+  ],
+  "alta": [
+   [
+    "card",
+    "Planificar desde el ingreso",
+    [
+     "Educación en alimentación, uso y conservación de insulina, y autocontrol.",
+     "Control ambulatorio a los 7–14 días del alta.",
+     "Antes del alta, evaluar iSGLT-2 o arGLP-1 por beneficio cardiovascular y renal.",
+     "MCG o bomba propios: continuar si el contexto lo permite; decidir dosis con glicemia capilar."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3"
+   ],
+   [
+    "card",
+    "Para el paciente",
+    [
+     "En el perfil paciente de Dietario puede registrar sus glicemias y traerlas al control (impresas o por QR)."
+    ],
+    ""
+   ]
+  ],
+  "fuentes": [
+   [
+    "card",
+    "Usadas en este tema",
+    [
+     "Consenso intrahospitalario SOCHIDIAB 2026: manejo de diabetes e hiperglicemia en el adulto (caps. 1, 3, 4, 5 y 7).",
+     "Consenso SOCHIDIAB 2022: enfrentamiento integral de la DM2 (Errázuriz et al.).",
+     "ADA Standards of Care 2026: secciones 2 (diagnóstico) y 5 (conductas y nutrición).",
+     "JBDS 2023: hipoglicemia en adultos hospitalizados.",
+     "Crisis hiperglicémicas: consenso 2026, cap. 6, basado en el consenso internacional ADA/EASD 2024.",
+     "ADA Standards of Care 2026: sección 16 (nutrición enteral y parenteral; pendiente de confirmar con el PDF)."
+    ],
+    ""
+   ],
+   [
+    "pend",
+    "Para completar",
+    [
+     "ADA 2026 secciones 6 y 9 (metas e insulina ambulatoria) y el PDF de la sección 16."
+    ]
+   ]
+  ]
+ },
+ "DM_PAC": {
+  "que": [
+   [
+    "big",
+    "HbA1c 6,5 %",
+    [
+     "Es el examen que muestra tu azúcar promedio de los últimos 2 a 3 meses. Desde 6,5 %, confirmado con un segundo examen, se habla de diabetes."
+    ],
+    ""
+   ],
+   [
+    "p",
+    "",
+    [
+     "En la diabetes el azúcar de la sangre (glicemia) se mantiene alta. Al principio casi no da síntomas, pero con los años daña los ojos, los riñones, los nervios y el corazón. Mantenerla controlada reduce ese riesgo."
+    ],
+    ""
+   ],
+   [
+    "card",
+    "Prediabetes",
+    [
+     "HbA1c entre 5,7 y 6,4 %: todavía no es diabetes, pero es el momento de cambiar hábitos."
+    ],
+    ""
+   ]
+  ],
+  "ali": [
+   [
+    "p",
+    "",
+    [
+     "No hay una dieta única para la diabetes: tu plan se adapta a ti, idealmente con tu nutricionista."
+    ],
+    ""
+   ],
+   [
+    "card",
+    "Más de",
+    [
+     "✓ Verduras y frutas enteras",
+     "✓ Legumbres, frutos secos y semillas",
+     "✓ Pan, arroz y fideos integrales",
+     "✓ Pescado y lácteos bajos en grasa",
+     "✓ Agua como bebida principal"
+    ],
+    ""
+   ],
+   [
+    "card",
+    "Menos de",
+    [
+     "✕ Bebidas azucaradas y jugos, incluso naturales",
+     "✕ Dulces y azúcar agregada",
+     "✕ Productos procesados y ultraprocesados",
+     "✕ Carnes rojas y sal"
+    ],
+    ""
+   ],
+   [
+    "card",
+    "Si usas insulina",
+    [
+     "Come a horas parecidas y en cantidades parecidas de pan, arroz, papas o fideos.",
+     "El alcohol puede bajarte el azúcar horas después: mídete."
+    ],
+    ""
+   ],
+   [
+    "card",
+    "Muévete",
+    [
+     "150 minutos a la semana de caminata rápida o similar.",
+     "Ejercicios de fuerza 2 o 3 veces por semana, en días no seguidos."
+    ],
+    ""
+   ],
+   [
+    "soon",
+    "Dieta mediterránea · en preparación",
+    [],
+    ""
+   ]
+  ],
+  "ctrl": [
+   [
+    "card",
+    "Mide tu glicemia",
+    [
+     "Anótala junto al momento: en ayunas, antes o después de comer."
+    ],
+    ""
+   ],
+   [
+    "btnReg",
+    "Abrir mi registro de glicemia",
+    [],
+    ""
+   ],
+   [
+    "card",
+    "Tu HbA1c",
+    [
+     "Al menos dos veces al año si estás estable; más seguido si no estás en tu meta."
+    ],
+    ""
+   ],
+   [
+    "card",
+    "Tus metas",
+    [
+     "Las fija tu médico según tu edad y tu salud. Anótalas aquí:",
+     "Ayunas ______ · HbA1c ______"
+    ],
+    ""
+   ],
+   [
+    "card",
+    "Tus remedios",
+    [
+     "Tómalos todos los días. No los suspendas sin hablar con tu médico."
+    ],
+    ""
+   ]
+  ],
+  "alarma": [
+   [
+    "warn",
+    "Si tu glicemia está bajo 70",
+    [
+     "Toma 15 g de azúcar: 3 cucharaditas en agua o 3 sobres.",
+     "Mídete de nuevo en 15 minutos; repite si sigue bajo 70.",
+     "Después come algo, como pan o galletas.",
+     "Si la persona está confundida o no puede tragar, no le des nada por boca y llama al 131."
+    ],
+    ""
+   ],
+   [
+    "warn",
+    "Ve a urgencia si tienes",
+    [
+     "Confusión, mucho sueño o desmayo · vómitos que no paran, sobre todo si usas insulina · glicemia muy alta con mucha sed, mucha orina y decaimiento"
+    ],
+    ""
+   ],
+   [
+    "card",
+    "Pide hora con tu médico si",
+    [
+     "Bajas de 70 seguido · tus glicemias están sobre tu meta varios días · estás enfermo, no puedes comer bien y usas insulina"
+    ],
+    ""
+   ]
+  ]
+ }
+}
