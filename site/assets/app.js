@@ -127,6 +127,23 @@
   });
   pintarMis();
 
+  /* ---------- barra superior que se esconde al bajar (celular) ---------- */
+  var top = document.querySelector(".a-top");
+  if (top) {
+    var lastY = window.scrollY, ticking = false;
+    window.addEventListener("scroll", function () {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function () {
+        var y = window.scrollY, d = y - lastY;
+        if (y < 80 || d < -6) body.classList.remove("a-hidetop");
+        else if (d > 6 && !document.querySelector(".a-sellist:not([hidden])")) body.classList.add("a-hidetop");
+        if (Math.abs(d) > 6) lastY = y;
+        ticking = false;
+      });
+    }, { passive: true });
+    document.addEventListener("focusin", function () { if (document.activeElement && top.contains(document.activeElement)) body.classList.remove("a-hidetop"); });
+  }
+
   /* ---------- botones de imprimir ---------- */
   document.addEventListener("click", function (e) { if (e.target.closest("[data-print]")) window.print(); });
 

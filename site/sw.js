@@ -1,7 +1,7 @@
 /* Dietario · funcionamiento sin conexión.
    Páginas: primero la red y, si no hay conexión, la copia guardada. Archivos estáticos: la copia guardada y se actualiza en segundo plano.
    No se guarda nada que el usuario escriba: el registro de presión y glicemia vive en localStorage, no aquí. */
-var V = "dietario-v2-1";
+var V = "dietario-v2-2";
 var CORE = ["/index.html", "/assets/app.css", "/assets/app.js", "/assets/favicon.svg", "/salud/index.html", "/registro/index.html",
   "/assets/registro.js", "/assets/qrcode.js", "/dietas/index.html", "/dietas/dash.html", "/dietas/fodmap.html", "/assets/ficha.css", "/nosotros.html"];
 self.addEventListener("install", function (e) {

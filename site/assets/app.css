@@ -24,6 +24,9 @@ body.a-app{margin:0;background:var(--a-bg);color:var(--a-ink);font-family:var(--
 /* ---------- Barra superior ---------- */
 .a-top{position:sticky;top:0;z-index:20;height:var(--a-top-h);display:flex;align-items:center;gap:10px;
   padding:0 max(16px, env(safe-area-inset-left, 0px));background:var(--a-surface);border-bottom:1px solid var(--a-line)}
+.a-top{transition:transform .22s ease}
+@media (max-width:899px){ body.a-hidetop .a-top{transform:translateY(-100%)} }
+@media (prefers-reduced-motion:reduce){ .a-top{transition:none} }
 .a-back{width:44px;height:44px;margin-left:-10px;border:0;background:none;display:grid;place-items:center;cursor:pointer;color:var(--a-ink);text-decoration:none;border-radius:12px;flex:none}
 .a-mark{width:32px;height:32px;border-radius:9px;background:var(--a-green);display:grid;place-items:center;flex:none}
 .a-brand{font-family:var(--a-display);font-weight:800;font-size:17px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none}
