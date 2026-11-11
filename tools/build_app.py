@@ -41,7 +41,7 @@ def page(path, title, body, nav="", back=None, top=None, desc="", scripts=(), he
 <title>{esc(title)} · Dietario</title>
 <meta name="description" content="{html.escape(desc or title)}">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#2A7A4B">
 <link rel="icon" href="{root}assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{root}assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="{root}manifest.webmanifest">

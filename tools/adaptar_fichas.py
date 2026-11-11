@@ -53,7 +53,7 @@ def adaptar(k):
     G = GRUPOS[k]
     s = s.replace('<link rel="stylesheet" href="../assets/ficha.css">',
                   '<link rel="stylesheet" href="../assets/ficha.css">\n<link rel="stylesheet" href="../assets/app.css">\n'
-                  '<link rel="manifest" href="../manifest.webmanifest">\n<link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">\n<meta name="theme-color" content="#FFFFFF">')
+                  '<link rel="manifest" href="../manifest.webmanifest">\n<link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">\n<meta name="theme-color" content="#2A7A4B">')
     s = s.replace("<body>", '<body class="a-app" data-root="../" data-nav="dietas" data-qr>', 1)
     s = re.sub(r'<div class="proto">.*?</header>', TOP, s, count=1, flags=re.S)
     s = s.replace('<a class="crumb" href="../index.html#dietas">← Todas las dietas</a>', barra(k), 1)
