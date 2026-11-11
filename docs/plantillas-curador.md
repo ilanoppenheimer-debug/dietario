@@ -2,7 +2,7 @@
 
 Documento de conocimiento para el proyecto "Curador de Dietario". Contiene **estructura y reglas, no contenido clínico**. Toda cifra o recomendación se obtiene de los documentos primarios del conocimiento.
 
-Versión 2.0 · noviembre 2026 · Novedades: condición para el paciente (sección 9), tema clínico (10), calculadora (11), bloques (12), nombres de sección para el selector.
+Versión 3.0 · noviembre 2026 · Novedades v3: búsqueda con Drive primero, núcleo de fuentes y ventanas de años (sección 13). v2: condición para el paciente (9), tema clínico (10), calculadora (11), bloques (12), nombres de sección para el selector.
 
 ---
 
@@ -38,7 +38,7 @@ Regla: el tríptico y la vista paciente **no pueden contradecirse**. El tríptic
 ### Flujo de trabajo
 
 1. **Alcance:** dieta, indicación principal y población (adulto ambulatorio salvo que se indique otra).
-2. **Fuentes:** inventario de guías y estudios disponibles en el conocimiento y de los que faltan.
+2. **Fuentes:** Drive primero, luego web para lo que falta; núcleo de máximo 8 documentos (sección 13).
 3. **Reanálisis:** extraer cada dato con su ubicación exacta y clasificar la evidencia.
 4. **Tipo de dieta:** elegir los módulos (sección 3).
 5. **Redacción:** profesional → paciente → tríptico, en ese orden.
@@ -280,3 +280,80 @@ Cada sección contiene solo bloques (sección 12). Todo bloque con cifras termin
 | `[BOTÓN] Texto → destino` | Enlace a calculadora, registro o ficha | — |
 
 Si algo no cabe, se divide en dos bloques: no se comprime.
+
+---
+
+## 13. Búsqueda de fuentes (Fase 1)
+
+### 13.1 Drive primero
+
+Las fuentes viven en Google Drive, no en el conocimiento del proyecto. Antes de buscar en la web:
+
+1. Lista la carpeta de la especialidad y sus subcarpetas, **recorriendo todas las páginas** de resultados. No basta con buscar por título: da falsos negativos.
+2. Para cada documento útil anota: nombre · año · ruta · vigencia (vigente / hay versión más nueva / retirada).
+3. Busca en la web solo lo que falta, las ediciones más nuevas y las fuentes chilenas.
+
+Mapa de carpetas (Mi unidad › Beca MMII › Especialidades):
+
+| Tema de Dietario | Carpeta principal | Ver también |
+|---|---|---|
+| Diabetes, hiperglicemia hospitalaria | Endocrinología › 01_Diabetes | Endocrinología › 08_Nutricion |
+| Obesidad, hígado graso, síndrome metabólico | Endocrinología › 06_Obesidad_y_Sindrome_Metabolico | 01_Diabetes |
+| Nutrición clínica, NE/NP, realimentación, UCI | Endocrinología › 08_Nutricion | Cuidados Críticos |
+| HTA, dislipidemia, riesgo cardiovascular | Cardiología | Endocrinología › 01_Diabetes (dislipidemia MINSAL) |
+| ERC, dieta renal, hiposódica | Nefrología | Cardiología |
+| Celiaquía, FODMAP, cirrosis, pancreatitis, baja en residuos | Gastroenterología | — |
+| Disfagia, sarcopenia, desnutrición del adulto mayor | Geriatría › 07_Fragilidad_Sarcopenia_y_Desnutricion | Neurología (ACV) |
+| Paciente oncológico | Oncología › 07_Dolor_y_Sintomas_en_Cancer_Avanzado | Endocrinología › 08_Nutricion |
+
+Si una carpeta no aparece con este nombre, lista la carpeta "Especialidades" y búscala por su contenido.
+
+**Documentos nuevos:** propón la carpeta de destino y el nombre según la convención: `Guía <Sociedad> <Año> - <Tema>.pdf` · `Review <Año> - <Tema> (Autores).pdf` · `Metaanálisis <Año> - <Tema> (Autor).pdf` · `ECA <Año> - <Nombre del estudio>.pdf`. Antes de proponer uno, verifica que no esté ya en otra especialidad.
+
+### 13.2 Ventanas de años
+
+| Tipo | Ventana | Regla |
+|---|---|---|
+| Guía de sociedad | Última edición vigente | Si tiene > 5 años: buscar actualización y verificar que no esté retirada o archivada. Retirada = no se usa |
+| Metaanálisis / RS | Últimos 5 años | Uno anterior solo si no hay uno más nuevo, y se dice |
+| ECA fundacional | Sin límite | Marcado "fundacional"; sirve para magnitud del efecto (P8–P9), no para fijar recomendaciones |
+| Otros ECA | Últimos 10 años | — |
+| Cohortes | Últimos 10 años | Solo si no hay ECA |
+| Documento chileno (MINSAL, sociedades) | Última versión | Año visible. Si tiene > 5 años o contradice una guía vigente: capa local, marcado "desactualizado" |
+| Tablas de composición / intercambio | La vigente | Indicar edición |
+
+No se usan: StatPearls, Merck, libros de texto como fuente citada, blogs ni guías retiradas.
+
+### 13.3 Lo más relevante: núcleo primero
+
+La lista no es un inventario exhaustivo. Se ordena así:
+
+| Prioridad | Máximo | Qué entra |
+|---|---|---|
+| 1 · Núcleo | 8 | Sin estos documentos no se puede armar el contenido |
+| 2 · Complementario | 6 | Mejoran una sección concreta (magnitud del efecto, adaptación local) |
+| 3 · Opcional | 4 | Solo si hay tiempo o acceso |
+
+Un documento entra al núcleo si cumple al menos dos de estos criterios, y se dice cuáles:
+1. Es la guía vigente de la sociedad de referencia del tema.
+2. De él salen cifras o recomendaciones que irán en la ficha.
+3. Aplica a adultos y a la práctica en Chile (medicina interna u hospital).
+4. Es el más reciente entre los que dicen lo mismo.
+5. No es redundante con otro documento del núcleo.
+
+Si dos guías dicen lo mismo, entra la más reciente y la otra baja a Prioridad 3 o sale. Si propones más documentos que el máximo, justifícalo.
+
+### 13.4 Formato de entrega de la Fase 1
+
+```
+# <Tema> · Fase 1 · Búsqueda <fecha>
+
+## Alcance
+## Ya en Drive
+| Documento | Año | Ruta | Vigencia |
+## Lista de fuentes
+| Prioridad | Documento (cita completa) | Año | Tipo | Estado (En Drive / Descargar) | Link | Acceso | Qué aporta | Destino + nombre sugerido |
+## Fuentes chilenas
+## Discordancias previsibles
+## Preguntas que la evidencia debe responder
+```
