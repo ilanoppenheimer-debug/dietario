@@ -287,13 +287,28 @@ Si algo no cabe, se divide en dos bloques: no se comprime.
 
 ### 13.1 Drive primero
 
-Las fuentes viven en Google Drive, no en el conocimiento del proyecto. Antes de buscar en la web:
+Las fuentes viven en Google Drive, no en el conocimiento del proyecto. Hay dos carpetas dentro de "Beca MMII", con roles distintos:
 
-1. Lista la carpeta de la especialidad y sus subcarpetas, **recorriendo todas las páginas** de resultados. No basta con buscar por título: da falsos negativos.
+| Carpeta | Rol | Qué se hace ahí |
+|---|---|---|
+| **Dietario** | Carpeta de trabajo: una subcarpeta por tema | Aquí va el material de cada contenido. La Fase 2 lee de aquí |
+| **Especialidades** | Biblioteca general por especialidad | Se revisa para no descargar lo que ya existe. No se duplica: si un documento de aquí es núcleo, Ilan crea un acceso directo en la subcarpeta del tema en Dietario |
+
+Antes de buscar en la web:
+1. Lista la subcarpeta del tema en Dietario y la carpeta de la especialidad en Especialidades, con sus subcarpetas, **recorriendo todas las páginas** de resultados. No basta con buscar por título: da falsos negativos.
 2. Para cada documento útil anota: nombre · año · ruta · vigencia (vigente / hay versión más nueva / retirada).
 3. Busca en la web solo lo que falta, las ediciones más nuevas y las fuentes chilenas.
 
-Mapa de carpetas (Mi unidad › Beca MMII › Especialidades):
+**Dietario** (Beca MMII › Dietario):
+
+| Subcarpeta | Contenido |
+|---|---|
+| 00_Transversal_Chile_y_OMS | Guías Alimentarias MINSAL, Reglamento Sanitario de los Alimentos (Ley 20.606), ENS, OMS. Sirve para todos los temas |
+| 01_DASH, 02_Diabetes, 03_Renal… | Una por tema, numeradas. Para un tema nuevo, propone la siguiente numeración (p. ej., 04_Hiposodica) |
+| 80_Referencia_general_no_es_fuente | Manuales y libros de texto. Punto de partida, **nunca se citan** |
+| 90_Nutricion_clinica_hospitalaria | Guías ESPEN/ASPEN, vademécum de fórmulas enterales. Para temas clínicos y calculadoras |
+
+**Especialidades** (Beca MMII › Especialidades):
 
 | Tema de Dietario | Carpeta principal | Ver también |
 |---|---|---|
@@ -306,9 +321,9 @@ Mapa de carpetas (Mi unidad › Beca MMII › Especialidades):
 | Disfagia, sarcopenia, desnutrición del adulto mayor | Geriatría › 07_Fragilidad_Sarcopenia_y_Desnutricion | Neurología (ACV) |
 | Paciente oncológico | Oncología › 07_Dolor_y_Sintomas_en_Cancer_Avanzado | Endocrinología › 08_Nutricion |
 
-Si una carpeta no aparece con este nombre, lista la carpeta "Especialidades" y búscala por su contenido.
+Si una carpeta no aparece con este nombre, lista la carpeta que la contiene y búscala por su contenido.
 
-**Documentos nuevos:** propón la carpeta de destino y el nombre según la convención: `Guía <Sociedad> <Año> - <Tema>.pdf` · `Review <Año> - <Tema> (Autores).pdf` · `Metaanálisis <Año> - <Tema> (Autor).pdf` · `ECA <Año> - <Nombre del estudio>.pdf`. Antes de proponer uno, verifica que no esté ya en otra especialidad.
+**Documentos nuevos:** se guardan en la subcarpeta del tema en Dietario, con nombre según la convención: `Guía <Sociedad> <Año> - <Tema>.pdf` · `Review <Año> - <Tema> (Autores).pdf` · `Metaanálisis <Año> - <Tema> (Autor).pdf` · `ECA <Año> - <Nombre del estudio>.pdf`. Antes de proponer uno, verifica que no esté ya en Dietario ni en Especialidades.
 
 ### 13.2 Ventanas de años
 
