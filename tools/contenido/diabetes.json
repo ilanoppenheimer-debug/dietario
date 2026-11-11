@@ -243,7 +243,7 @@
    ],
    [
     "btn",
-    "Calcular dosis basal y corrección",
+    "Calcular dosis basal",
     "basal"
    ]
   ],
@@ -336,6 +336,11 @@
      "La corrección nocturna sin ingesta es una de las causas más frecuentes de hipoglicemia hospitalaria."
     ],
     "Consenso intrahospitalario SOCHIDIAB 2026, cap. 7"
+   ],
+   [
+    "btn",
+    "Abrir la escala de corrección",
+    "corr"
    ]
   ],
   "cort": [
@@ -981,6 +986,79 @@
      "Discordancias resueltas por la regla \"gana la más reciente\": metas hospitalarias y esquema de inicio en sala (consenso chileno 2026 sobre ADA 2026); inicio de insulina ambulatoria (ADA 2026 sobre SOCHIDIAB 2022)."
     ],
     ""
+   ]
+  ],
+  "bb": [
+   [
+    "card",
+    "Cuándo basal-bolo",
+    [
+     "Basal/corrección es el esquema de elección para la mayoría: más simple y con menos hipoglicemia.",
+     "Basal-bolo: DM1; DM2 con insulinopenia marcada; corticoides en dosis altas (>20 mg/día de prednisona o equivalente)."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, caps. 2 y 3"
+   ],
+   [
+    "table",
+    "Cálculo de la DDT",
+    "0.8fr 1.2fr 1.1fr",
+    [
+     "Desde",
+     "Basal-bolo",
+     "Basal/corrección"
+    ],
+    [
+     [
+      "Infusión EV estable 4–6 h",
+      "DDT = UI/h × 24 · 50 % basal + 50 % bolos en 3–4 comidas + corrección",
+      "50 % de la DDT como basal + corrección"
+     ],
+     [
+      "Dosis previa",
+      "70 % de la DDT previa · 50 % basal + 50 % bolos + corrección",
+      "70 % de la basal previa + corrección"
+     ],
+     [
+      "Peso",
+      "0,5–0,6 UI/kg/día (0,3 si hay riesgo de hipoglicemia) · 50 % / 50 % + corrección",
+      "0,2–0,3 UI/kg/día de basal + corrección"
+     ]
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, tabla 6"
+   ],
+   [
+    "card",
+    "Precauciones de cada origen",
+    [
+     "Infusión EV: puede diferir mucho de la teórica por peso (sensibilidad, estrés, dextrosa concomitante, fármacos).",
+     "Dosis previa: la sobrebasalización ambulatoria es frecuente; si la basal supera 0,5 UI/kg/día, recalcular por peso.",
+     "Peso: puede subestimar la dosis por la hiperglicemia de estrés.",
+     "El consenso sugiere estimar por peso y/o por la infusión, y promediar si difieren. Superponer la primera dosis SC antes de suspender la infusión."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, tabla 6"
+   ],
+   [
+    "card",
+    "Diabetes tipo 1",
+    [
+     "Siempre basal-bolo, ajustado a su sensibilidad y a su relación insulina/carbohidratos.",
+     "Nunca suspender la basal, aunque esté en ayuno o normoglicémica: riesgo de cetoacidosis.",
+     "Idealmente con apoyo de un equipo de diabetes."
+    ],
+    "Consenso intrahospitalario SOCHIDIAB 2026, cap. 2"
+   ],
+   [
+    "note",
+    "",
+    [
+     "ADA 2026 (sección 16) parte con 0,3–0,6 UI/kg/día y 80 % de la dosis domiciliaria. Se usa el consenso chileno, posterior. De ADA se toma la escala de corrección según la DDT: <40 UI sensible, 40–80 normal, >80 resistente."
+    ],
+    ""
+   ],
+   [
+    "btn",
+    "Calcular basal-bolo y DDT",
+    "bb"
    ]
   ]
  },

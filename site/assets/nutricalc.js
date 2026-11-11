@@ -202,26 +202,50 @@
   /* ---------- Insulina en el hospitalizado no crítico · Consenso intrahospitalario SOCHIDIAB 2026 (caps. 3 y 5) ---------- */
   var CORRECCION = { tramos: ["<140", "141–180", "181–220", "221–260", "261–300", "301–350", "351–400", ">400"],
     sensible: [0, 0, 2, 4, 6, 8, 10, 12], normal: [0, 2, 4, 6, 8, 10, 12, 14], resistente: [0, 4, 6, 8, 10, 12, 14, 16] };
-  /* o: {peso, previa (UI/día o 0), sens: "sensible"|"normal"|"resistente", sobre200: bool, tipo: "glargina"|"nph"} */
+  /* Origen de la dosis (consenso 2026, cap. 3 tabla 2 y cap. 2 tabla 6):
+     peso: basal 0,2–0,3 UI/kg (insulinosensible 0,1–0,15; resistente 0,3); previa: 70 % de la basal previa (50 % si sensible);
+     ev: 50 % de la DDT extrapolada de la infusión estable de las últimas 4–6 h (UI/h × 24).
+     o: {peso, origen: "peso"|"previa"|"ev", previa (UI/día), ev (UI/h), sens: "sensible"|"normal"|"resistente", sobre200, tipo: "glargina"|"nph"} */
   function insulinaBasal(o) {
     var out = { alerta: null };
     if (!(o.peso >= 25 && o.peso <= 350)) return { ok: false, error: "Peso fuera de rango (25–350 kg)." };
-    var dosis, como;
-    if (o.previa > 0 && o.previa / o.peso <= 0.5) {
-      var f = o.sens === "sensible" ? 0.5 : 0.7; dosis = o.previa * f; como = Math.round(f * 100) + " % de la dosis previa";
-    } else {
-      var u = o.sens === "sensible" ? (o.sobre200 ? 0.15 : 0.1) : o.sens === "resistente" ? 0.3 : (o.sobre200 ? 0.3 : 0.2);
-      dosis = u * o.peso; como = u.toString().replace(".", ",") + " UI/kg";
-      if (o.previa > 0) out.alerta = "La dosis previa (" + (o.previa / o.peso).toFixed(2).replace(".", ",") + " UI/kg) supera 0,5 UI/kg: posible sobrebasalización, se recalculó por peso.";
-    }
+    var origen = o.origen || (o.previa > 0 ? "previa" : "peso"), dosis, como;
+    var porPeso = function () { var u = o.sens === "sensible" ? (o.sobre200 ? 0.15 : 0.1) : o.sens === "resistente" ? 0.3 : (o.sobre200 ? 0.3 : 0.2); return [u * o.peso, u.toString().replace(".", ",") + " UI/kg"]; };
+    if (origen === "previa") {
+      if (!(o.previa > 0)) return { ok: false, error: "Ingresa la dosis basal previa." };
+      if (o.previa / o.peso <= 0.5) { var f = o.sens === "sensible" ? 0.5 : 0.7; dosis = o.previa * f; como = Math.round(f * 100) + " % de la basal previa (" + o.previa + " UI)"; }
+      else { var pp = porPeso(); dosis = pp[0]; como = pp[1]; out.alerta = "La basal previa (" + (o.previa / o.peso).toFixed(2).replace(".", ",") + " UI/kg) supera 0,5 UI/kg: posible sobrebasalización, se recalculó por peso."; }
+    } else if (origen === "ev") {
+      if (!(o.ev > 0)) return { ok: false, error: "Ingresa la infusión estable (UI/h)." };
+      var ddt = o.ev * 24; dosis = ddt * 0.5; como = "50 % de " + Math.round(ddt) + " UI/día (" + String(o.ev).replace(".", ",") + " UI/h × 24)";
+      out.ddt = ddt;
+    } else { var q = porPeso(); dosis = q[0]; como = q[1]; }
     dosis = Math.floor(dosis);
     if (!out.alerta && dosis / o.peso > 0.5) out.alerta = "Sobre 0,5 UI/kg/día: más riesgo de hipoglicemia por sobrebasalización.";
-    out.ok = true; out.dosis = dosis; out.como = como;
+    out.ok = true; out.dosis = dosis; out.como = como; out.origen = origen;
     if (o.tipo === "nph") { var am = Math.round(dosis * 2 / 3); out.posologia = { nph: true, am: am, pm: dosis - am }; }
     else out.posologia = { nph: false, unica: dosis };
     out.correccion = CORRECCION[o.sens] || CORRECCION.normal;
     return out;
   }
+  /* Basal-bolo (consenso 2026, cap. 2 tabla 6): DDT por peso 0,5–0,6 UI/kg (0,3 con riesgo de hipoglicemia),
+     70 % de la DDT previa, o la DDT de la infusión EV (UI/h × 24). 50 % basal y 50 % bolos en 3–4 comidas + corrección.
+     o: {peso, origen, previa (DDT previa UI/día), ev (UI/h), riesgoHipo, sobre200, prandial: "analogo"|"cristalina"} */
+  function insulinaBasalBolo(o) {
+    if (!(o.peso >= 25 && o.peso <= 350)) return { ok: false, error: "Peso fuera de rango (25–350 kg)." };
+    var origen = o.origen || "peso", ddt, como;
+    if (origen === "previa") { if (!(o.previa > 0)) return { ok: false, error: "Ingresa la dosis diaria total previa." }; ddt = o.previa * 0.7; como = "70 % de la DDT previa (" + o.previa + " UI)"; }
+    else if (origen === "ev") { if (!(o.ev > 0)) return { ok: false, error: "Ingresa la infusión estable (UI/h)." }; ddt = o.ev * 24; como = String(o.ev).replace(".", ",") + " UI/h × 24"; }
+    else { var u = o.riesgoHipo ? 0.3 : (o.sobre200 ? 0.6 : 0.5); ddt = u * o.peso; como = u.toString().replace(".", ",") + " UI/kg"; }
+    ddt = Math.floor(ddt);
+    var comidas = o.prandial === "cristalina" ? 3 : 4, basal = Math.floor(ddt / 2), bolos = ddt - basal, porComida = Math.floor(bolos / comidas);
+    var alerta = null;
+    if (basal / o.peso > 0.5) alerta = "Basal sobre 0,5 UI/kg/día: revisar sobrebasalización.";
+    return { ok: true, ddt: ddt, como: como, basal: basal, bolos: bolos, comidas: comidas, porComida: porComida, alerta: alerta,
+      porKg: ddt / o.peso, escalaSugerida: ddt < 40 ? "sensible" : ddt <= 80 ? "normal" : "resistente" };
+  }
+  /* Escala sugerida según DDT (ADA 2026, sección 16): <40 UI baja, 40–80 media, >80 alta. */
+  function escalaPorDDT(ddt) { return ddt < 40 ? "sensible" : ddt <= 80 ? "normal" : "resistente"; }
   var CORTICOIDES = { prednisona: [10, 20, 30, 40], metilprednisolona: [8, 16, 24, 32], hidrocortisona: [50, 100, 150, 200],
     dexametasona: [2, 4, 6, 8], betametasona: [1.2, 2.4, 3.6, 4.8] };
   /* o: {peso, grupo: 1|2, corticoide, dosisMg, prandial: "analogo"|"cristalina"}
@@ -249,7 +273,7 @@
               pesoAjustadoUCI: pesoAjustadoUCI, perdidaPeso: perdidaPeso, requerimientos: requerimientos,
               realimentacion: realimentacion, planRealimentacion: planRealimentacion, velocidadEnteral: velocidadEnteral,
               SITUACIONES: SITUACIONES, RENAL: RENAL,
-              gebMifflin: gebMifflin, gebHarrisBenedict: gebHarrisBenedict, insulinaBasal: insulinaBasal, insulinaCorticoides: insulinaCorticoides,
+              gebMifflin: gebMifflin, gebHarrisBenedict: gebHarrisBenedict, insulinaBasal: insulinaBasal, insulinaBasalBolo: insulinaBasalBolo, escalaPorDDT: escalaPorDDT, insulinaCorticoides: insulinaCorticoides,
               CORRECCION: CORRECCION, CORTICOIDES: CORTICOIDES, sodioCorregido: sodioCorregido, osmolaridadEfectiva: osmolaridadEfectiva };
   if (typeof module !== "undefined" && module.exports) module.exports = api; else root.NutriCalc = api;
 })(this);

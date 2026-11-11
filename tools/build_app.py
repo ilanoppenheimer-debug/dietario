@@ -91,7 +91,7 @@ def blocks(arr, root, accent="var(--a-green)"):
             out.append(f'<div class="a-card dash">{esc(b[1])}</div>')
         elif k == "btn":
             mode = b[2]
-            href = {"basal": "clinica/calculadoras.html?modo=basal#insulina", "cort": "clinica/calculadoras.html?modo=cort#insulina",
+            href = {"basal": "clinica/calculadoras.html?modo=basal#insulina", "cort": "clinica/calculadoras.html?modo=cort#insulina", "bb": "clinica/calculadoras.html?modo=bb#insulina", "corr": "clinica/calculadoras.html?modo=corr#insulina",
                     "osm": "clinica/calculadoras.html#osmolaridad", "ref": "clinica/calculadoras.html#realimentacion"}[mode]
             out.append(f'<a class="a-btn blue" href="{root}{href}">{esc(b[1])}</a>')
         elif k == "btnReg":
@@ -410,7 +410,7 @@ def tema(path, title, grupo, color, defs, data, sub=""):
          nav="clinica", back="clinica/index.html", top="Clínica")
 
 def build_temas():
-    dmdefs = [("metas", "Metas y monitoreo"), ("ingreso", "Al ingreso: qué esquema"), ("basal", "Insulina basal"), ("corr", "Insulina de corrección"),
+    dmdefs = [("metas", "Metas y monitoreo"), ("ingreso", "Al ingreso: qué esquema"), ("basal", "Insulina basal"), ("corr", "Insulina de corrección"), ("bb", "Basal-bolo y DDT"),
               ("cort", "Corticoides"), ("ayuno", "Ayuno y pabellón"), ("nut", "Nutrición enteral y parenteral"), ("hipo", "Hipoglicemia"),
               ("crisis", "Crisis hiperglicémicas"), ("amb", "Inicio de insulina ambulatorio"), ("alta", "Al alta"), ("fuentes", "Fuentes")]
     pro = dict(DM["DM_PRO"])
@@ -581,29 +581,36 @@ def build_calculadoras():
    <div class="mini" id="ne-out"></div></div>
  </section>
  <section data-sec="Insulina en el hospitalizado" id="insulina" class="a-blue">
-  <div class="a-seg" role="group" aria-label="Modo"><button type="button" data-modo="basal" aria-pressed="true">Basal y corrección</button><button type="button" data-modo="cort" aria-pressed="false">Con corticoides</button></div>
-  <label class="a-field"><span>Peso real (kg)</span><input class="a-in" id="i-peso" inputmode="decimal" value="80" autocomplete="off"></label>
-  <div data-modo-box="basal" style="display:flex;flex-direction:column;gap:16px">
-   <div class="a-card" style="gap:12px">
-    <span class="a-lbl">¿Usaba insulina basal?</span><div class="a-pills">{pills("prev", [("no", "No"), ("si", "Sí")], "no")}</div>
-    <label class="a-field" id="i-prev-box" hidden><span>Dosis basal previa (UI/día)</span><input class="a-in" id="i-prev" inputmode="decimal" autocomplete="off"></label>
-    <span class="a-lbl">Sensibilidad</span><div class="a-pills">{pills("sens", [("sensible", "Sensible"), ("normal", "Habitual"), ("resistente", "Resistente")], "normal")}</div>
-    <span class="a-foot">Sensible: mayor frágil, ERC avanzada, IMC &lt;20, baja ingesta o ayuno prolongado. Resistente: IMC &gt;30, diabetes de larga data, requerimientos altos o corticoides.</span>
-    <span class="a-lbl">Glicemias sobre 200</span><div class="a-pills">{pills("hi", [("0", "No"), ("1", "Sí")], "0")}</div>
-    <span class="a-lbl">Insulina basal</span><div class="a-pills">{pills("tipo", [("glargina", "Glargina U100"), ("nph", "NPH")], "glargina")}</div>
-   </div>
-   <div id="ib-out" aria-live="polite" style="display:flex;flex-direction:column;gap:16px"></div>
+  <div class="a-seg a-seg4" role="group" aria-label="Esquema"><button type="button" data-modo="basal" aria-pressed="true">Basal</button><button type="button" data-modo="corr" aria-pressed="false">Corrección</button><button type="button" data-modo="bb" aria-pressed="false">Basal-bolo</button><button type="button" data-modo="cort" aria-pressed="false">Corticoides</button></div>
+  <p class="a-p a-foot" id="modo-txt" style="font-size:13px"></p>
+  <label class="a-field" data-ver="basal bb cort"><span>Peso real (kg)</span><input class="a-in" id="i-peso" inputmode="decimal" value="80" autocomplete="off"></label>
+  <div class="a-card" data-ver="basal bb" style="gap:12px">
+   <span class="a-lbl">Calcular desde</span><div class="a-pills">{pills("origen", [("peso", "Peso"), ("previa", "Dosis previa"), ("ev", "Infusión EV")], "peso")}</div>
+   <label class="a-field" id="i-prev-box" hidden><span id="i-prev-lbl">Dosis basal previa (UI/día)</span><input class="a-in" id="i-prev" inputmode="decimal" autocomplete="off"></label>
+   <label class="a-field" id="i-ev-box" hidden><span>Infusión estable últimas 4–6 h (UI/h)</span><input class="a-in" id="i-ev" inputmode="decimal" autocomplete="off"></label>
+   <div data-ver="basal" style="display:flex;flex-direction:column;gap:12px"><span class="a-lbl">Sensibilidad</span><div class="a-pills">{pills("sens", [("sensible", "Sensible"), ("normal", "Habitual"), ("resistente", "Resistente")], "normal")}</div></div>
+   <div data-ver="bb" style="display:flex;flex-direction:column;gap:12px"><span class="a-lbl">Riesgo de hipoglicemia</span><div class="a-pills">{pills("hipo", [("0", "No"), ("1", "Sí")], "0")}</div>
+    <span class="a-foot">Mayor frágil, ERC avanzada, desnutrición o baja ingesta: 0,3 UI/kg.</span></div>
+   <div id="hi-box" style="display:flex;flex-direction:column;gap:12px"><span class="a-lbl">Glicemias sobre 200</span><div class="a-pills">{pills("hi", [("0", "No"), ("1", "Sí")], "0")}</div></div>
+   <div data-ver="basal" style="display:flex;flex-direction:column;gap:12px"><span class="a-lbl">Insulina basal</span><div class="a-pills">{pills("tipo", [("glargina", "Glargina U100"), ("nph", "NPH")], "glargina")}</div></div>
+   <div data-ver="bb" style="display:flex;flex-direction:column;gap:12px"><span class="a-lbl">Insulina prandial</span><div class="a-pills">{pills("prand", [("analogo", "Análogo rápido · 4 comidas"), ("cristalina", "Cristalina · 3 comidas")], "analogo")}</div></div>
   </div>
-  <div data-modo-box="cort" hidden style="display:flex;flex-direction:column;gap:16px">
+  <div class="a-card" data-ver="corr" style="gap:12px">
+   <span class="a-lbl">Escala</span><div class="a-pills">{pills("esc", [("sensible", "Sensible"), ("normal", "Normal"), ("resistente", "Resistente")], "normal")}</div>
+   <span class="a-foot">Sensible: mayor frágil, ERC avanzada, IMC &lt;20, baja ingesta o ayuno prolongado. Resistente: IMC &gt;30, diabetes de larga data, requerimientos altos o corticoides. Con la DDT conocida, ADA sugiere: &lt;40 UI sensible, 40–80 normal, &gt;80 resistente.</span>
+   <span class="a-lbl">Insulina</span><div class="a-pills">{pills("cins", [("cristalina", "Cristalina"), ("analogo", "Análogo rápido")], "cristalina")}</div>
+   <span class="a-lbl">Situación</span><div class="a-pills">{pills("cmom", [("comidas", "Come"), ("ayuno", "Ayuno o nutrición continua")], "comidas")}</div>
+  </div>
+  <div data-ver="cort" style="display:flex;flex-direction:column;gap:16px">
    <div class="a-card" style="gap:12px">
     <span class="a-lbl">Grupo</span><div class="a-pills">{pills("grupo", [("1", "Grupo 1 · 0,3"), ("2", "Grupo 2 · 0,5")], "2")}</div>
     <span class="a-foot" id="grupo-txt"></span>
     <span class="a-lbl">Corticoide</span><div class="a-pills">{pills("cort", [("prednisona", "Prednisona"), ("metilprednisolona", "Metilprednisolona"), ("hidrocortisona", "Hidrocortisona"), ("dexametasona", "Dexametasona"), ("betametasona", "Betametasona")], "prednisona")}</div>
     <label class="a-field"><span>Dosis diaria (mg)</span><input class="a-in" id="i-cd" inputmode="decimal" value="60" autocomplete="off"></label>
-    <span class="a-lbl">Insulina prandial</span><div class="a-pills">{pills("prand", [("analogo", "Análogo rápido · 4 comidas"), ("cristalina", "Cristalina · 3 comidas")], "analogo")}</div>
+    <span class="a-lbl">Insulina prandial</span><div class="a-pills">{pills("prandc", [("analogo", "Análogo rápido · 4 comidas"), ("cristalina", "Cristalina · 3 comidas")], "analogo")}</div>
    </div>
-   <div id="ic-out" aria-live="polite" style="display:flex;flex-direction:column;gap:16px"></div>
   </div>
+  <div id="i-out" aria-live="polite" style="display:flex;flex-direction:column;gap:16px"></div>
   <div class="a-card note">Cálculo de apoyo según el consenso; la indicación final es del médico tratante. No se guarda ningún dato. Más detalle en el tema <a href="diabetes.html#basal" style="font-weight:800">Diabetes</a>.</div>
  </section>
  <section data-sec="Sodio corregido y osmolaridad" id="osmolaridad" class="a-blue">

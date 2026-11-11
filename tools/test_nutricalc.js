@@ -102,6 +102,18 @@ ib = C.insulinaBasal({ peso: 90, previa: 30, sens: "sensible", tipo: "glargina" 
 ib = C.insulinaBasal({ peso: 60, previa: 40, sens: "normal", tipo: "glargina" }); eq("Sobrebasalizado → por peso", ib.dosis, 12); igual("Alerta sobrebasalización", !!ib.alerta, true);
 igual("Columna resistente", C.insulinaBasal({ peso: 70, sens: "resistente" }).correccion.join(","), "0,4,6,8,10,12,14,16");
 
+// Basal por infusión EV y basal-bolo (consenso 2026, tabla 6)
+ib = C.insulinaBasal({ peso: 80, origen: "ev", ev: 2, sens: "normal", tipo: "glargina" }); eq("Basal desde EV: 50 % de 48", ib.dosis, 24);
+igual("Basal EV sin dato", C.insulinaBasal({ peso: 80, origen: "ev", sens: "normal" }).ok, false);
+let bb = C.insulinaBasalBolo({ peso: 80, origen: "peso", prandial: "analogo" });
+eq("BB por peso 0,5", bb.ddt, 40); eq("BB basal 50 %", bb.basal, 20); eq("BB por comida (4)", bb.porComida, 5);
+eq("BB riesgo hipo 0,3", C.insulinaBasalBolo({ peso: 80, origen: "peso", riesgoHipo: true }).ddt, 24);
+eq("BB >200: 0,6", C.insulinaBasalBolo({ peso: 80, origen: "peso", sobre200: true }).ddt, 48);
+bb = C.insulinaBasalBolo({ peso: 70, origen: "previa", previa: 60, prandial: "cristalina" });
+eq("BB 70 % DDT previa", bb.ddt, 42); eq("BB basal", bb.basal, 21); eq("BB por comida (3)", bb.porComida, 7);
+eq("BB desde EV", C.insulinaBasalBolo({ peso: 80, origen: "ev", ev: 2 }).ddt, 48);
+igual("Escala ADA por DDT", [C.escalaPorDDT(30), C.escalaPorDDT(60), C.escalaPorDDT(90)].join(","), "sensible,normal,resistente");
+
 // Corticoides: los 3 casos clínicos del consenso (cap. 5)
 let ic = C.insulinaCorticoides({ peso: 80, grupo: 2, corticoide: "prednisona", dosisMg: 60, prandial: "analogo" });
 eq("Caso 1 total", ic.total, 72); eq("Caso 1 basal", ic.basal, 28); eq("Caso 1 por comida (4)", ic.porComida, 10);

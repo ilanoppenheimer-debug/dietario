@@ -131,49 +131,79 @@
   document.addEventListener("change", function(e){ if (e.target.closest && e.target.closest("#f")) geb(); });
   geb();
 
-  /* ---------- Insulina ---------- */
-  var st = { modo: new URLSearchParams(location.search).get("modo") === "cort" ? "cort" : "basal", prev: "no", sens: "normal", hi: "0", tipo: "glargina", grupo: "2", cort: "prednisona", prand: "analogo" };
-  function pills(){
-    document.querySelectorAll("[data-g]").forEach(function(b){ b.setAttribute("aria-pressed", st[b.getAttribute("data-g")] === b.getAttribute("data-v")); });
-    document.querySelectorAll("[data-modo]").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-modo") === st.modo); });
-    document.querySelectorAll("[data-modo-box]").forEach(function(x){ x.hidden = x.getAttribute("data-modo-box") !== st.modo; });
-    $("i-prev-box").hidden = st.prev !== "si";
+  /* ---------- Insulina: basal, corrección, basal-bolo y corticoides ---------- */
+  var MODOS = { basal: "Insulina basal + escala de corrección: esquema de elección en sala (consenso 2026).",
+    corr: "Escala fija según sensibilidad: no depende del peso.",
+    bb: "Basal-bolo: DM1, insulinopenia marcada o prednisona >20 mg/día (consenso 2026). DDT 50 % basal y 50 % bolos.",
+    cort: "Método del consenso para hiperglicemia por corticoides." };
+  var m0 = new URLSearchParams(location.search).get("modo");
+  var st = { modo: MODOS[m0] ? m0 : "basal", origen: "peso", sens: "normal", hi: "0", tipo: "glargina", hipo: "0", prand: "analogo",
+    esc: "normal", cins: "cristalina", cmom: "comidas", grupo: "2", cort: "prednisona", prandc: "analogo" };
+  var $$ = function (s) { return document.querySelectorAll(s); };
+  function tablaCorr(col, titulo, pie) {
+    return '<div class="a-card" style="gap:0"><span class="a-lbl" style="color:var(--a-blue);margin-bottom:6px">' + titulo + '</span>' +
+      C.CORRECCION.tramos.map(function (t, i) { return '<div class="a-kv"><span>' + t + ' mg/dL</span><b>' + C.CORRECCION[col][i] + ' UI</b></div>'; }).join("") +
+      '<span class="a-foot" style="margin-top:8px">' + pie + '</span></div>';
+  }
+  var COL = { sensible: "sensible", normal: "normal", resistente: "resistente" }, NCOL = { sensible: "Sensible", normal: "Normal", resistente: "Resistente" };
+  function pintarControles() {
+    $$("[data-g]").forEach(function (b) { if (b.closest("#insulina")) b.setAttribute("aria-pressed", st[b.getAttribute("data-g")] === b.getAttribute("data-v")); });
+    $$("[data-modo]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-modo") === st.modo); });
+    $$("#insulina [data-ver]").forEach(function (x) { x.hidden = x.getAttribute("data-ver").split(" ").indexOf(st.modo) < 0; });
+    $("modo-txt").textContent = MODOS[st.modo];
+    $("i-prev-box").hidden = st.origen !== "previa"; $("i-ev-box").hidden = st.origen !== "ev";
+    $("i-prev-lbl").textContent = st.modo === "bb" ? "Dosis diaria total previa (UI/día)" : "Dosis basal previa (UI/día)";
+    $("hi-box").hidden = st.origen !== "peso" || (st.modo === "bb" && st.hipo === "1");
     $("grupo-txt").textContent = st.grupo === "1" ? "Sin diabetes previa; DM sin insulina con HbA1c <8,5 %; o ≥70 años, IMC <20 o VFG <30." : "DM <70 años con insulina previa, o sin insulina con HbA1c >8,5 %; con IMC >20 y VFG >30.";
   }
-  function insulina(){
-    pills();
-    var peso = num("i-peso");
+  var err = function (t) { return '<div class="a-card warn"><b>' + t + '</b></div>'; };
+  function insulina() {
+    pintarControles();
+    var peso = num("i-peso"), out = $("i-out"), html = "";
     if (st.modo === "basal") {
-      var r = C.insulinaBasal({ peso: peso, previa: st.prev === "si" ? (num("i-prev") || 0) : 0, sens: st.sens, sobre200: st.hi === "1", tipo: st.tipo });
-      if (!r.ok) { $("ib-out").innerHTML = '<div class="a-card warn"><b>' + r.error + '</b></div>'; return; }
+      var r = C.insulinaBasal({ peso: peso, origen: st.origen, previa: num("i-prev") || 0, ev: num("i-ev") || 0, sens: st.sens, sobre200: st.hi === "1", tipo: st.tipo });
+      if (!r.ok) { out.innerHTML = err(r.error); return; }
       var pos = r.posologia.nph ? "NPH: " + r.posologia.am + " UI en la mañana y " + r.posologia.pm + " UI a las 22 h" : "Glargina U100: " + r.dosis + " UI en monodosis nocturna";
-      var col = {sensible:"Sensible", normal:"Normal", resistente:"Resistente"}[st.sens];
-      $("ib-out").innerHTML = '<div class="a-card"><span class="a-lbl" style="color:var(--a-blue)">Insulina basal</span><span class="a-big">' + r.dosis + ' <small>UI/día</small></span>' +
-        '<b style="font-size:14px">' + pos + '</b><span class="a-foot" style="font-size:13px">' + r.como + ' · Consenso SOCHIDIAB 2026, cap. 3</span></div>' +
+      html = '<div class="a-card"><span class="a-lbl" style="color:var(--a-blue)">Insulina basal</span><span class="a-big">' + r.dosis + ' <small>UI/día</small></span>' +
+        '<b style="font-size:14px">' + pos + '</b><span class="a-foot" style="font-size:13px">' + r.como + ' · Consenso SOCHIDIAB 2026</span></div>' +
         (r.alerta ? '<div class="a-card warn"><b>⚠ ' + r.alerta + '</b></div>' : '') +
-        '<div class="a-card" style="gap:0"><span class="a-lbl" style="color:var(--a-blue);margin-bottom:6px">Corrección antes de comer · columna ' + col + '</span>' +
-        C.CORRECCION.tramos.map(function(t, i){ return '<div class="a-kv"><span>' + t + ' mg/dL</span><b>' + r.correccion[i] + ' UI</b></div>'; }).join("") +
-        '<span class="a-foot" style="margin-top:8px">Cristalina: solo desayuno, almuerzo y cena (no en la once). Análogo: hasta 4 comidas. Ajuste diario de la basal según ayuno en el tema Diabetes.</span></div>';
+        (st.origen === "ev" ? '<div class="a-card note">Superponer la primera dosis SC con la infusión antes de suspenderla. El consenso sugiere contrastar con el cálculo por peso y, si difieren, promediar.</div>' : '') +
+        '<div class="a-card note">Más la escala de corrección (modo Corrección), columna ' + NCOL[st.sens].toLowerCase() + '. Ajuste diario de la basal según el ayuno en el tema Diabetes.</div>';
+    } else if (st.modo === "corr") {
+      var cuando = st.cmom === "ayuno" ? (st.cins === "cristalina" ? "Cada 6 h" : "Cada 4 h") : (st.cins === "cristalina" ? "Antes de desayuno, almuerzo y cena (no en la once: se superpone con la cena)" : "Antes de desayuno, almuerzo, once y cena");
+      html = tablaCorr(COL[st.esc], "Corrección · escala " + NCOL[st.esc].toLowerCase(), "<b>" + cuando + ".</b> Si no logra la meta: +2 UI por tramo. Bajo 70: protocolo de hipoglicemia. No corregir de noche sin ingesta. Consenso SOCHIDIAB 2026, cap. 3, tabla 4.");
+    } else if (st.modo === "bb") {
+      var b = C.insulinaBasalBolo({ peso: peso, origen: st.origen, previa: num("i-prev") || 0, ev: num("i-ev") || 0, riesgoHipo: st.hipo === "1", sobre200: st.hi === "1", prandial: st.prand });
+      if (!b.ok) { out.innerHTML = err(b.error); return; }
+      html = '<div class="a-card"><span class="a-lbl" style="color:var(--a-blue)">Dosis diaria total (DDT)</span><span class="a-big">' + b.ddt + ' <small>UI/día</small></span>' +
+        '<span class="a-foot" style="font-size:13px">' + b.como + (st.origen !== "peso" ? ' · ' + nf(b.porKg, 2) + ' UI/kg/día' : '') + ' · Consenso SOCHIDIAB 2026, tabla 6</span>' +
+        '<div class="a-fgrid" style="margin-top:6px"><div style="background:var(--a-bg);border-radius:12px;padding:10px"><span class="a-lbl" style="font-size:11px">Basal 50 %</span><br><b style="font-size:20px">' + b.basal + ' UI</b><br><span class="a-foot">glargina o NPH (2/3 AM · 1/3 22 h)</span></div>' +
+        '<div style="background:var(--a-bg);border-radius:12px;padding:10px"><span class="a-lbl" style="font-size:11px">Bolos 50 %</span><br><b style="font-size:20px">' + b.porComida + ' UI</b><br><span class="a-foot">× ' + b.comidas + ' comidas (' + b.bolos + ' UI)</span></div></div></div>' +
+        (b.alerta ? '<div class="a-card warn"><b>⚠ ' + b.alerta + '</b></div>' : '') +
+        (st.origen === "previa" ? '<div class="a-card note">Alta frecuencia de sobrebasalización ambulatoria: si la basal previa supera 0,5 UI/kg/día, recalcular por peso.</div>' : '') +
+        (st.origen === "ev" ? '<div class="a-card note">La DDT desde la infusión puede diferir mucho de la teórica por peso: contrastar ambas y, si difieren, promediar. Superponer la SC antes de suspender la infusión.</div>' : '') +
+        tablaCorr(b.escalaSugerida, "Corrección sugerida · escala " + NCOL[b.escalaSugerida].toLowerCase(), "Escala según la DDT (ADA 2026, sección 16): &lt;40 UI sensible, 40–80 normal, &gt;80 resistente. Se suma a cada bolo. Comida &lt;50 %: omitir o reducir el bolo.");
     } else {
-      var c = C.insulinaCorticoides({ peso: peso, grupo: +st.grupo, corticoide: st.cort, dosisMg: num("i-cd"), prandial: st.prand });
-      if (!c.ok) { $("ic-out").innerHTML = '<div class="a-card warn"><b>' + c.error + '</b></div>'; return; }
+      var c = C.insulinaCorticoides({ peso: peso, grupo: +st.grupo, corticoide: st.cort, dosisMg: num("i-cd"), prandial: st.prandc });
+      if (!c.ok) { out.innerHTML = err(c.error); return; }
       var basalTxt = st.cort === "prednisona" || st.cort === "metilprednisolona" ? "NPH junto al corticoide" : st.cort === "hidrocortisona" ? "Según glicemias" : "Glargina";
-      $("ic-out").innerHTML = '<div class="a-card"><span class="a-lbl" style="color:var(--a-blue)">Dosis diaria total final</span><span class="a-big">' + c.total + ' <small>UI/día</small></span>' +
+      html = '<div class="a-card"><span class="a-lbl" style="color:var(--a-blue)">Dosis diaria total final</span><span class="a-big">' + c.total + ' <small>UI/día</small></span>' +
         '<span class="a-foot" style="font-size:13px">(' + nf(c.base, 1) + ' + ' + nf(c.extra, 1) + ' por ' + st.cort + ') UI/kg × ' + nf(peso, 1) + ' kg</span>' +
         '<div class="a-fgrid" style="margin-top:6px"><div style="background:var(--a-bg);border-radius:12px;padding:10px"><span class="a-lbl" style="font-size:11px">Basal 40 %</span><br><b style="font-size:20px">' + c.basal + ' UI</b><br><span class="a-foot">' + basalTxt + '</span></div>' +
         '<div style="background:var(--a-bg);border-radius:12px;padding:10px"><span class="a-lbl" style="font-size:11px">Prandial 60 %</span><br><b style="font-size:20px">' + c.porComida + ' UI</b><br><span class="a-foot">fijas × ' + c.comidas + ' comidas</span></div></div></div>' +
         (c.aviso ? '<div class="a-card amber"><b>' + c.aviso + '</b></div>' : '') +
         '<div class="a-card" style="gap:0"><span class="a-lbl" style="color:var(--a-blue);margin-bottom:6px">Dosis por comida (fija ± corrección)</span>' +
-        c.tabla.map(function(x){ return '<div class="a-kv"><span>' + x.tramo + ' mg/dL <span class="a-muted">' + (x.ajuste > 0 ? "+" + x.ajuste : x.ajuste < 0 ? "−" + (-x.ajuste) : "") + '</span></span><b>' + x.dosis + ' UI</b></div>'; }).join("") +
+        c.tabla.map(function (x) { return '<div class="a-kv"><span>' + x.tramo + ' mg/dL <span class="a-muted">' + (x.ajuste > 0 ? "+" + x.ajuste : x.ajuste < 0 ? "−" + (-x.ajuste) : "") + '</span></span><b>' + x.dosis + ' UI</b></div>'; }).join("") +
         '<span class="a-foot" style="margin-top:8px">Bajo 70: protocolo de hipoglicemia. Dosis entre tramos de la tabla: se usa el tramo inferior. Consenso SOCHIDIAB 2026, cap. 5, tablas 4–6.</span></div>';
     }
+    out.innerHTML = html;
   }
-  document.getElementById("insulina").addEventListener("click", function(e){
+  $("insulina").addEventListener("click", function (e) {
     var b = e.target.closest("[data-g],[data-modo]"); if (!b) return;
     if (b.hasAttribute("data-modo")) st.modo = b.getAttribute("data-modo"); else st[b.getAttribute("data-g")] = b.getAttribute("data-v");
     insulina();
   });
-  ["i-peso","i-prev","i-cd"].forEach(function(id){ $(id).addEventListener("input", insulina); });
+  ["i-peso", "i-prev", "i-ev", "i-cd"].forEach(function (id) { $(id).addEventListener("input", insulina); });
   insulina();
 
   /* ---------- Sodio corregido y osmolaridad ---------- */

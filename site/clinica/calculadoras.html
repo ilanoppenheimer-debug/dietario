@@ -94,29 +94,36 @@
    <div class="mini" id="ne-out"></div></div>
  </section>
  <section data-sec="Insulina en el hospitalizado" id="insulina" class="a-blue">
-  <div class="a-seg" role="group" aria-label="Modo"><button type="button" data-modo="basal" aria-pressed="true">Basal y corrección</button><button type="button" data-modo="cort" aria-pressed="false">Con corticoides</button></div>
-  <label class="a-field"><span>Peso real (kg)</span><input class="a-in" id="i-peso" inputmode="decimal" value="80" autocomplete="off"></label>
-  <div data-modo-box="basal" style="display:flex;flex-direction:column;gap:16px">
-   <div class="a-card" style="gap:12px">
-    <span class="a-lbl">¿Usaba insulina basal?</span><div class="a-pills"><button type="button" class="a-pill" data-g="prev" data-v="no" aria-pressed="true">No</button><button type="button" class="a-pill" data-g="prev" data-v="si" aria-pressed="false">Sí</button></div>
-    <label class="a-field" id="i-prev-box" hidden><span>Dosis basal previa (UI/día)</span><input class="a-in" id="i-prev" inputmode="decimal" autocomplete="off"></label>
-    <span class="a-lbl">Sensibilidad</span><div class="a-pills"><button type="button" class="a-pill" data-g="sens" data-v="sensible" aria-pressed="false">Sensible</button><button type="button" class="a-pill" data-g="sens" data-v="normal" aria-pressed="true">Habitual</button><button type="button" class="a-pill" data-g="sens" data-v="resistente" aria-pressed="false">Resistente</button></div>
-    <span class="a-foot">Sensible: mayor frágil, ERC avanzada, IMC &lt;20, baja ingesta o ayuno prolongado. Resistente: IMC &gt;30, diabetes de larga data, requerimientos altos o corticoides.</span>
-    <span class="a-lbl">Glicemias sobre 200</span><div class="a-pills"><button type="button" class="a-pill" data-g="hi" data-v="0" aria-pressed="true">No</button><button type="button" class="a-pill" data-g="hi" data-v="1" aria-pressed="false">Sí</button></div>
-    <span class="a-lbl">Insulina basal</span><div class="a-pills"><button type="button" class="a-pill" data-g="tipo" data-v="glargina" aria-pressed="true">Glargina U100</button><button type="button" class="a-pill" data-g="tipo" data-v="nph" aria-pressed="false">NPH</button></div>
-   </div>
-   <div id="ib-out" aria-live="polite" style="display:flex;flex-direction:column;gap:16px"></div>
+  <div class="a-seg a-seg4" role="group" aria-label="Esquema"><button type="button" data-modo="basal" aria-pressed="true">Basal</button><button type="button" data-modo="corr" aria-pressed="false">Corrección</button><button type="button" data-modo="bb" aria-pressed="false">Basal-bolo</button><button type="button" data-modo="cort" aria-pressed="false">Corticoides</button></div>
+  <p class="a-p a-foot" id="modo-txt" style="font-size:13px"></p>
+  <label class="a-field" data-ver="basal bb cort"><span>Peso real (kg)</span><input class="a-in" id="i-peso" inputmode="decimal" value="80" autocomplete="off"></label>
+  <div class="a-card" data-ver="basal bb" style="gap:12px">
+   <span class="a-lbl">Calcular desde</span><div class="a-pills"><button type="button" class="a-pill" data-g="origen" data-v="peso" aria-pressed="true">Peso</button><button type="button" class="a-pill" data-g="origen" data-v="previa" aria-pressed="false">Dosis previa</button><button type="button" class="a-pill" data-g="origen" data-v="ev" aria-pressed="false">Infusión EV</button></div>
+   <label class="a-field" id="i-prev-box" hidden><span id="i-prev-lbl">Dosis basal previa (UI/día)</span><input class="a-in" id="i-prev" inputmode="decimal" autocomplete="off"></label>
+   <label class="a-field" id="i-ev-box" hidden><span>Infusión estable últimas 4–6 h (UI/h)</span><input class="a-in" id="i-ev" inputmode="decimal" autocomplete="off"></label>
+   <div data-ver="basal" style="display:flex;flex-direction:column;gap:12px"><span class="a-lbl">Sensibilidad</span><div class="a-pills"><button type="button" class="a-pill" data-g="sens" data-v="sensible" aria-pressed="false">Sensible</button><button type="button" class="a-pill" data-g="sens" data-v="normal" aria-pressed="true">Habitual</button><button type="button" class="a-pill" data-g="sens" data-v="resistente" aria-pressed="false">Resistente</button></div></div>
+   <div data-ver="bb" style="display:flex;flex-direction:column;gap:12px"><span class="a-lbl">Riesgo de hipoglicemia</span><div class="a-pills"><button type="button" class="a-pill" data-g="hipo" data-v="0" aria-pressed="true">No</button><button type="button" class="a-pill" data-g="hipo" data-v="1" aria-pressed="false">Sí</button></div>
+    <span class="a-foot">Mayor frágil, ERC avanzada, desnutrición o baja ingesta: 0,3 UI/kg.</span></div>
+   <div id="hi-box" style="display:flex;flex-direction:column;gap:12px"><span class="a-lbl">Glicemias sobre 200</span><div class="a-pills"><button type="button" class="a-pill" data-g="hi" data-v="0" aria-pressed="true">No</button><button type="button" class="a-pill" data-g="hi" data-v="1" aria-pressed="false">Sí</button></div></div>
+   <div data-ver="basal" style="display:flex;flex-direction:column;gap:12px"><span class="a-lbl">Insulina basal</span><div class="a-pills"><button type="button" class="a-pill" data-g="tipo" data-v="glargina" aria-pressed="true">Glargina U100</button><button type="button" class="a-pill" data-g="tipo" data-v="nph" aria-pressed="false">NPH</button></div></div>
+   <div data-ver="bb" style="display:flex;flex-direction:column;gap:12px"><span class="a-lbl">Insulina prandial</span><div class="a-pills"><button type="button" class="a-pill" data-g="prand" data-v="analogo" aria-pressed="true">Análogo rápido · 4 comidas</button><button type="button" class="a-pill" data-g="prand" data-v="cristalina" aria-pressed="false">Cristalina · 3 comidas</button></div></div>
   </div>
-  <div data-modo-box="cort" hidden style="display:flex;flex-direction:column;gap:16px">
+  <div class="a-card" data-ver="corr" style="gap:12px">
+   <span class="a-lbl">Escala</span><div class="a-pills"><button type="button" class="a-pill" data-g="esc" data-v="sensible" aria-pressed="false">Sensible</button><button type="button" class="a-pill" data-g="esc" data-v="normal" aria-pressed="true">Normal</button><button type="button" class="a-pill" data-g="esc" data-v="resistente" aria-pressed="false">Resistente</button></div>
+   <span class="a-foot">Sensible: mayor frágil, ERC avanzada, IMC &lt;20, baja ingesta o ayuno prolongado. Resistente: IMC &gt;30, diabetes de larga data, requerimientos altos o corticoides. Con la DDT conocida, ADA sugiere: &lt;40 UI sensible, 40–80 normal, &gt;80 resistente.</span>
+   <span class="a-lbl">Insulina</span><div class="a-pills"><button type="button" class="a-pill" data-g="cins" data-v="cristalina" aria-pressed="true">Cristalina</button><button type="button" class="a-pill" data-g="cins" data-v="analogo" aria-pressed="false">Análogo rápido</button></div>
+   <span class="a-lbl">Situación</span><div class="a-pills"><button type="button" class="a-pill" data-g="cmom" data-v="comidas" aria-pressed="true">Come</button><button type="button" class="a-pill" data-g="cmom" data-v="ayuno" aria-pressed="false">Ayuno o nutrición continua</button></div>
+  </div>
+  <div data-ver="cort" style="display:flex;flex-direction:column;gap:16px">
    <div class="a-card" style="gap:12px">
     <span class="a-lbl">Grupo</span><div class="a-pills"><button type="button" class="a-pill" data-g="grupo" data-v="1" aria-pressed="false">Grupo 1 · 0,3</button><button type="button" class="a-pill" data-g="grupo" data-v="2" aria-pressed="true">Grupo 2 · 0,5</button></div>
     <span class="a-foot" id="grupo-txt"></span>
     <span class="a-lbl">Corticoide</span><div class="a-pills"><button type="button" class="a-pill" data-g="cort" data-v="prednisona" aria-pressed="true">Prednisona</button><button type="button" class="a-pill" data-g="cort" data-v="metilprednisolona" aria-pressed="false">Metilprednisolona</button><button type="button" class="a-pill" data-g="cort" data-v="hidrocortisona" aria-pressed="false">Hidrocortisona</button><button type="button" class="a-pill" data-g="cort" data-v="dexametasona" aria-pressed="false">Dexametasona</button><button type="button" class="a-pill" data-g="cort" data-v="betametasona" aria-pressed="false">Betametasona</button></div>
     <label class="a-field"><span>Dosis diaria (mg)</span><input class="a-in" id="i-cd" inputmode="decimal" value="60" autocomplete="off"></label>
-    <span class="a-lbl">Insulina prandial</span><div class="a-pills"><button type="button" class="a-pill" data-g="prand" data-v="analogo" aria-pressed="true">Análogo rápido · 4 comidas</button><button type="button" class="a-pill" data-g="prand" data-v="cristalina" aria-pressed="false">Cristalina · 3 comidas</button></div>
+    <span class="a-lbl">Insulina prandial</span><div class="a-pills"><button type="button" class="a-pill" data-g="prandc" data-v="analogo" aria-pressed="true">Análogo rápido · 4 comidas</button><button type="button" class="a-pill" data-g="prandc" data-v="cristalina" aria-pressed="false">Cristalina · 3 comidas</button></div>
    </div>
-   <div id="ic-out" aria-live="polite" style="display:flex;flex-direction:column;gap:16px"></div>
   </div>
+  <div id="i-out" aria-live="polite" style="display:flex;flex-direction:column;gap:16px"></div>
   <div class="a-card note">Cálculo de apoyo según el consenso; la indicación final es del médico tratante. No se guarda ningún dato. Más detalle en el tema <a href="diabetes.html#basal" style="font-weight:800">Diabetes</a>.</div>
  </section>
  <section data-sec="Sodio corregido y osmolaridad" id="osmolaridad" class="a-blue">

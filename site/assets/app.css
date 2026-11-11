@@ -89,6 +89,9 @@ a.a-card,button.a-card{text-decoration:none;color:inherit;font:inherit;text-alig
 .a-seg{display:flex;background:#E7EFE8;border-radius:12px;padding:4px;gap:4px}
 .a-seg button,.a-seg a{flex:1;border:0;border-radius:9px;min-height:40px;font:inherit;font-weight:800;font-size:14px;background:none;color:#5B746C;cursor:pointer;
   display:grid;place-items:center;text-decoration:none}
+.a-seg4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.a-seg4 button{font-size:13px;padding:0 2px}
+@media (max-width:380px){.a-seg4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .a-seg .on,.a-seg [aria-pressed="true"],.a-seg [aria-current="page"]{background:var(--a-surface);color:var(--a-ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
 
 .a-pills{display:flex;flex-wrap:wrap;gap:8px}
