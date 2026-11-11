@@ -1,8 +1,8 @@
 # Dietario · Plantillas y lógica de armado de fichas
 
-Documento de conocimiento para el Project "Curador de Dietas". Contiene **estructura y reglas, no contenido clínico**. Toda cifra o recomendación se obtiene de los documentos primarios del conocimiento.
+Documento de conocimiento para el proyecto "Curador de Dietario". Contiene **estructura y reglas, no contenido clínico**. Toda cifra o recomendación se obtiene de los documentos primarios del conocimiento.
 
-Versión 1.0 · noviembre 2026
+Versión 2.0 · noviembre 2026 · Novedades: condición para el paciente (sección 9), tema clínico (10), calculadora (11), bloques (12), nombres de sección para el selector.
 
 ---
 
@@ -10,7 +10,10 @@ Versión 1.0 · noviembre 2026
 
 | Recurso | URL | Uso |
 |---|---|---|
-| Sitio (prototipo) | https://dietario.vercel.app/ | Ver cómo se presentan las fichas |
+| App (prototipo) | https://dietario.vercel.app/ | Ver cómo se presenta cada tipo de contenido |
+| Condición paciente ejemplo | https://dietario.vercel.app/salud/diabetes.html | Formato "Mi salud" |
+| Tema clínico ejemplo | https://dietario.vercel.app/clinica/diabetes.html | Formato tema profesional (requiere código) |
+| Calculadoras | https://dietario.vercel.app/clinica/calculadoras.html | Formato de calculadora (requiere código) |
 | Ficha ejemplo DASH | https://dietario.vercel.app/dietas/dash.html | Referencia **visual y de formato**, no de evidencia |
 | Ficha ejemplo FODMAP | https://dietario.vercel.app/dietas/fodmap.html | Ejemplo de dieta por etapas |
 | Trípticos ejemplo | https://dietario.vercel.app/tripticos/dash.pdf · /fodmap.pdf | Capacidad real de cada panel |
@@ -210,3 +213,70 @@ Para llevar una ficha al sitio, entregarla en Markdown con los códigos de secci
 ```
 
 Datos de gráficos (P8) y tablas en tablas Markdown, no en prosa.
+
+**Nombres para el selector.** En la app cada vista se lee por secciones en un menú desplegable. Agrupa las secciones y dales un nombre corto (≤ 25 caracteres). Referencia DASH:
+- Paciente: ¿Cuánto ayuda? · Porciones · La sal · Qué elegir · Un día de ejemplo · Trucos · Antes de empezar
+- Profesional: Resumen · Magnitud del efecto · Evidencia · Prescribir · Referencias
+
+---
+
+## 9. Plantilla · condición para el paciente (Mi salud)
+
+Siempre 4 secciones, en este orden. Lenguaje paciente (sección 5).
+
+| Sección | Contenido | Bloques típicos |
+|---|---|---|
+| Qué es | Definición simple, por qué importa, cifra diagnóstica si es útil | [CIFRA] + 1–2 párrafos + [TARJETA] |
+| Mi alimentación | Qué comer más y menos, enlaces a las dietas de Dietario que aplican | [TARJETA] "Más de" / "Menos de" con ✓ y ✕ · enlace a ficha |
+| Mi control | Qué medir y cada cuánto, metas ("las fija tu médico" + referencia general con fuente), remedios | [TARJETA] + [BOTÓN] al registro si aplica |
+| Cuándo consultar | Urgencia vs. pedir hora | [ALERTA] urgencia · [TARJETA] pedir hora |
+
+Reglas: sin dosis de fármacos; umbrales de alarma solo si están en una guía (si no, a "Puntos a validar").
+
+---
+
+## 10. Plantilla · tema clínico profesional
+
+Para médicos de medicina interna y de hospital. Entre 6 y 12 secciones con nombre corto (≤ 30 caracteres) y una sección final **Fuentes**.
+
+Orden sugerido (adaptar al tema):
+1. Definición y metas
+2. Evaluación inicial o al ingreso
+3. Manejo, una sección por escenario (p. ej., basal, corrección, corticoides)
+4. Situaciones especiales (ayuno, nutrición enteral/parenteral, ERC, adulto mayor)
+5. Complicaciones y alertas
+6. Ambulatorio y alta (incluye "si hay acceso" y alternativa de menor costo)
+7. Fuentes (y discordancias resueltas)
+
+Cada sección contiene solo bloques (sección 12). Todo bloque con cifras termina en `Fuente:`.
+
+---
+
+## 11. Especificación · calculadora
+
+| Campo | Contenido |
+|---|---|
+| Nombre y para qué sirve | 1 línea |
+| Entradas | nombre · unidad · rango válido · valor por defecto · opciones (si son botones) |
+| Cálculo | fórmula o tabla exacta, con fuente (guía, tabla, página) |
+| Redondeo | hacia abajo, al entero, a 0,5… (como lo hace la guía) |
+| Salidas | qué se muestra en grande y qué como detalle |
+| Avisos | condiciones que disparan alerta y su texto |
+| Casos de prueba | ≥ 3 con entradas y resultado esperado; usar los ejemplos de la guía si existen |
+| Zonas grises | valores entre tramos, datos faltantes: qué decisión se tomó (va a "Puntos a validar") |
+
+---
+
+## 12. Bloques
+
+| Bloque | Uso | Límite |
+|---|---|---|
+| `[TARJETA] Título` | Contenido general | 2–6 líneas de ≤ 25 palabras + `Fuente:` |
+| `[ALERTA] Título` | Urgencias, riesgos, errores peligrosos | 1–4 líneas + `Fuente:` |
+| `[TABLA] Título` | Umbrales, dosis, comparaciones | ≤ 4 columnas (6 si son números cortos), ≤ 8 filas + `Fuente:` |
+| `[NOTA]` | Discordancia entre guías o aclaración | 1–2 líneas |
+| `[PENDIENTE] Qué falta` | Lo que no está en las fuentes entregadas | 1–2 líneas con el documento que lo resolvería |
+| `[CIFRA] Valor` | Solo paciente: un número que motive o defina | 1 cifra + 1–2 frases |
+| `[BOTÓN] Texto → destino` | Enlace a calculadora, registro o ficha | — |
+
+Si algo no cabe, se divide en dos bloques: no se comprime.
