@@ -865,8 +865,8 @@
     "Cuándo iniciar insulina en DM2",
     [
      "Considerarla con síntomas de hiperglicemia, HbA1c >10 % o glicemia ≥300 mg/dL, sea cual sea el tratamiento previo.",
-     "Sin hiperglicemia severa ni crisis, se prefiere la terapia basada en GLP-1 antes que la insulina.",
-     "Al iniciar insulina, mantener los otros fármacos y combinarla con arGLP-1 (o GIP/GLP-1)."
+     "Sin hiperglicemia severa ni crisis, ADA prefiere la terapia basada en GLP-1 antes que la insulina, si hay acceso.",
+     "Al iniciar insulina, mantener los otros fármacos y, si hay acceso, combinarla con arGLP-1 (o GIP/GLP-1)."
     ],
     "ADA Standards of Care 2026, sección 9, 9.20–9.23"
    ],
@@ -877,6 +877,16 @@
      "El consenso SOCHIDIAB 2022 usaba HbA1c ≥9 % y glicemia >300 en el debut sintomático. ADA 2026 es posterior: gana."
     ],
     ""
+   ],
+   [
+    "amber",
+    "Acceso y costo en Chile",
+    [
+     "arGLP-1 y análogos basales tienen alto costo y poca cobertura: muchos pacientes no los podrán mantener.",
+     "La propia ADA recomienda, con barreras de costo, usar opciones de menor costo: metformina, sulfonilureas, glitazonas e insulina humana (NPH y cristalina), considerando su riesgo de hipoglicemia y aumento de peso.",
+     "En la práctica: NPH como basal (al acostarse; pasar a dos dosis si hace falta) y cristalina como prandial, con la misma titulación."
+    ],
+    "ADA Standards of Care 2026, sección 9, 9.30"
    ],
    [
     "table",
@@ -920,11 +930,15 @@
     "Siempre",
     [
      "Prescribir glucagón a todo paciente con insulina.",
-     "Monitoreo continuo recomendado con insulina.",
-     "Análogos basales: menos hipoglicemia nocturna que NPH.",
+     "Monitoreo continuo recomendado con insulina; si no hay acceso, glicemia capilar.",
+     "Análogos basales: menos hipoglicemia nocturna que NPH, a mayor costo.",
      "Revisar el tratamiento cada 3–6 meses; no retrasar la intensificación."
     ],
     "ADA Standards of Care 2026, sección 9, 9.14, 9.25 y 9.28"
+   ],
+   [
+    "html",
+    "<div class=\"a-card note\"><b>Sugerencia · sistema público</b><span>Para ver lo disponible en atención primaria, la Vía Clínica de DM2 para APS del MINSAL es una buena referencia (secuencia con metformina, iSGLT-2, iDPP-4 e insulina basal, y cuándo derivar).</span><a href=\"https://www.paho.org/sites/default/files/2026/02/clinica-diabetes-mellitus-tipo-2-chile.pdf\" target=\"_blank\" rel=\"noopener\" style=\"font-weight:800;color:var(--a-blue)\">Abrir la vía clínica (PDF) ↗</a></div>"
    ]
   ],
   "alta": [
@@ -934,7 +948,7 @@
     [
      "Educación en alimentación, uso y conservación de insulina, y autocontrol.",
      "Control ambulatorio a los 7–14 días del alta.",
-     "Antes del alta, evaluar iSGLT-2 o arGLP-1 por beneficio cardiovascular y renal.",
+     "Antes del alta, evaluar iSGLT-2 o arGLP-1 por beneficio cardiovascular y renal, según acceso del paciente.",
      "MCG o bomba propios: continuar si el contexto lo permite; decidir dosis con glicemia capilar."
     ],
     "Consenso intrahospitalario SOCHIDIAB 2026, cap. 3"
